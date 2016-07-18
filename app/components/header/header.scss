@@ -1,0 +1,14 @@
+.castle-background {
+  background: url('../../assets/background/castle.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 550px;
+  .header {
+    margin-top: 20px;
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
+  }
+  
+}
