@@ -38,7 +38,6 @@
   "dependencies": {
     "normalize.css": "^4.2.0",
     "react": "^15.1.0",
-    "react-bootstrap": "^0.29.5",
     "react-dom": "^15.1.0"
   },
   "pre-commit": [
