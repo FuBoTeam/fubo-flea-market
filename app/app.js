@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './components/header/header';
-import Content from './overview/content';
+import Content from './board/content';
 import './index.scss';
 
 class App extends React.Component {
