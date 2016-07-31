@@ -21,7 +21,8 @@
     "no-underscore-dangle": [0],
     "react/prefer-stateless-function": 0,
     "arrow-body-style": ["error", "always"],
-    "no-console": 1
+    "no-console": 1,
+    "no-unused-vars": 1
   },
   "settings": {
     "import/resolver": {
