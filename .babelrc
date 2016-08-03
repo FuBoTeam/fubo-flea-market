@@ -3,5 +3,10 @@
 		"react",
 		"es2015"
 	],
-	"plugins": []
+  "env": {
+    "development": {
+      "presets": []
+    }
+  },
+	"plugins": ["transform-object-rest-spread"]
 }

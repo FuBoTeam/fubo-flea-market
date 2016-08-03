@@ -4,7 +4,11 @@ const webpack = require('webpack');
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: {
-    javascript: ['webpack-dev-server/client?http://0.0.0.0:8080', 'webpack/hot/only-dev-server', path.resolve(__dirname, 'app/app.js')],
+    javascript: [
+      'webpack-dev-server/client?http://0.0.0.0:8080',
+      'webpack/hot/only-dev-server',
+      path.resolve(__dirname, 'app/index.js')
+    ],
     html: path.resolve(__dirname, 'app/index.html'),
   }, 
   output: { 
@@ -56,7 +60,6 @@ module.exports = {
     configFile: './.eslintrc'
   },
   plugins: [
-    //new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ]
 };
