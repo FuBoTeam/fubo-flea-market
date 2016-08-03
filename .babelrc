@@ -5,7 +5,7 @@
 	],
   "env": {
     "development": {
-      "presets": ["react-hmre"]
+      "presets": []
     }
   },
 	"plugins": ["transform-object-rest-spread"]

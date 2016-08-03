@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Fu-Bo-Tech/fubo-flea-market.git"
+    "url": "https://github.com/Fu-Bo-Tech/fubo-flea-market.git"
   },
   "author": "ben196888, ElaineHuang",
   "license": "ISC",
@@ -21,14 +21,13 @@
   },
   "homepage": "https://github.com/Fu-Bo-Tech/fubo-flea-market#readme",
   "devDependencies": {
-    "autoprefixer-loader": "^3.2.0",
     "babel-core": "^6.10.4",
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-object-rest-spread": "^6.8.0",
+    "babel-polyfill": "^6.9.1",
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",
-    "babel-preset-react-hmre": "^1.1.1",
     "babel-register": "^6.11.5",
     "chai": "^3.5.0",
     "cross-env": "^2.0.0",
@@ -45,10 +44,8 @@
     "jsdom": "^9.4.1",
     "mocha": "^2.5.3",
     "mochawesome": "^1.4.0",
-    "node-libs-browser": "^1.0.0",
     "node-sass": "^3.8.0",
     "pre-commit": "^1.1.3",
-    "react-addons-test-utils": "^15.2.1",
     "react-hot-loader": "^1.3.0",
     "redux-devtools": "^3.3.1",
     "redux-devtools-dock-monitor": "^1.1.1",
@@ -61,7 +58,6 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "babel-polyfill": "^6.9.1",
     "exports-loader": "^0.6.3",
     "immutable": "^3.8.1",
     "imports-loader": "^0.6.5",
