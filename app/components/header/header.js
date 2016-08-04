@@ -7,7 +7,7 @@ export default class Header extends React.Component {
     return (
       <div className="layout-row vertical-top castle-background">
         <ul className="layout-row align-between">
-          <li><a href="" nowrap>Flea Market</a></li>
+          <li><a href="">Flea Market</a></li>
           <li><a href=""><span>Logout</span><i className="fa fa-sign-out" /></a></li>
         </ul>
       </div>
