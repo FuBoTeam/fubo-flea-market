@@ -3,7 +3,7 @@ import { persistState } from 'redux-devtools';
 import thunk from 'redux-thunk';
 // import createSagaMiddleware from 'redux-saga'
 
-import fleaMarketApp from '../reducers';
+import rootReducer from '../reducers';
 // import rootSaga from '../sagas'
 import DevTools from '../containers/DevTools';
 
@@ -24,8 +24,7 @@ const enhancer = compose(
 const reducers = require('../reducers');
 
 export default function configureStore(initialState) {
-  const store = createStore(fleaMarketApp, initialState, enhancer);
-
+  const store = createStore(rootReducer, initialState, enhancer);
   // saga.run(rootSaga)
 
   if (module.hot) {

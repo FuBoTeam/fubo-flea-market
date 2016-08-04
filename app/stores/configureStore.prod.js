@@ -6,7 +6,7 @@ import {
 import thunk from 'redux-thunk';
 // import createSagaMiddleware from 'redux-saga'
 
-import fleaMarketApp from '../reducers';
+import rootReducer from '../reducers';
 // import rootSaga from '../sagas'
 
 // const saga = createSagaMiddleware()
@@ -15,7 +15,7 @@ import fleaMarketApp from '../reducers';
 const enhancer = applyMiddleware(thunk);
 
 export default function configureStore(initialState) {
-  const store = createStore(fleaMarketApp, initialState, enhancer);
+  const store = createStore(rootReducer, initialState, enhancer);
 
   // saga.run(rootSaga)
 
