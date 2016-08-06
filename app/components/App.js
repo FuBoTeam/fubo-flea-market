@@ -22,6 +22,8 @@ class App extends React.Component {
           <Link to="/">Home</Link>
           {' '}
           <Link to="/about">About</Link>
+          {' '}
+          <Link to="/login">Login/Register</Link>
         </header>
         <div>
           <Button primary onClick={() => { return browserHistory.push('/about'); }}>About us!</Button>

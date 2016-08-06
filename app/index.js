@@ -14,6 +14,7 @@ import configureStore from './stores/configureStore';
 import App from './components/App';
 import Home from './components/Home';
 import About from './components/About';
+import Login from './components/Login';
 import DevTools from './containers/DevTools';
 import './index.scss';
 
@@ -27,6 +28,7 @@ render(
         <Route path="/" component={App}>
           <IndexRoute component={Home} />
           <Route path="about" component={About} />
+          <Route path="login" component={Login} />
         </Route>
       </Router>
       <DevTools />
