@@ -1,3 +1,5 @@
+@import "~normalize.css/normalize.css";
+
 .castle-background {
   background: url('../../assets/background/castle.jpg');
   background-size: cover;
@@ -21,12 +23,27 @@
       } 
     }
     li {
+      .header-title {
+        height: 100px;
+      }
       a {
+        font-weight: bold;
         color: white;
         display: block;
         text-align: center;
         padding: 20px 25px;
         text-decoration: none;
+        &:hover {
+          color: #3333cc;
+        }
+      }
+      i {
+        margin-left: 10px;
+      }
+      span {
+        @media screen and (max-width: 480px) {
+          display: none;
+        }
       }
     }
   }
