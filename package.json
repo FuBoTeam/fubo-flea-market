@@ -7,6 +7,7 @@
     "build": "webpack",
     "lint-staged": "lint-staged",
     "eslint:fix": "eslint --fix",
+    "eslint": "eslint --fix --ext .js app test",
     "git:add": "git add",
     "start": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build",
     "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register --require ./test/setup.js --reporter mochawesome",
@@ -59,6 +60,7 @@
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
+    "webpack-dashboard": "^0.1.8",
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
