@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './header/header';
-import belle from 'belle';
-const Button = belle.Button;
+import { Button } from 'belle';
+
 // import { connect } from 'react-redux';
 
 const App = () => {
