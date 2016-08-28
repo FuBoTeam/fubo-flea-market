@@ -1,17 +1,41 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import Header from './header/header';
 import { Button } from 'belle';
+import {
+  Link,
+  browserHistory,
+} from 'react-router';
 
-// import { connect } from 'react-redux';
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.displayName = 'App';
+  }
+  render() {
+    let { children } = this.props;
+    return (
+      <div>
+        <Header />
+        <header>
+          Links:
+          {' '}
+          <Link to="/">Home</Link>
+          {' '}
+          <Link to="/about">About</Link>
+          {' '}
+          <Link to="/login">Login/Register</Link>
+        </header>
+        <div>
+          <Button primary onClick={() => { return browserHistory.push('/about'); }}>About us!</Button>
+        </div>
+        <div style={{ marginTop: '1.5em' }}>{children}</div>
+      </div>
+    );
+  }
+}
 
-const App = () => {
-  return (
-    <div>
-      <Header />
-      <Button primary>Follow</Button>
-      Hello World! Ya
-    </div>
-  );
+App.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default App;
