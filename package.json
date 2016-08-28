@@ -5,7 +5,9 @@
   "main": "app/app.js",
   "scripts": {
     "build": "webpack",
-    "eslint": "eslint --fix --ext .js app test",
+    "lint-staged": "lint-staged",
+    "eslint:fix": "eslint --fix",
+    "git:add": "git add",
     "start": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build",
     "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register --require ./test/setup.js --reporter mochawesome",
     "test:watch": "npm test -- --watch"
@@ -43,6 +45,7 @@
     "express": "^4.14.0",
     "file-loader": "^0.9.0",
     "jsdom": "^9.4.1",
+    "lint-staged": "^2.0.3",
     "mocha": "^2.5.3",
     "mochawesome": "^1.4.0",
     "node-sass": "^3.8.0",
@@ -74,7 +77,10 @@
     "redux-saga": "^0.11.0",
     "redux-thunk": "^2.1.0"
   },
+  "lint-staged": {
+    "*.@(js|jsx)": ["eslint:fix", "git:add"]
+  },
   "pre-commit": [
-    "eslint"
+    "lint-staged"
   ]
 }
