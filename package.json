@@ -9,7 +9,7 @@
     "eslint:fix": "eslint --fix",
     "eslint": "eslint --fix --ext .js app test",
     "git:add": "git add",
-    "start": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build",
+    "start": "webpack-dashboard -- webpack-dev-server --devtool eval --progress --colors --hot --content-base build",
     "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register --require ./test/setup.js --reporter mochawesome",
     "test:watch": "npm test -- --watch"
   },
