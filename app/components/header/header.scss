@@ -1,4 +1,4 @@
-@import "~normalize.css/normalize.css";
+@import "../style/global.scss";
 
 .castle-background {
   background: url('../../assets/background/castle.jpg');
@@ -6,6 +6,7 @@
   background-repeat: no-repeat;
   background-position: center;
   height: 550px;
+  font-family: 'Poiret One', cursive;
   ul {
     width: 100%;
     list-style-type: none;
