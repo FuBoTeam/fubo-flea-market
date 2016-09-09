@@ -12,7 +12,7 @@ class App extends React.Component {
     this.displayName = 'App';
   }
   render() {
-    let { children } = this.props;
+    const { children } = this.props;
     return (
       <div>
         <Header />
