@@ -16,7 +16,7 @@ import Home from './components/Home';
 import About from './components/About';
 import Login from './components/Login';
 import DevTools from './containers/DevTools';
-import './index.scss';
+import './index.css';
 
 const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);

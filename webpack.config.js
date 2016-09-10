@@ -1,11 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const postcssNested = require('postcss-nested');
+const postcssNext = require('postcss-cssnext');
 
 // const DashboardPlugin = require('webpack-dashboard/plugin');
 
 module.exports = {
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'cheap-module-eval-source-map',
   entry: {
     javascript: [
       'webpack-dev-server/client?http://0.0.0.0:8080',
@@ -14,14 +15,18 @@ module.exports = {
     ],
     html: path.resolve(__dirname, 'app/index.html'),
   },
-  output: {
-  	path: path.resolve(__dirname, 'build'),
-   	filename: 'bundle.js',
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: 'bundle.js',
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
   },
-  module: {
+  postcss: [
+    postcssNested,
+    postcssNext,
+  ],
+  module: {
     preLoaders: [
       {
         test: /\.js[x]?$/,
@@ -37,25 +42,16 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.scss$/,
-        loaders: [
-          'style',
-          'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
-          'resolve-url',
-          'sass',
-        ],
-      },
-      {
-        test: /\.css$/,
+      test: /\.[s]?css$/,
         loaders: [
           'style?sourceMap',
           'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
+          'postcss',
         ],
       },
       {
-        test: /\.(jpg|gif|png)$/,
-        loader: 'url?limit=25000',
-        exclude: /node_modules/,
+        test: /\.(png|jpg|jpeg|gif|woff)$/,
+        loader: 'url-loader?limit=8192?name=[name].[ext]',
       },
       {
         test: /\.woff?$/,
@@ -70,7 +66,7 @@ module.exports = {
         loader: 'file?name=[name].[ext]',
       },
     ],
-  },
+  },
   eslint: {
     configFile: './.eslintrc',
   },
