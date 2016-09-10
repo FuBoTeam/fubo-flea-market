@@ -3,8 +3,6 @@ const webpack = require('webpack');
 const postcssNested = require('postcss-nested');
 const postcssNext = require('postcss-cssnext');
 
-// const DashboardPlugin = require('webpack-dashboard/plugin');
-
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: {
@@ -72,9 +70,5 @@ module.exports = {
   },
   plugins: [
     new webpack.NoErrorsPlugin(),
-    // new ExtractTextPlugin('app.css', {
-    //   allChunks: true
-    // })
-    // new DashboardPlugin()
   ],
 };

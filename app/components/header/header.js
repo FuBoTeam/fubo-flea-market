@@ -1,8 +1,6 @@
 import React from 'react';
 import CSSModules from 'react-css-modules';
 import styles from './header.css';
-import '../style/general.css';
-import '../style/global.css';
 
 class Header extends React.Component {
   render() {
