@@ -9,7 +9,7 @@
     "eslint:fix": "eslint --fix",
     "eslint": "eslint --fix --ext .js app test",
     "git:add": "git add",
-    "start": "webpack-dashboard -- webpack-dev-server --host 0.0.0.0 --devtool eval --progress --colors --hot --content-base build",
+    "start": "webpack-dev-server --host 0.0.0.0 --devtool eval --progress --colors --hot --content-base build",
     "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register --require ./test/setup.js --reporter mochawesome",
     "test:watch": "npm test -- --watch"
   },
@@ -44,6 +44,7 @@
     "eslint-plugin-jsx-a11y": "^1.5.5",
     "eslint-plugin-react": "^5.2.2",
     "express": "^4.14.0",
+    "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "jsdom": "^9.4.1",
     "lint-staged": "^2.0.3",
@@ -56,6 +57,7 @@
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.0.11",
     "remote-redux-devtools": "^0.3.4",
+    "resolve-url-loader": "^1.6.0",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
@@ -70,6 +72,7 @@
     "imports-loader": "^0.6.5",
     "normalize.css": "^4.2.0",
     "react": "^15.3.0",
+    "react-css-modules": "^3.7.10",
     "react-dom": "^15.3.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.6.1",
@@ -80,9 +83,9 @@
     "redux-thunk": "^2.1.0"
   },
   "lint-staged": {
-    "*.@(js|jsx)": ["eslint:fix", "git:add"]
-  },
-  "pre-commit": [
-    "lint-staged"
-  ]
+    "*.@(js|jsx)": [
+      "eslint:fix",
+      "git:add"
+    ]
+  }
 }

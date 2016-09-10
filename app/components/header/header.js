@@ -1,11 +1,14 @@
 import React from 'react';
-import './header.scss';
+import CSSModules from 'react-css-modules';
+import styles from './header.scss';
 import '../style/general.scss';
+import '../style/global.scss';
 
-export default class Header extends React.Component {
+class Header extends React.Component {
   render() {
+    console.log(styles);
     return (
-      <div className="layout-row vertical-top castle-background">
+      <div className="layout-row vertical-top" styleName="castle-background">
         <ul className="layout-row align-between">
           <li><a href="">Flea Market</a></li>
           <li><a href=""><span>Logout</span><i className="fa fa-sign-out" /></a></li>
@@ -14,3 +17,5 @@ export default class Header extends React.Component {
     );
   }
 }
+
+export default CSSModules(Header, styles);
