@@ -1,11 +1,11 @@
 import React from 'react';
 
-const About = () => {
+const Upload = () => {
   return (
     <div>
-      About us!
+      Upload page!
     </div>
   );
 };
 
-export default About;
+export default Upload;
