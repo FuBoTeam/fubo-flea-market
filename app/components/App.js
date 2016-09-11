@@ -5,6 +5,7 @@ import {
   Link,
   browserHistory,
 } from 'react-router';
+import { AuthGlobals } from 'redux-auth/bootstrap-theme';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,20 +16,9 @@ class App extends React.Component {
     const { children } = this.props;
     return (
       <div>
+        <AuthGlobals />
         <Header />
-        <header>
-          Links:
-          {' '}
-          <Link to="/">Home</Link>
-          {' '}
-          <Link to="/about">About</Link>
-          {' '}
-          <Link to="/login">Login/Register</Link>
-        </header>
-        <div>
-          <Button primary onClick={() => { return browserHistory.push('/about'); }}>About us!</Button>
-        </div>
-        <div style={{ marginTop: '1.5em' }}>{children}</div>
+        {children}
       </div>
     );
   }

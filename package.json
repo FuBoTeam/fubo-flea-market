@@ -65,7 +65,10 @@
   },
   "dependencies": {
     "belle": "^2.0.7",
+    "compression": "^1.6.2",
     "exports-loader": "^0.6.3",
+    "express": "^4.14.0",
+    "if-env": "^1.0.0",
     "immutable": "^3.8.1",
     "imports-loader": "^0.6.5",
     "normalize.css": "^4.2.0",
@@ -78,7 +81,8 @@
     "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.5.2",
     "redux-saga": "^0.11.0",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "webpack-isomorphic-tools": "^2.5.8"
   },
   "lint-staged": {
     "*.@(js|jsx)": [

@@ -1,39 +1,17 @@
 import 'babel-polyfill';
 import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import {
-  Router,
-  Route,
-  IndexRoute,
-  browserHistory,
-} from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import ReactDOM from 'react-dom';
+import { initialize } from './routing';
 
-import configureStore from './stores/configureStore';
-import App from './components/App';
-import Home from './components/Home';
-import About from './components/About';
-import Login from './components/Login';
-import DevTools from './containers/DevTools';
-import './index.css';
-import './components/style/global.css';
+const reactRoot = window.document.getElementById('app');
 
-const store = configureStore();
-const history = syncHistoryWithStore(browserHistory, store);
+initialize().then(({ provider }) => {
+  ReactDOM.render(provider, reactRoot);
+});
 
-render(
-  <Provider store={store}>
-    <div>
-      <Router history={history}>
-        <Route path="/" component={App}>
-          <IndexRoute component={Home} />
-          <Route path="about" component={About} />
-          <Route path="login" component={Login} />
-        </Route>
-      </Router>
-      <DevTools />
-    </div>
-  </Provider>,
-  document.getElementById('app')
-);
+if (process.env.NODE_ENV !== 'production') {
+  if (!reactRoot.firstChild || !reactRoot.firstChild.attributes ||
+      !reactRoot.firstChild.attributes['data-react-checksum']) {
+    console.error('Server-side React render was discarded. Make sure that your initial render does not contain any client-side code.');
+  }
+}
