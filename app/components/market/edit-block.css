@@ -1,0 +1,22 @@
+.edit-block {
+  display: flex;
+  margin-bottom: 5px;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px #e6e6e6;
+  width: 60%;
+  img {
+    height: 300px;
+  }
+}
+
+.edit-info {
+  padding: 30px;
+  dt {
+    margin-top: 10px;
+  }
+  dd {
+    margin: 5px 0 5px;
+    color: #666;
+  }
+}

@@ -1,4 +1,7 @@
 import React, { PropTypes } from 'react';
+import CSSModules from 'react-css-modules';
+import styles from './edit-block.css';
+import { Button } from 'belle';
 
 class EditBlock extends React.Component {
   constructor(props) {
@@ -8,9 +11,15 @@ class EditBlock extends React.Component {
   render() {
     const { good } = this.props;
     return (
-      <li>
-        title: {good.title} editable<br />
-        description: {good.description}
+      <li styleName="edit-block">
+        <img src={good.imgUrl} alt="Not found" />
+        <dl styleName="edit-info">
+          <dt>Title</dt>
+          <dd>{good.title}</dd>
+          <dt>Description</dt>
+          <dd>{good.description}</dd>
+          <Button primary>Edit</Button>
+        </dl>
       </li>
     );
   }
@@ -24,4 +33,4 @@ EditBlock.propTypes = {
   }),
 };
 
-export default EditBlock;
+export default CSSModules(EditBlock, styles);

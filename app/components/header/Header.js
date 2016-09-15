@@ -3,10 +3,14 @@ import CSSModules from 'react-css-modules';
 import styles from './styles.css';
 
 class Header extends React.Component {
+  constructor(props) {
+    super(props);
+    this.displayName = 'Header';
+  }
   render() {
     return (
       <div styleName="castle-background">
-        <ul styleName="header">
+        <ul styleName="header scroll-header">
           <li><a href="">Flea Market</a></li>
           <li><a href=""><span>Logout</span><i className="fa fa-sign-out" /></a></li>
         </ul>
@@ -15,4 +19,4 @@ class Header extends React.Component {
   }
 }
 
-export default CSSModules(Header, styles);
+export default CSSModules(Header, styles, { allowMultiple: true });

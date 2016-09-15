@@ -45,7 +45,7 @@ class App extends React.Component {
             {tabs}
           </ul>
         </header>
-        <div styleName="board-container">{children}</div>
+        <div>{children}</div>
       </div>
     );
   }

@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
-
+import CSSModules from 'react-css-modules';
 import Block from './Block';
 import EditBlock from './EditBlock';
+import styles from './goods.css';
 
 class GoodBlocks extends React.Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class GoodBlocks extends React.Component {
     const { goods, path } = this.props;
     if (path === 'SHOW_MY') {
       return (
-      <ul>
+      <ul styleName="goods-edit-container">
         {
           goods.map(good => {
             return (<EditBlock
@@ -25,7 +26,7 @@ class GoodBlocks extends React.Component {
       );
     }
     return (
-    <ul>
+    <ul styleName="goods-container">
       {
         goods.map(good => {
           return (<Block
@@ -44,4 +45,4 @@ GoodBlocks.propTypes = {
   path: PropTypes.string.isRequired,
 };
 
-export default GoodBlocks;
+export default CSSModules(GoodBlocks, styles);
