@@ -9,16 +9,16 @@ import DevTools from '../containers/DevTools';
 
 // const saga = createSagaMiddleware()
 
-function getDebugSessionKey() {
-  const matches = window.location.href.match(/[?&]debug_session=([^&]+)\b/);
-  return (matches && matches.length > 0) ? matches[1] : null;
-}
+// function getDebugSessionKey() {
+//   const matches = window.location.href.match(/[?&]debug_session=([^&]+)\b/);
+//   return (matches && matches.length > 0) ? matches[1] : null;
+// }
 
 const enhancer = compose(
   // applyMiddleware(thunk, saga),
   applyMiddleware(thunk),
-  DevTools.instrument(),
-  persistState(getDebugSessionKey())
+  DevTools.instrument()
+  // persistState(getDebugSessionKey())
 );
 
 const reducers = require('../reducers');

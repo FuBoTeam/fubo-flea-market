@@ -31,16 +31,14 @@
   }
 }
 .header-btn {
-  a {
-    font-weight: bold;
-    color: white;
-    display: block;
-    text-align: center;
-    padding: 20px 25px;
-    text-decoration: none;
-    &:hover {
-      color: #3333cc;
-    }
+  font-weight: bold;
+  color: white;
+  display: block;
+  text-align: center;
+  padding: 20px 25px;
+  text-decoration: none;
+  &:hover {
+    color: #3333cc;
   }
   i {
     margin-left: 10px;

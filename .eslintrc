@@ -16,6 +16,10 @@
     "eol-last": [0],
     "indent": 0,
     "react/jsx-indent": 0,
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".js", ".jsx"] }
+    ],
     "quotes": [1, "single"],
     "no-mixed-requires": [0],
     "no-underscore-dangle": [0],

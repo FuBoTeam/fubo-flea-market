@@ -2,3 +2,6 @@
 node_modules/
 mochawesome-reports/
 npm-debug.log
+# webpack-isomorphic-tools
+webpack-stats.json
+webpack-assets.json

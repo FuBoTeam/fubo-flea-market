@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import {
   Router,
@@ -15,9 +15,9 @@ import App from './components/App';
 import Home from './components/Home';
 import About from './components/About';
 import Login from './components/Login';
+import Logout from './components/Logout';
 import Dashboard from './components/Dashboard';
-import DevTools from './containers/DevTools';
-import './index.css';
+// import './index.css';
 
 function requireAuth(store, nextState, replace, next) {
   if (!store.getState().auth.getIn(['user', 'isSignedIn'])) {
@@ -29,7 +29,7 @@ function requireAuth(store, nextState, replace, next) {
 // a single function can be used for both client and server-side rendering.
 // when run from the server, this function will need to know the cookies and
 // url of the current request. also be sure to set `isServer` to true.
-export function initialize({ cookies, isServer, currentLocation, userAgent } = {}) {
+export function initialize({ apiUrl, cookies, isServer, currentLocation, userAgent } = {}) {
   const store = configureStore();
   let history = (isServer)
     ? createMemoryHistory(currentLocation)
@@ -43,6 +43,7 @@ export function initialize({ cookies, isServer, currentLocation, userAgent } = {
         <IndexRoute component={Home} />
         <Route path="/about" component={About} />
         <Route path="/login" component={Login} />
+        <Route path="/logout" component={Logout} />
         <Route
           path="/goods"
           component={Dashboard}
@@ -53,12 +54,8 @@ export function initialize({ cookies, isServer, currentLocation, userAgent } = {
     </Router>
   );
 
-  const devTools = (
-    <DevTools />
-  );
-
   return store.dispatch(configure(
-    { apiUrl: 'http://devise-token-auth-demo.herokuapp.com' },
+    { apiUrl },
     { isServer, cookies, currentLocation }
   )).then(({ redirectPath, blank } = {}) => {
     if (userAgent) {
