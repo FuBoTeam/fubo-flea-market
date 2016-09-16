@@ -19,3 +19,10 @@ try {
 }
 
 require('babel-register')(config);
+
+require.extensions['.scss'] = () => {
+  return;
+};
+require.extensions['.css'] = () => {
+  return;
+};

@@ -8,7 +8,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const strip = require('strip-loader');
 
 const projectRootPath = path.resolve(__dirname, '../');
-const assetsPath = path.resolve(projectRootPath, './app/assets');
+const assetsPath = path.resolve(projectRootPath, './build/assets');
+
+// postcss config
+const postcssNested = require('postcss-nested');
+const postcssNext = require('postcss-cssnext');
 
 // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
@@ -29,18 +33,52 @@ module.exports = {
     chunkFilename: '[name]-[chunkhash].js',
     publicPath: '/build/',
   },
+  postcss: [
+    postcssNested,
+    postcssNext,
+  ],
   module: {
     loaders: [
-      { test: /\.jsx?$/, exclude: /node_modules/, loaders: [strip.loader('debug'), 'babel'] },
-      { test: /\.json$/, loader: 'json-loader' },
-      { test: /\.less$/, loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!less?outputStyle=expanded&sourceMap=true&sourceMapContents=true') },
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=2&sourceMap!autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true') },
-      { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
-      { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
-      { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream' },
-      { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
-      { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml' },
-      { test: webpackIsomorphicToolsPlugin.regular_expression('images'), loader: 'url-loader?limit=10240' },
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loaders: [
+          strip.loader('debug'),
+          'babel',
+        ],
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader',
+      },
+      {
+        test: /\.[s]?css$/,
+        loader: ExtractTextPlugin.extract('style', 'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'),
+      },
+      {
+        test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url?limit=10000&mimetype=application/font-woff',
+      },
+      {
+        test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url?limit=10000&mimetype=application/font-woff',
+      },
+      {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url?limit=10000&mimetype=application/octet-stream',
+      },
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'file',
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url?limit=10000&mimetype=image/svg+xml',
+      },
+      {
+        test: webpackIsomorphicToolsPlugin.regular_expression('images'),
+        loader: 'url-loader?limit=10240',
+      },
     ],
   },
   progress: true,
@@ -78,7 +116,7 @@ module.exports = {
         warnings: false,
       },
     }),
-
     webpackIsomorphicToolsPlugin,
+    new webpack.NoErrorsPlugin(),
   ],
 };
