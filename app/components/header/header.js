@@ -1,20 +1,17 @@
 import React from 'react';
-import CSSModules from 'react-css-modules';
-// import styles from './header.css';
 import { Link } from 'react-router';
-
-// <div styleName="castle-background">
-//   <ul styleName="header">
-//     <Link to="/"><li styleName="header-btn">Flea Market</li></Link>
-//     <Link to="/logout"><li styleName="header-btn"><span>Logout</span><i className="fa fa-sign-out" /></li></Link>
-//   </ul>
-// </div>
+import CSSModules from 'react-css-modules';
+import styles from './header.css';
 
 class Header extends React.Component {
+  constructor(props) {
+    super(props);
+    this.displayName = 'Header';
+  }
   render() {
     return (
-      <div>
-        <ul>
+      <div styleName="castle-background">
+        <ul styleName="header scroll-header">
           <Link to="/"><li>Flea Market</li></Link>
           <Link to="/logout"><li><span>Logout</span><i className="fa fa-sign-out" /></li></Link>
         </ul>
@@ -23,5 +20,4 @@ class Header extends React.Component {
   }
 }
 
-// export default CSSModules(Header, styles);
-export default CSSModules(Header, null);
+export default CSSModules(Header, styles, { allowMultiple: true, errorWhenNotFound: false });

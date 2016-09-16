@@ -17,7 +17,7 @@ import About from './components/About';
 import Login from './components/Login';
 import Logout from './components/Logout';
 import Dashboard from './components/Dashboard';
-// import './index.css';
+import './index.css';
 
 function requireAuth(store, nextState, replace, next) {
   if (!store.getState().auth.getIn(['user', 'isSignedIn'])) {
