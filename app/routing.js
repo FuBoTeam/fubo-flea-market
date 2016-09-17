@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import {
   Router,
@@ -19,12 +19,28 @@ import Logout from './components/Logout';
 import Dashboard from './components/Dashboard';
 import './index.css';
 
-function requireAuth(store, nextState, replace, next) {
-  if (!store.getState().auth.getIn(['user', 'isSignedIn'])) {
-    replace('/login');
+class AuthRoute extends React.Component {
+  constructor(props) {
+    super(props);
+    this.displayName = 'AuthRoute';
+    this.requireAuth = this.requireAuth.bind(this);
   }
-  next();
+  requireAuth(nextState, replace, next) {
+    const { getState } = this.props;
+    if (!getState().auth.getIn(['user', 'isSignedIn'])) {
+      replace('/login');
+    }
+    next();
+  }
+  render() {
+    const { ...props } = this.props;
+    return <Route onEnter={this.requireAuth} {...props} />;
+  }
 }
+
+AuthRoute.propTypes = {
+  getState: PropTypes.func.isRequired,
+};
 
 // a single function can be used for both client and server-side rendering.
 // when run from the server, this function will need to know the cookies and
@@ -37,6 +53,7 @@ export function initialize({ apiUrl, cookies, isServer, currentLocation, userAge
 
   history = syncHistoryWithStore(history, store);
 
+  const { getState } = store;
   const routes = (
     <Router history={history}>
       <Route path="/" component={App}>
@@ -44,7 +61,8 @@ export function initialize({ apiUrl, cookies, isServer, currentLocation, userAge
         <Route path="/about" component={About} />
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
-        <Route
+        <AuthRoute
+          getState={getState}
           path="/goods"
           component={Dashboard}
         />
