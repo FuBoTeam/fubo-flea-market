@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Header from './header/header';
+import Header from './Header';
 import { AuthGlobals } from 'redux-auth/bootstrap-theme';
 
 class App extends React.Component {
