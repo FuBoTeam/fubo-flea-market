@@ -12,11 +12,10 @@ import { configure } from 'redux-auth';
 
 import configureStore from './stores/configureStore';
 import App from './components/App';
-import Home from './components/Home';
-import About from './components/About';
 import Login from './components/Login';
 import Logout from './components/Logout';
-import Dashboard from './components/Dashboard';
+import Market from './components/Market';
+import Good from './components/Good';
 import './index.css';
 
 class AuthRoute extends React.Component {
@@ -57,16 +56,14 @@ export function initialize({ apiUrl, cookies, isServer, currentLocation, userAge
   const routes = (
     <Router history={history}>
       <Route path="/" component={App}>
-        <IndexRoute component={Home} />
-        <Route path="/about" component={About} />
+        <IndexRoute component={Market} />
         <Route path="/login" component={Login} />
         <Route path="/logout" component={Logout} />
         <AuthRoute
           getState={getState}
-          path="/goods"
-          component={Dashboard}
+          path="/goods/:guid"
+          component={Good}
         />
-        <Route path="/goods/:guid" />
         <Route path="*" />
       </Route>
     </Router>
