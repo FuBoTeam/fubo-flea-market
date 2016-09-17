@@ -1,10 +1,11 @@
 import React from 'react';
+import { OAuthSignInButton } from 'redux-auth/default-theme';
 
 const Login = () => {
   return (
     <div>
-      Login page!
-      <button>Login/Register w/ Google account!</button>
+      <h1>Login page!</h1>
+      <OAuthSignInButton provider="google" />
     </div>
   );
 };
