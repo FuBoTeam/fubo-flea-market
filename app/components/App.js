@@ -5,6 +5,7 @@ import {
   Link,
   browserHistory,
 } from 'react-router';
+import { AuthGlobals } from 'redux-auth/default-theme';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class App extends React.Component {
     const { children } = this.props;
     return (
       <div>
+        <AuthGlobals />
         <Header />
         <header>
           Links:
