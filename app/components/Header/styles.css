@@ -29,8 +29,6 @@
       color: black;
     } 
   }
-}
-.header-btn {
   a {
     font-weight: bold;
     color: white;
@@ -50,4 +48,13 @@
       display: none;
     }
   }
+}
+
+.scroll-header {
+  transition: 1s;
+  background-color: #FFFFFF;
+  opacity: 0.8;
+  a {
+    color: black;
+  } 
 }
