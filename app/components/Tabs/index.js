@@ -29,9 +29,9 @@ class Tabs extends React.Component {
     const tabs = this.tabNames.map((tab, index) => {
       const selected = (tab.link === location.pathname) ? 'active' : '';
       return (
-        <li styleName={selected} key={index}>
-          <Link to={tab.link}>{tab.name}</Link>
-        </li>
+        <Link to={tab.link} key={index}>
+          <li styleName={selected}>{tab.name}</li>
+        </Link>
       );
     });
     return (

@@ -11,7 +11,9 @@
 }
 
 .edit-info {
-  padding: 30px;
+  padding: 10px 30px;
+  height: 230px;
+  margin: 0;
   dt {
     margin-top: 10px;
   }
@@ -19,4 +21,14 @@
     margin: 5px 0 5px;
     color: #666;
   }
+}
+
+.edit-container {
+  width: 100%;
+}
+
+.btn-container {
+  height: 70px;
+  padding: 12px;
+  background-color: #e6e6e6;
 }

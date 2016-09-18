@@ -6,11 +6,8 @@ import user from './user';
 
 const rootReducer = combineReducers({
   goods,
-<<<<<<< HEAD
   auth: authStateReducer,
-=======
   user,
->>>>>>> 7343fa4... Implement goods information and editing components.
   routing: routerReducer,
 });
 

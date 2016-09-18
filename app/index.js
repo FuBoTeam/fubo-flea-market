@@ -8,8 +8,6 @@ import { configure } from 'redux-auth';
 import configureStore from './stores/configureStore';
 import RTRouter from './components/RTRouter';
 
-import DevTools from './containers/DevTools';
-
 import './index.css';
 import './styles/global.css';
 

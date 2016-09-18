@@ -2,6 +2,10 @@ import React, { PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
 import styles from './edit-block.css';
 import { Button } from 'belle';
+const btnStyles = {
+  float: 'right',
+  marginLeft: 10,
+};
 
 class EditBlock extends React.Component {
   constructor(props) {
@@ -13,13 +17,18 @@ class EditBlock extends React.Component {
     return (
       <li styleName="edit-block">
         <img src={good.imgUrl} alt="Not found" />
-        <dl styleName="edit-info">
-          <dt>Title</dt>
-          <dd>{good.title}</dd>
-          <dt>Description</dt>
-          <dd>{good.description}</dd>
-          <Button primary>Edit</Button>
-        </dl>
+        <div styleName="edit-container">
+          <dl styleName="edit-info">
+            <dt>Title</dt>
+            <dd>{good.title}</dd>
+            <dt>Description</dt>
+            <dd>{good.description}</dd>
+          </dl>
+          <div styleName="btn-container">
+            <Button primary style={btnStyles}>Delete</Button>
+            <Button primary style={btnStyles}>Edit</Button>
+          </div>
+        </div>
       </li>
     );
   }
