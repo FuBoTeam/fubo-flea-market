@@ -1,5 +1,5 @@
 import React from 'react';
-import { OAuthSignInButton } from 'redux-auth/default-theme';
+import { OAuthSignInButton } from 'redux-auth/bootstrap-theme';
 
 const Login = () => {
   return (

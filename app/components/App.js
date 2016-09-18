@@ -5,7 +5,7 @@ import {
   Link,
   browserHistory,
 } from 'react-router';
-import { AuthGlobals } from 'redux-auth/default-theme';
+import { AuthGlobals } from 'redux-auth/bootstrap-theme';
 
 class App extends React.Component {
   constructor(props) {
