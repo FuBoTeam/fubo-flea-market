@@ -18,7 +18,7 @@ class Block extends React.Component {
 
 Block.propTypes = {
   good: PropTypes.shape({
-    uuid: PropTypes.string.isRequired,
+    guid: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
   }),

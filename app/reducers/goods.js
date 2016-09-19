@@ -3,16 +3,46 @@ import {
   ADD_GOOD,
 } from '../actions';
 
-const initialState = [];
+const initialState = [{
+  guid: 0,
+  title: 'Cup',
+  description: 'YAYA',
+  subscriptPeople: [{ uuid: 1, displayName: 'Ben.liu' }],
+  Bidder: null,
+  imgUrl: '',
+  highestBiddingMoney: 100,
+  owner: { uuid: 0, displayName: 'Elaine' },
+  detailUrl: '',
+}, {
+  guid: 1,
+  title: 'Hat',
+  description: 'YAYA',
+  subscriptPeople: [{ uuid: 1, displayName: 'Ben.liu' }],
+  Bidder: null,
+  imgUrl: '',
+  highestBiddingMoney: 100,
+  owner: { uuid: 0, displayName: 'Elaine' },
+  detailUrl: '',
+}, {
+  guid: 2,
+  title: 'shose',
+  description: 'YAYA',
+  subscriptPeople: [{ uuid: 0, displayName: 'Elaine' }],
+  Bidder: null,
+  imgUrl: '',
+  highestBiddingMoney: 100,
+  owner: { uuid: 1, displayName: 'Ben.liu' },
+  detailUrl: '',
+}];
 
 const getNextUuid = (goods) => {
-  let uuid = 0;
+  let guid = 0;
   for (let i = 0; i < goods.length; i++) {
-    if (parseInt(goods[i].uuid, 10) > uuid) {
-      uuid = parseInt(goods[i].uuid, 10);
+    if (parseInt(goods[i].guid, 10) > guid) {
+      guid = parseInt(goods[i].guid, 10);
     }
   }
-  return (++uuid).toString();
+  return (++guid).toString();
 };
 
 const goods = (state = initialState, action) => {

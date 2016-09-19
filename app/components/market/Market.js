@@ -4,10 +4,7 @@ import Goods from '../../containers/Goods';
 
 const Market = () => {
   return (
-    <div>
-      Market page!
-      <Goods />
-    </div>
+    <Goods />
   );
 };
 
