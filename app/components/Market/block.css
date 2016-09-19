@@ -1,0 +1,25 @@
+.good-container {
+  height: auto;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin: 5px;
+  padding-bottom: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px #e6e6e6;
+  label {
+    margin: 10px 15px 0;
+    font-size: 20px;
+  }
+  p {
+    margin: 10px 15px;
+    color: #666;
+  }
+}
+
+.image {
+  flex-grow: 1;
+  height: 300px;
+  object-fit: cover;
+}

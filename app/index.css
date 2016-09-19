@@ -1,3 +1,4 @@
 body {
   background: url('./assets/background/board.jpg');
+  min-height: 100%;
 }

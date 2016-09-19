@@ -5,10 +5,10 @@ import {
   IndexRoute,
 } from 'react-router';
 import App from './App';
-import Home from './Home';
-import About from './About';
 import Login from './Login';
 import Logout from './Logout';
+import Market from './Market';
+import Upload from './Upload';
 import DevTools from '../containers/DevTools';
 
 class RTRouter extends React.Component {
@@ -18,8 +18,10 @@ class RTRouter extends React.Component {
     this.requireAuth = this.requireAuth.bind(this);
     this.routes = (
       <Route path="/" component={App}>
-        <IndexRoute component={Home} />
-        <Route path="about" component={About} />
+        <IndexRoute component={Market} />
+        <Route path="my-goods" component={Market} />
+        <Route path="my-bids" component={Market} />
+        <Route path="upload" component={Upload} />
         <Route path="login" component={Login} />
         <Route
           onEnter={this.requireAuth}

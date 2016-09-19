@@ -1,0 +1,35 @@
+.tab-group {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 10px 0;
+  li {
+    width: 300px;
+    padding: 10px 20px;
+    border: 1px solid white;
+    background-color: rgba(100%, 100%, 100%, 0.3);
+    text-align: center;
+    color: black;
+    margin: 0;
+    &:hover {
+      background-color: #ff8080;
+      color: white;
+    }
+    &.active {
+      border-bottom: 2px solid #ff8080;
+      background-color: white;
+      color: #ff8080;
+    }
+  }
+  a {
+    color: black;
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
+    &:focus {
+      text-decoration: none;
+    }
+  }
+}

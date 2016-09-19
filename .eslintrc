@@ -26,6 +26,7 @@
     "new-cap": [0, {
       "newIsCap": true
     }],
+    "jsx-quotes": 1
   },
   "settings": {
     "import/resolver": {

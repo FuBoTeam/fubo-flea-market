@@ -1,11 +1,7 @@
 import React, { PropTypes } from 'react';
-import Header from './Header';
-import { Button } from 'belle';
-import {
-  Link,
-  browserHistory,
-} from 'react-router';
 import { AuthGlobals } from 'redux-auth/bootstrap-theme';
+import Header from './Header';
+import Tabs from './Tabs';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,24 +9,13 @@ class App extends React.Component {
     this.displayName = 'App';
   }
   render() {
-    const { children } = this.props;
+    const { children, location } = this.props;
     return (
       <div>
         <AuthGlobals />
         <Header />
-        <header>
-          Links:
-          {' '}
-          <Link to="/">Home</Link>
-          {' '}
-          <Link to="/about">About</Link>
-          {' '}
-          <Link to="/login">Login/Register</Link>
-        </header>
-        <div>
-          <Button primary onClick={() => { return browserHistory.push('/about'); }}>About us!</Button>
-        </div>
-        <div style={{ marginTop: '1.5em' }}>{children}</div>
+        <Tabs location={location} />
+        {children}
       </div>
     );
   }
@@ -38,6 +23,7 @@ class App extends React.Component {
 
 App.propTypes = {
   children: PropTypes.node.isRequired,
+  location: PropTypes.object,
 };
 
 export default App;
