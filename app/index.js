@@ -2,38 +2,25 @@ import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import {
-  Router,
-  Route,
-  IndexRoute,
-  browserHistory,
-} from 'react-router';
+import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-
+import { configure } from 'redux-auth';
 import configureStore from './stores/configureStore';
-import App from './components/App';
-import Home from './components/Home';
-import About from './components/About';
-import Login from './components/Login';
-import DevTools from './containers/DevTools';
+import RTRouter from './components/RTRouter';
 import './index.css';
 import './styles/global.css';
 
 const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
 
-render(
-  <Provider store={store}>
-    <div>
-      <Router history={history}>
-        <Route path="/" component={App}>
-          <IndexRoute component={Home} />
-          <Route path="about" component={About} />
-          <Route path="login" component={Login} />
-        </Route>
-      </Router>
-      <DevTools />
-    </div>
-  </Provider>,
-  document.getElementById('app')
-);
+store.dispatch(configure({
+  apiUrl: 'http://flea-backend.dev/',
+})).then(() => {
+  const { getState } = store;
+  render(
+    <Provider store={store} key="provider">
+      <RTRouter history={history} getState={getState} />
+    </Provider>,
+    document.getElementById('app')
+  );
+});
