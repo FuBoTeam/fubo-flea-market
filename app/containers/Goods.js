@@ -1,4 +1,4 @@
-import GoodBlocks from '../components/market/GoodBlocks';
+import GoodBlocks from '../components/Market/GoodBlocks';
 
 import { connect } from 'react-redux';
 import { getGoods } from '../actions';
