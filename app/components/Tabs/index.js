@@ -14,8 +14,8 @@ class Tabs extends React.Component {
         link: '/',
         name: 'Market',
       }, {
-        link: '/my-goods',
-        name: 'My Goods',
+        link: '/my-selling',
+        name: 'My Selling',
       }, {
         link: '/my-bids',
         name: 'My Bids',

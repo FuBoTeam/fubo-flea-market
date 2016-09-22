@@ -10,6 +10,7 @@ class Header extends React.Component {
   render() {
     return (
       <div styleName="castle-background">
+        <div styleName="planet-logo"></div>
         <ul styleName="header scroll-header">
           <li><a href="">Flea Market</a></li>
           <li><a href=""><span>Logout</span><i className="fa fa-sign-out" /></a></li>

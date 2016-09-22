@@ -1,4 +1,5 @@
 body {
   background: url('./assets/background/board.jpg');
+  overflow-x: hidden;
   min-height: 100%;
 }

@@ -21,7 +21,7 @@ class Block extends React.Component {
         <img styleName="image" src={good.imgUrl} alt="Not found" />
         <label>{good.title}</label>
         <Rating defaultValue={starNum} disabled disabledStyle={starStyle}>star</Rating>
-        <p>Current: {good.subscriptPeople[0].displayName}</p>
+        <p>Highest Bidder: {good.subscriptPeople[0].displayName}</p>
       </li>
     );
   }

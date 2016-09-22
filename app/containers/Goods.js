@@ -23,7 +23,7 @@ const getDiffGoods = (goods, filter = 'SHOW_ALL', myself) => {
 const _getFilter = (path) => {
   const pathDict = {
     '/': 'SHOW_ALL',
-    '/my-goods': 'SHOW_MY',
+    '/my-selling': 'SHOW_MY',
     '/my-bids': 'SHOW_BID',
   };
   return pathDict[path];
