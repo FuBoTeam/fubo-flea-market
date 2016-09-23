@@ -15,7 +15,6 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
   font-size: 30px;
   transition: 0.5s;
   position: fixed;
@@ -38,6 +37,9 @@
     text-decoration: none;
     &:hover {
       color: #3333cc;
+      text-decoration: none;
+    }
+    &:focus {
       text-decoration: none;
     }
   }
@@ -66,11 +68,10 @@
   width: 500px;
   height: 500px;
   position: absolute;
-  right: -215px;
+  right: 225px;
   top: -215px;
   animation: infinite-rotate 180s infinite linear;
   transform: rotate(360deg);
-  overflow-x: hidden;
 }
 
 @keyframes infinite-rotate{

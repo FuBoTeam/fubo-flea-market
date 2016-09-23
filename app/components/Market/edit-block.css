@@ -4,9 +4,11 @@
   background-color: white;
   border: 1px solid #ccc;
   box-shadow: 1px 1px 1px #e6e6e6;
-  width: 60%;
+  max-width: 1200px;
+  width: 100%;
   img {
     height: 300px;
+    max-width: 50%;
   }
 }
 
