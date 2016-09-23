@@ -19,8 +19,8 @@ class RTRouter extends React.Component {
     this.routes = (
       <Route path="/" component={App}>
         <IndexRoute component={Market} />
-        <Route path="my-goods" component={Market} />
         <Route path="my-selling" component={Market} />
+        <Route path="my-bids" component={Market} />
         <Route path="upload" component={Upload} />
         <Route path="login" component={Login} />
         <Route

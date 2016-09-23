@@ -1,0 +1,32 @@
+.upload-form {
+  max-width: 600px;
+  width: 100%;
+  margin: auto;
+  padding: 30px;
+  background-color: white;
+  box-shadow:4px 5px 10px rgba(20%,20%,40%,0.5);
+}
+
+.title {
+  text-align: right;
+}
+
+.form-title {
+  text-align: center;
+  margin: 0;
+}
+
+.description {
+  resize: none;
+}
+
+.btn-container {
+  margin: 0 -30px -30px -30px;
+  background-color: #e6e6e6;
+  padding: 15px 20px;
+  text-align: right;
+}
+
+.input-control {
+  margin-bottom: 20px;
+}

@@ -8,6 +8,7 @@
   padding-bottom: 5px;
   border: 1px solid #ccc;
   box-shadow: 1px 1px 1px #e6e6e6;
+  min-width: 220px;
   label {
     margin: 10px 15px 0;
     font-size: 20px;
