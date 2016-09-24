@@ -64,6 +64,7 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "babel-relay-plugin": "^0.9.3",
     "belle": "^2.0.7",
     "exports-loader": "^0.6.3",
     "graphql": "^0.7.0",
