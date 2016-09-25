@@ -20,31 +20,35 @@ class RTRouter extends React.Component {
     super(props);
     this.displayName = 'RTRouter';
     this.requireAuth = this.requireAuth.bind(this);
+    const { getState } = this.props;
+    const user = getState().auth.getIn(['user', 'attributes']) || null;
     this.routes = (
       <Route
         path="/"
         component={App}
       >
         <IndexRoute
+          user={user}
           component={Market}
           queries={GoodsQueries}
         />
         <Route
-          path="my-selling"
-          component={Market}
-          queries={GoodsQueries}
+          onEnter={this.requireAuth}
+          path="upload"
+          component={Upload}
         />
-        <Route
-          path="my-bids"
-          component={Market}
-          queries={GoodsQueries}
-        />
-        <Route path="upload" component={Upload} />
         <Route path="login" component={Login} />
         <Route
           onEnter={this.requireAuth}
           path="logout"
           component={Logout}
+        />
+        <Route
+          onEnter={this.requireAuth}
+          path=":filter"
+          user={user}
+          component={Market}
+          queries={GoodsQueries}
         />
       </Route>
     );
