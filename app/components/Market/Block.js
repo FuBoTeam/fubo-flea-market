@@ -14,14 +14,19 @@ class Block extends React.Component {
   }
   render() {
     const { good } = this.props;
-    let starNum = parseInt(good.subscriptPeople.length / 5 + 1, 10);
+    const length = good.subscriptPeople && good.subscriptPeople.length || 0;
+    const highestBidder = good.subscriptPeople &&
+                          good.subscriptPeople[0] &&
+                          good.subscriptPeople[0].displayName ||
+                          'None of Above';
+    let starNum = parseInt(length / 5 + 1, 10);
     starNum = starNum > 5 ? 5 : starNum;
     return (
       <li styleName="good-container">
-        <img styleName="image" src={good.imgUrl} alt="Not found" />
+        <img styleName="image" src={good.image} alt="Not found" />
         <label>{good.title}</label>
         <Rating defaultValue={starNum} disabled disabledStyle={starStyle}>star</Rating>
-        <p>Highest Bidder: {good.subscriptPeople[0].displayName}</p>
+        <p>Highest Bidder: {highestBidder}</p>
       </li>
     );
   }
@@ -29,9 +34,10 @@ class Block extends React.Component {
 
 Block.propTypes = {
   good: PropTypes.shape({
-    guid: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
+    image: PropTypes.string,
   }),
 };
 

@@ -3,12 +3,16 @@ import {
   Router,
   Route,
   IndexRoute,
+  applyRouterMiddleware,
 } from 'react-router';
+import Relay from 'react-relay';
+import useRelay from 'react-router-relay';
 import App from './App';
 import Login from './Login';
 import Logout from './Logout';
 import Market from './Market';
 import Upload from './Upload';
+import GoodsQueries from '../queries/GoodsQueries';
 import DevTools from '../containers/DevTools';
 
 class RTRouter extends React.Component {
@@ -16,17 +20,37 @@ class RTRouter extends React.Component {
     super(props);
     this.displayName = 'RTRouter';
     this.requireAuth = this.requireAuth.bind(this);
+    const { getState } = this.props;
+    const user = getState().auth.getIn(['user', 'attributes']) || null;
+    const isSignedIn = getState().auth.getIn(['user', 'isSignedIn']);
     this.routes = (
-      <Route path="/" component={App}>
-        <IndexRoute component={Market} />
-        <Route path="my-selling" component={Market} />
-        <Route path="my-bids" component={Market} />
-        <Route path="upload" component={Upload} />
+      <Route
+        path="/"
+        isSignedIn={isSignedIn}
+        component={App}
+      >
+        <IndexRoute
+          user={user}
+          component={Market}
+          queries={GoodsQueries}
+        />
+        <Route
+          onEnter={this.requireAuth}
+          path="upload"
+          component={Upload}
+        />
         <Route path="login" component={Login} />
         <Route
           onEnter={this.requireAuth}
           path="logout"
           component={Logout}
+        />
+        <Route
+          onEnter={this.requireAuth}
+          path=":filter"
+          user={user}
+          component={Market}
+          queries={GoodsQueries}
         />
       </Route>
     );
@@ -42,7 +66,11 @@ class RTRouter extends React.Component {
     const { history } = this.props;
     return (
       <div>
-        <Router history={history}>
+        <Router
+          history={history}
+          render={applyRouterMiddleware(useRelay)}
+          environment={Relay.Store}
+        >
           {this.routes}
         </Router>
         <DevTools />
