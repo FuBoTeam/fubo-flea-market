@@ -22,9 +22,11 @@ class RTRouter extends React.Component {
     this.requireAuth = this.requireAuth.bind(this);
     const { getState } = this.props;
     const user = getState().auth.getIn(['user', 'attributes']) || null;
+    const isSignedIn = getState().auth.getIn(['user', 'isSignedIn']);
     this.routes = (
       <Route
         path="/"
+        isSignedIn={isSignedIn}
         component={App}
       >
         <IndexRoute
