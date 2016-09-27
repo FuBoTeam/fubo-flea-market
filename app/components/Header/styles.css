@@ -1,5 +1,5 @@
 .castle-background {
-  background: url('../../assets/background/castle.jpg');
+  background: linear-gradient(120deg, #1bbbb1, #005ce6);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -15,7 +15,6 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
   font-size: 30px;
   transition: 0.5s;
   position: fixed;
@@ -38,6 +37,10 @@
     text-decoration: none;
     &:hover {
       color: #3333cc;
+      text-decoration: none;
+    }
+    &:focus {
+      text-decoration: none;
     }
   }
   i {
@@ -57,4 +60,25 @@
   a {
     color: black;
   } 
+}
+
+.planet-logo {
+  background-image: none,url(../../assets/background/planet.svg);
+  background-size: cover;
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  right: 225px;
+  top: -215px;
+  animation: infinite-rotate 180s infinite linear;
+  transform: rotate(360deg);
+}
+
+@keyframes infinite-rotate{
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
