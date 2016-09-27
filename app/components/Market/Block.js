@@ -34,7 +34,7 @@ class Block extends React.Component {
 
 Block.propTypes = {
   good: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
     image: PropTypes.string,

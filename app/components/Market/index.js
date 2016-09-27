@@ -24,7 +24,7 @@ class Market extends React.Component {
           })
         }</ul>
       );
-    } else if (params.filter === 'my-bid') {
+    } else if (params.filter === 'my-bids') {
       return (
         <ul styleName="goods-container">{
           goods.edges.filter((g) => {
@@ -48,7 +48,7 @@ class Market extends React.Component {
 }
 
 Market.propTypes = {
-  goods: PropTypes.arrayOf(PropTypes.object).isRequired,
+  goods: PropTypes.object.isRequired,
   params: PropTypes.object.isRequired,
   route: PropTypes.object.isRequired,
 };

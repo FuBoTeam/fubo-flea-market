@@ -16,7 +16,7 @@ class EditBlock extends React.Component {
     const { good } = this.props;
     return (
       <li styleName="edit-block">
-        <img src={good.imgUrl} alt="Not found" />
+        <img src={good.image} alt="Not found" />
         <div styleName="edit-container">
           <dl styleName="edit-info">
             <dt>Title</dt>
@@ -36,9 +36,10 @@ class EditBlock extends React.Component {
 
 EditBlock.propTypes = {
   good: PropTypes.shape({
-    guid: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string,
+    image: PropTypes.string,
   }),
 };
 
