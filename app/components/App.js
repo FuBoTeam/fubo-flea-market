@@ -11,11 +11,15 @@ class App extends React.Component {
   render() {
     const { children, location, route } = this.props;
     const isSignedIn = route.isSignedIn;
+    let tab = '';
+    if (location.pathname !== '/detail') {
+      tab = (<Tabs location={location} />);
+    }
     return (
       <div>
         <AuthGlobals />
         <Header isSignedIn={isSignedIn} />
-        <Tabs location={location} />
+        {tab}
         {children}
       </div>
     );

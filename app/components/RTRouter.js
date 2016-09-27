@@ -11,6 +11,7 @@ import App from './App';
 import Login from './Login';
 import Logout from './Logout';
 import Market from './Market';
+import GoodDetail from './GoodDetail';
 import Upload from './Upload';
 import GoodsQueries from '../queries/GoodsQueries';
 import DevTools from '../containers/DevTools';
@@ -46,7 +47,10 @@ class RTRouter extends React.Component {
           component={Logout}
         />
         <Route
-          onEnter={this.requireAuth}
+          path="detail"
+          component={GoodDetail}
+        />
+        <Route
           path=":filter"
           user={user}
           component={Market}
