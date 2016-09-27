@@ -16,10 +16,10 @@ class Market extends React.Component {
       return (
         <ul styleName="goods-edit-container">{
           goods.edges.filter((g) => {
-            return route.user.id === g.ownerId;
+            return route.user.id === g.node.ownerId;
           }).map((g) => {
             return (
-              <EditBlock key={g.id} good={g} />
+              <EditBlock key={g.node.id} good={g.node} />
             );
           })
         }</ul>
@@ -28,11 +28,11 @@ class Market extends React.Component {
       return (
         <ul styleName="goods-container">{
           goods.edges.filter((g) => {
-            return g.subscriptPeople.some((u) => {
+            return g.node.subscriptPeople.some((u) => {
               return route.user.id === u.id;
             });
           }).map((g) => {
-            return <Block key={g.id} good={g} />;
+            return <Block key={g.node.id} good={g.node} />;
           })
         }</ul>
       );
@@ -40,7 +40,7 @@ class Market extends React.Component {
     return (
       <ul styleName="goods-container">{
         goods.edges.map((g) => {
-          return <Block key={g.id} good={g} />;
+          return <Block key={g.node.id} good={g.node} />;
         })
       }</ul>
     );
