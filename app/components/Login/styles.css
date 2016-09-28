@@ -1,0 +1,15 @@
+.container {
+  max-width: 500px;
+  width: 100%;
+  background-color: white;
+  box-shadow:4px 5px 10px rgba(20%,20%,40%,0.5);
+  padding: 30px;
+  margin: 30px auto;
+  h1 {
+    text-align: center;
+    margin-top: 0;
+  }
+  p {
+    text-align: center;
+  }
+}

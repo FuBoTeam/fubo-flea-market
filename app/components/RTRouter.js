@@ -47,10 +47,12 @@ class RTRouter extends React.Component {
           component={Logout}
         />
         <Route
+          onEnter={this.requireAuth}
           path="detail"
           component={GoodDetail}
         />
         <Route
+          onEnter={this.requireAuth}
           path=":filter"
           user={user}
           component={Market}

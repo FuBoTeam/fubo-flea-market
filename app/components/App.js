@@ -12,7 +12,7 @@ class App extends React.Component {
     const { children, location, route } = this.props;
     const isSignedIn = route.isSignedIn;
     let tab = '';
-    if (location.pathname !== '/detail') {
+    if (location.pathname !== '/detail' && location.pathname !== '/login') {
       tab = (<Tabs location={location} />);
     }
     return (
