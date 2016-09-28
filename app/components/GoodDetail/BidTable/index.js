@@ -1,6 +1,7 @@
 import React from 'react';
 import CSSModules from 'react-css-modules';
 import styles from './styles.css';
+import BidForm from '../BidForm';
 
 class BidTable extends React.Component {
   constructor(props) {
@@ -34,6 +35,7 @@ class BidTable extends React.Component {
             <td>{test.clamor}</td>
             <td>{test.Time}</td>
           </tr>
+          <BidForm />
         </tbody>
       </table>
     );

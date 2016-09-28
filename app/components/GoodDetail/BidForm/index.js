@@ -1,6 +1,12 @@
 import React from 'react';
-import CSSModules from 'react-css-modules';
-import styles from './styles.css';
+import { Button } from 'belle';
+const btnStyles = {
+  paddingTop: 3,
+  paddingBottom: 3,
+};
+const nameStyle = {
+  lineHeight: '34px',
+};
 
 class BidForm extends React.Component {
   constructor(props) {
@@ -9,11 +15,14 @@ class BidForm extends React.Component {
   }
   render() {
     return (
-      <div>
-        bidForm
-      </div>
+      <tr>
+        <td style={nameStyle}>Elaine</td>
+        <td><input className="form-control" type="number" /></td>
+        <td><input className="form-control" type="text" /></td>
+        <td><Button primary style={btnStyles}>Submit</Button></td>
+      </tr>
     );
   }
 }
 
-export default CSSModules(BidForm, styles);
+export default BidForm;

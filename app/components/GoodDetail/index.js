@@ -13,7 +13,9 @@ class GoodDetail extends React.Component {
     return (
       <div styleName="container">
         <Info />
-        <BidTable />
+        <div styleName="bid-content">
+          <BidTable />
+        </div>
       </div>
     );
   }
