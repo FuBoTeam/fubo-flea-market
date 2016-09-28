@@ -17,6 +17,9 @@
     margin: 10px 15px;
     color: #666;
   }
+  a {
+    display: inline-flex;
+  }
 }
 
 .image {

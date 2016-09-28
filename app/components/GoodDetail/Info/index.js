@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
 import styles from './styles.css';
 import { Rating } from 'belle';
 const starStyle = {
   opacity: 1,
-  marginBottom: 5,
+  marginBottom: 15,
+  fontSize: 40,
 };
 
 class Info extends React.Component {
@@ -13,22 +14,31 @@ class Info extends React.Component {
     this.displayName = 'Info';
   }
   render() {
+    const { good } = this.props;
     return (
       <div styleName="good-info">
-        <img src="https://xieranmaya.github.io/images/cats/photo-23583825.jpg" alt="not found" />
+        <img src={good.image} alt="not found" />
         <div styleName="word-intro">
-          <label>Cat</label>
+          <h2>{good.title}</h2>
           <Rating defaultValue={2} disabled disabledStyle={starStyle}>star</Rating>
           <label>Description</label>
-          <p>My favoriate very lovely cute pretty YAYA YAYA</p>
+          <p>{good.description}</p>
           <label>Highest Bidder</label>
           <p>Elaine</p>
           <label>Highest Amount</label>
           <p>NTD 400</p>
+          <label>Created At</label>
+          <p>{good.createdAt}</p>
+          <label>Updated At</label>
+          <p>{good.updatedAt}</p>
         </div>
       </div>
     );
   }
 }
+
+Info.propTypes = {
+  good: PropTypes.object.isRequired,
+};
 
 export default CSSModules(Info, styles);
