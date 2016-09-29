@@ -9,20 +9,27 @@ class BidTable extends React.Component {
     this.displayName = 'BidTable';
   }
   render() {
-    const tableTitle = ['Display Name', 'Money', 'Clamor', 'Time'];
-    const test = {
+    const tableElements = ['displayName', 'money', 'clamor', 'time'];
+    const tableTitles = {
+      displayName: 'Display Name',
+      money: 'Money',
+      clamor: 'Clamor',
+      time: 'Time',
+    };
+    const mockData = {
       displayName: 'Elaine',
       money: 500,
       clamor: 'My goods!!!',
-      Time: '01:11',
+      time: '01:11',
     };
     return (
       <table className="table table-hover" styleName="bid-table">
         <thead>
-          <tr className="warning">{
-            tableTitle.map((title, index) => {
+          <tr className="warning">
+          {
+            tableElements.map((element, index) => {
               return (
-                <td key={index}>{title}</td>
+                <td key={index}>{tableTitles[element]}</td>
               );
             })
           }
@@ -30,10 +37,11 @@ class BidTable extends React.Component {
         </thead>
         <tbody>
           <tr>
-            <td>{test.displayName}</td>
-            <td>{test.money}</td>
-            <td>{test.clamor}</td>
-            <td>{test.Time}</td>
+          {
+            tableElements.map((element, index) => {
+              return (<td key={index}>{mockData[element]}</td>);
+            })
+          }
           </tr>
           <BidForm />
         </tbody>
