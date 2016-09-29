@@ -20,7 +20,7 @@ Relay.injectNetworkLayer(
 );
 
 store.dispatch(configure({
-  apiUrl: 'http://flea-backend.dev/',
+  apiUrl: 'http://flea.fubotech.com.tw/',
 })).then(() => {
   const { getState } = store;
   render(
