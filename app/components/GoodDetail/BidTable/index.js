@@ -11,10 +11,10 @@ class BidTable extends React.Component {
   render() {
     const tableElements = ['displayName', 'money', 'clamor', 'time'];
     const tableTitles = {
-      displayName: 'Display Name',
-      money: 'Money',
-      clamor: 'Clamor',
-      time: 'Time',
+      displayName: 'Bidder',
+      money: 'Bid',
+      clamor: 'Taunt(ex.未看先猜，樓下魯蛇)',
+      time: 'Bid Time',
     };
     const mockData = {
       displayName: 'Elaine',

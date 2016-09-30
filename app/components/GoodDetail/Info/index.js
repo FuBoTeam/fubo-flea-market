@@ -31,6 +31,8 @@ class Info extends React.Component {
           <p>{good.createdAt}</p>
           <label>Updated At</label>
           <p>{good.updatedAt}</p>
+          <label>Good ID</label>
+          <p>{good.id}</p>
         </div>
       </div>
     );
