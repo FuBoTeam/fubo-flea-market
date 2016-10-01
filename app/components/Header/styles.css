@@ -21,6 +21,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  z-index: 9;
   &:hover {
     background-color: #FFFFFF;
     opacity: 0.6;

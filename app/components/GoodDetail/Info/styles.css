@@ -1,0 +1,23 @@
+.good-info {
+  background-color: white;
+  max-width: 400px;
+  width: 48%;
+  box-shadow:4px 5px 10px rgba(20%,20%,40%,0.5);
+  margin: 0 20px 20px 0;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+  img {
+    width: 100%;
+  }
+  label {
+    display: block;
+  }
+  h2 {
+    margin-top: 0;
+  }
+}
+
+.word-intro {
+  padding: 20px;
+}

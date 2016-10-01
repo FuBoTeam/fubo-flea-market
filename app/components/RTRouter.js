@@ -11,8 +11,10 @@ import App from './App';
 import Login from './Login';
 import Logout from './Logout';
 import Market from './Market';
+import GoodDetail from './GoodDetail';
 import Upload from './Upload';
 import GoodsQueries from '../queries/GoodsQueries';
+import GoodQueries from '../queries/GoodQueries';
 import DevTools from '../containers/DevTools';
 
 class RTRouter extends React.Component {
@@ -44,6 +46,11 @@ class RTRouter extends React.Component {
           onEnter={this.requireAuth}
           path="logout"
           component={Logout}
+        />
+        <Route
+          path="good/:id"
+          component={GoodDetail}
+          queries={GoodQueries}
         />
         <Route
           onEnter={this.requireAuth}
