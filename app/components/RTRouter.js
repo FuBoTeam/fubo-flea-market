@@ -9,7 +9,6 @@ import Relay from 'react-relay';
 import useRelay from 'react-router-relay';
 import App from './App';
 import Login from './Login';
-import Logout from './Logout';
 import Market from './Market';
 import GoodDetail from './GoodDetail';
 import Upload from './Upload';
@@ -42,11 +41,6 @@ class RTRouter extends React.Component {
           component={Upload}
         />
         <Route path="login" component={Login} />
-        <Route
-          onEnter={this.requireAuth}
-          path="logout"
-          component={Logout}
-        />
         <Route
           path="good/:id"
           component={GoodDetail}
