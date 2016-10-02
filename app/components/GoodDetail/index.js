@@ -3,7 +3,7 @@ import Relay from 'react-relay';
 import CSSModules from 'react-css-modules';
 import styles from './styles.css';
 import Info from './Info';
-import BidTable from './BidTable';
+import BidTableContainer from '../../containers/BidTableContainer';
 
 class GoodDetail extends React.Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class GoodDetail extends React.Component {
       <div styleName="container">
         <Info good={good} />
         <div styleName="bid-content">
-          <BidTable />
+          <BidTableContainer />
         </div>
       </div>
     );
