@@ -1,5 +1,4 @@
 import React from 'react';
-import { browserHistory } from 'react-router';
 import { OAuthSignInButton } from 'redux-auth/bootstrap-theme';
 import CSSModules from 'react-css-modules';
 import styles from './styles.css';
@@ -9,6 +8,7 @@ const btnStyle = {
 
 class Login extends React.Component {
   render() {
+    const { changeLocationOnSignIn } = this.props;
     const { next } = this.props.location.query;
     return (
       <div styleName="container">
@@ -17,7 +17,7 @@ class Login extends React.Component {
         <p>Support Google Login.
           <OAuthSignInButton
             provider="google"
-            next={() => { return browserHistory.push(next || '/'); }}
+            next={() => { return changeLocationOnSignIn(next || '/'); }}
             style={btnStyle}
           />
         </p>
@@ -28,6 +28,7 @@ class Login extends React.Component {
 
 Login.propTypes = {
   location: React.PropTypes.object.isRequired,
+  changeLocationOnSignIn: React.PropTypes.func.isRequired,
 };
 
 export default CSSModules(Login, styles);
