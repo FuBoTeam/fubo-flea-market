@@ -16,11 +16,12 @@ class Block extends React.Component {
   }
   render() {
     const { good } = this.props;
-    const length = good.subscriptPeople && good.subscriptPeople.length || 0;
-    const highestBidder = good.subscriptPeople &&
-                          good.subscriptPeople[0] &&
-                          good.subscriptPeople[0].displayName ||
-                          'None of Above';
+    const length = good.allBiddings.totalCount || 0;
+    let highestBidder = 'None of Above';
+    if (length > 0) {
+      const bidder = good.allBiddings.edges[length - 1];
+      highestBidder = bidder.node.user.fakeName;
+    }
     const detailLink = `good/${good.id}`;
     let starNum = parseInt(length / 5 + 1, 10);
     starNum = starNum > 5 ? 5 : starNum;

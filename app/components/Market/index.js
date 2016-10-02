@@ -16,7 +16,7 @@ class Market extends React.Component {
       return (
         <ul styleName="goods-edit-container">{
           goods.edges.filter((g) => {
-            return route.user.id === g.node.ownerId;
+            return route.user.id === g.node.owner.id;
           }).map((g) => {
             return (
               <EditBlock key={g.node.id} good={g.node} />
@@ -28,8 +28,8 @@ class Market extends React.Component {
       return (
         <ul styleName="goods-container">{
           goods.edges.filter((g) => {
-            return g.node.subscriptPeople.some((u) => {
-              return route.user.id === u.id;
+            return g.node.allBiddings.edges.some((node) => {
+              return route.user.id === node.user.id;
             });
           }).map((g) => {
             return <Block key={g.node.id} good={g.node} />;
@@ -65,7 +65,21 @@ export default Relay.createContainer(
               id,
               title,
               image,
-              description
+              allBiddings(first: 2147483647) {
+                edges {
+                  node {
+                    amount,
+                    user {
+                     fakeName,
+                     id
+                    } 
+                  }
+                }
+                totalCount
+              },
+              owner {
+                id
+              }
             }
           }
         }
