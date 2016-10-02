@@ -65,7 +65,12 @@ class RTRouter extends React.Component {
   requireAuth(nextState, replace, next) {
     const { getState } = this.props;
     if (!getState().auth.getIn(['user', 'isSignedIn'])) {
-      replace('/login');
+      replace({
+        pathname: '/login',
+        query: {
+          next: getState().routing.locationBeforeTransitions.pathname,
+        },
+      });
     }
     next();
   }
