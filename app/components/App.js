@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { AuthGlobals } from 'redux-auth/bootstrap-theme';
-import Header from './Header';
+import HeaderContainer from '../containers/HeaderContainer';
 import Tabs from './Tabs';
 
 class App extends React.Component {
@@ -9,8 +9,7 @@ class App extends React.Component {
     this.displayName = 'App';
   }
   render() {
-    const { children, location, route } = this.props;
-    const isSignedIn = route.isSignedIn;
+    const { children, location } = this.props;
     let tab = '';
     if (!location.pathname.includes('good') && location.pathname !== '/login') {
       tab = (<Tabs location={location} />);
@@ -18,7 +17,7 @@ class App extends React.Component {
     return (
       <div>
         <AuthGlobals />
-        <Header isSignedIn={isSignedIn} />
+        <HeaderContainer />
         {tab}
         {children}
       </div>
@@ -29,7 +28,6 @@ class App extends React.Component {
 App.propTypes = {
   children: PropTypes.node.isRequired,
   location: PropTypes.object,
-  route: PropTypes.object.isRequired,
 };
 
 export default App;

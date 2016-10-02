@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
 import styles from './styles.css';
+import { SignOutButton } from 'redux-auth/default-theme';
 import {
   IndexLink,
   Link,
@@ -14,9 +15,9 @@ class Header extends React.Component {
   render() {
     const { isSignedIn } = this.props;
     const LoginLogoutCmp = isSignedIn ? (
-      <Link to="/logout"><span>Logout</span><i className="fa fa-sign-out" /></Link>
+      <SignOutButton styleName="sign-out">Logout<i className="fa fa-sign-out" /></SignOutButton>
     ) : (
-      <Link to="/login"><span>Login</span><i className="fa fa-sign-in" /></Link>
+      <Link to="/login" styleName="sign-in"><span>Login</span><i className="fa fa-sign-in" /></Link>
     );
     return (
       <div styleName="castle-background">

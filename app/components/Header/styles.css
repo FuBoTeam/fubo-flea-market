@@ -83,3 +83,16 @@
     transform: rotate(360deg);
   }
 }
+
+.sign-out {
+  padding: 20px;
+  border: none;
+  background-color: #e6e6e6;
+  span {
+    display: none;
+  }
+}
+
+.sign-in {
+  background-color: #e6e6e6;
+}

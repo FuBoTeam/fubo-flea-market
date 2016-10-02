@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
 import styles from './styles.css';
 import BidForm from '../BidForm';
+import {
+  Link,
+} from 'react-router';
 
 class BidTable extends React.Component {
   constructor(props) {
@@ -9,6 +12,10 @@ class BidTable extends React.Component {
     this.displayName = 'BidTable';
   }
   render() {
+    const { isSignedIn, user } = this.props;
+    const bidForm = isSignedIn ? (<BidForm user={user} />) : (<tr>
+        <td colSpan="4" styleName="login"><Link to="/login">Sign up/Log in</Link> to place bid.</td>
+      </tr>);
     const tableElements = ['displayName', 'money', 'clamor', 'time'];
     const tableTitles = {
       displayName: 'Bidder',
@@ -43,11 +50,16 @@ class BidTable extends React.Component {
             })
           }
           </tr>
-          <BidForm />
+          {bidForm}
         </tbody>
       </table>
     );
   }
 }
+
+BidTable.propTypes = {
+  isSignedIn: PropTypes.bool.isRequired,
+  user: PropTypes.object,
+};
 
 export default CSSModules(BidTable, styles);
