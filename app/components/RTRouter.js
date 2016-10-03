@@ -8,7 +8,7 @@ import {
 import Relay from 'react-relay';
 import useRelay from 'react-router-relay';
 import App from './App';
-import Login from './Login';
+import LoginContainer from '../containers/LoginContainer';
 import Market from './Market';
 import GoodDetail from './GoodDetail';
 import Upload from './Upload';
@@ -40,7 +40,7 @@ class RTRouter extends React.Component {
           path="upload"
           component={Upload}
         />
-        <Route path="login" component={Login} />
+        <Route path="login" component={LoginContainer} />
         <Route
           path="good/:id"
           component={GoodDetail}
