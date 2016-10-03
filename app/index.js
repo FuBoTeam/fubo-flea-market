@@ -4,11 +4,11 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import { configure } from 'redux-auth';
+import { configure, fetch } from 'redux-auth';
 import Relay from 'react-relay';
 import configureStore from './stores/configureStore';
 import RTRouter from './components/RTRouter';
-
+import { Adrenaline } from 'adrenaline';
 import './index.css';
 import './styles/global.css';
 
@@ -24,9 +24,11 @@ store.dispatch(configure({
 })).then(() => {
   const { getState } = store;
   render(
-    <Provider store={store} key="provider">
-      <RTRouter history={history} getState={getState} />
-    </Provider>,
+    <Adrenaline endpoint="http://flea.fubotech.com.tw/graphql">
+      <Provider store={store} key="provider">
+        <RTRouter history={history} getState={getState} />
+      </Provider>
+    </Adrenaline>,
     document.getElementById('app')
   );
 });

@@ -17,7 +17,7 @@ class Info extends React.Component {
     const { good } = this.props;
     return (
       <div styleName="good-info">
-        <img src={good.image} alt="not found" />
+        <img src={good.image || 'https://xieranmaya.github.io/images/cats/photo-103450229.jpg'} alt="not found" />
         <div styleName="word-intro">
           <h2>{good.title}</h2>
           <Rating defaultValue={2} disabled disabledStyle={starStyle}>star</Rating>
