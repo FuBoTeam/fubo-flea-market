@@ -10,10 +10,9 @@ import useRelay from 'react-router-relay';
 import App from './App';
 import LoginContainer from '../containers/LoginContainer';
 import Market from './Market';
-import GoodDetail from './GoodDetail';
+import GoodDetailContainer from '../containers/GoodDetailContainer';
 import UploadContainer from '../containers/UploadContainer';
 import GoodsQueries from '../queries/GoodsQueries';
-import GoodQueries from '../queries/GoodQueries';
 import DevTools from '../containers/DevTools';
 
 class RTRouter extends React.Component {
@@ -43,8 +42,7 @@ class RTRouter extends React.Component {
         <Route path="login" component={LoginContainer} />
         <Route
           path="good/:id"
-          component={GoodDetail}
-          queries={GoodQueries}
+          component={GoodDetailContainer}
         />
         <Route
           onEnter={this.requireAuth}
