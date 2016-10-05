@@ -26,7 +26,7 @@ const enhancer = compose(
     routerMiddleware(browserHistory),
     thunk
   ),
-  DevTools.instrument(),
+  window.devToolsExtension ? window.devToolsExtension() : DevTools.instrument(),
   persistState(getDebugSessionKey())
 );
 

@@ -79,7 +79,7 @@ class RTRouter extends React.Component {
         >
           {this.routes}
         </Router>
-        <DevTools />
+        {!window.devToolsExtension ? <DevTools /> : null}
       </div>
     );
   }
