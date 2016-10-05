@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Relay from 'react-relay';
+import { container } from 'adrenaline';
 import CSSModules from 'react-css-modules';
 import Block from './Block';
 import EditBlock from './EditBlock';
@@ -11,12 +11,15 @@ class Market extends React.Component {
     this.displayName = 'Market';
   }
   render() {
-    const { goods, params, route } = this.props;
+    const { allGoods, params, user, isFetching } = this.props;
+    if (isFetching) {
+      return <div>Now Loading......</div>;
+    }
     if (params.filter === 'my-selling') {
       return (
         <ul styleName="goods-edit-container">{
-          goods.edges.filter((g) => {
-            return route.user.id === g.node.owner.id;
+          allGoods.edges.filter((g) => {
+            return user.id === g.node.owner.id;
           }).map((g) => {
             return (
               <EditBlock key={g.node.id} good={g.node} />
@@ -27,9 +30,9 @@ class Market extends React.Component {
     } else if (params.filter === 'my-bids') {
       return (
         <ul styleName="goods-container">{
-          goods.edges.filter((g) => {
+          allGoods.edges.filter((g) => {
             return g.node.allBiddings.edges.some((node) => {
-              return route.user.id === node.user.id;
+              return user.id === node.user.id;
             });
           }).map((g) => {
             return <Block key={g.node.id} good={g.node} />;
@@ -39,7 +42,7 @@ class Market extends React.Component {
     }
     return (
       <ul styleName="goods-container">{
-        goods.edges.map((g) => {
+        allGoods.edges.map((g) => {
           return <Block key={g.node.id} good={g.node} />;
         })
       }</ul>
@@ -48,42 +51,81 @@ class Market extends React.Component {
 }
 
 Market.propTypes = {
-  goods: PropTypes.object.isRequired,
+  allGoods: PropTypes.object,
+  isFetching: PropTypes.bool.isRequired,
   params: PropTypes.object.isRequired,
-  route: PropTypes.object.isRequired,
+  user: PropTypes.object,
 };
 
-export default Relay.createContainer(
-  CSSModules(Market, styles), {
-  fragments: {
-    goods: () => {
-      return Relay.QL`
-        fragment on GoodConnection {
-          totalCount,
-          edges {
-            node {
+const queryAllGoods = `
+  query {
+    allGoods {
+      totalCount,
+      edges {
+        node {
+          id,
+          title,
+          image,
+          allBiddings {
+            edges {
+              node {
+                amount,
+                user{
+                  fakeName,
+                  id
+                }
+              }
+            },
+            totalCount
+          },
+          owner {
+            id
+          }
+        }
+      }
+    }
+  }
+`;
+const queryMyGoods = `
+  query {
+    user {
+      myGoods {
+        totalCount,
+        edges {
+          node {
+            id,
+            title,
+            description,
+            image
+          }
+        }
+      }
+    }
+  }
+`;
+const queryMyBiddings = `
+  query {
+    user {
+      myBiddings {
+        totalCount,
+        edges {
+          node {
+            id,
+            amount,
+            trashWord,
+            good {
               id,
               title,
-              image,
-              allBiddings(first: 2147483647) {
-                edges {
-                  node {
-                    amount,
-                    user {
-                     fakeName,
-                     id
-                    } 
-                  }
-                }
-                totalCount
-              },
-              owner {
-                id
-              }
+              description,
+              image
             }
           }
         }
-      `;
-    },
-  },
-});
+      }
+    }
+  }
+`;
+
+export default container({
+  query: queryAllGoods,
+})(CSSModules(Market, styles));
