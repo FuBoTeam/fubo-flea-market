@@ -11,7 +11,7 @@ import App from './App';
 import LoginContainer from '../containers/LoginContainer';
 import Market from './Market';
 import GoodDetail from './GoodDetail';
-import Upload from './Upload';
+import UploadContainer from '../containers/UploadContainer';
 import GoodsQueries from '../queries/GoodsQueries';
 import GoodQueries from '../queries/GoodQueries';
 import DevTools from '../containers/DevTools';
@@ -38,7 +38,7 @@ class RTRouter extends React.Component {
         <Route
           onEnter={this.requireAuth}
           path="upload"
-          component={Upload}
+          component={UploadContainer}
         />
         <Route path="login" component={LoginContainer} />
         <Route

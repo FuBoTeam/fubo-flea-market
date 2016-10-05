@@ -30,7 +30,8 @@ const graphOptions = {
 const enhancer = applyMiddleware(
   routerMiddleware(browserHistory),
   graphqlMiddleware(graphOptions),
-  thunk);
+  thunk
+);
 
 export default function configureStore(initialState) {
   const store = createStore(rootReducer, initialState, enhancer);
