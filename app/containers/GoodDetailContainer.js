@@ -3,9 +3,13 @@ import GoodDetail from '../components/GoodDetail';
 import { goodQuery } from '../actions';
 
 const mapStateToProps = (state) => {
+  const good = state.graph.data && state.graph.data.good || null;
+  const error = state.graph.error || null;
+  const isLoading = state.graph.isFetching || (good === null && error === null);
   return {
-    isFetching: state.graph.isFetching,
-    good: state.graph.data && state.graph.data.good || {},
+    isLoading,
+    error,
+    good,
   };
 };
 

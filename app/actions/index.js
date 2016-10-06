@@ -26,6 +26,39 @@ export const addGoodMutation = (good) => {
   };
 };
 
+export const allGoodsQuery = () => {
+  return {
+    type: GRAPH,
+    data: {
+      query: `
+        query {
+          allGoods{
+            totalCount,
+            edges {
+              node {
+                id,
+                title,
+                image,
+                allBiddings(first: 2147483647) {
+                  totalCount,
+                  edges {
+                    node {
+                      user {
+                        id,
+                        fakeName
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      `,
+    },
+  };
+};
+
 export const goodQuery = (id) => {
   return {
     type: GRAPH,
@@ -43,6 +76,67 @@ export const goodQuery = (id) => {
             image,
             title,
             updatedAt
+          }
+        }
+      `,
+    },
+  };
+};
+
+export const myBiddingsQuery = () => {
+  return {
+    type: GRAPH,
+    data: {
+      query: `
+        query {
+          user {
+            myBiddings {
+              totalCount,
+              edges {
+                node {
+                  good {
+                    id,
+                    title,
+                    image,
+                    allBiddings(first: 2147483647) {
+                      totalCount,
+                      edges {
+                        node {
+                          user {
+                            id,
+                            fakeName
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      `,
+    },
+  };
+};
+
+export const myGoodsQuery = () => {
+  return {
+    type: GRAPH,
+    data: {
+      query: `
+        query {
+          user {
+            myGoods {
+              totalCount,
+              edges {
+                node {
+                  id,
+                  title,
+                  image
+                }
+              }
+            }
           }
         }
       `,

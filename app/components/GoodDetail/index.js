@@ -14,9 +14,9 @@ class GoodDetail extends React.Component {
     return getGood(params.id);
   }
   render() {
-    const { isFetching, good } = this.props;
-    if (isFetching) {
-      return <div>Now Fetching......</div>;
+    const { isLoading, good } = this.props;
+    if (isLoading) {
+      return <div>Now Loading......</div>;
     }
     return (
       <div styleName="container">
@@ -30,8 +30,9 @@ class GoodDetail extends React.Component {
 }
 
 GoodDetail.propTypes = {
-  isFetching: PropTypes.bool.isRequired,
   getGood: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  error: PropTypes.object,
   good: PropTypes.object,
   params: PropTypes.object.isRequired,
 };
