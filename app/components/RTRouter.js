@@ -61,9 +61,7 @@ class RTRouter extends React.Component {
     const { history } = this.props;
     return (
       <div>
-        <Router
-          history={history}
-        >
+        <Router history={history}>
           {this.routes}
         </Router>
         {!window.devToolsExtension ? <DevTools /> : null}
