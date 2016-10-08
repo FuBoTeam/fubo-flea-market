@@ -16,7 +16,7 @@ class Block extends React.Component {
   }
   render() {
     const { good } = this.props;
-    const length = good.allBiddings.totalCount || 0;
+    const length = good.allBiddings && good.allBiddings.totalCount || 0;
     let highestBidder = 'None of Above';
     if (length > 0) {
       const bidder = good.allBiddings.edges[length - 1];

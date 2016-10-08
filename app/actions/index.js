@@ -1,21 +1,145 @@
-export const GET_GOODS = 'GET_GOODS';
-export const ADD_GOOD = 'ADD_GOOD';
+export const GRAPH = 'GRAPH';
+export const GRAPH_READY = 'GRAPH_READY';
+export const GRAPH_DONE = 'GRAPH_DONE';
+export const GRAPH_ERROR = 'GRAPH_ERROR';
 
-export const getGoods = () => {
+export const addGoodMutation = (good) => {
   return {
-    type: GET_GOODS,
+    type: GRAPH,
+    vars: {
+      good,
+    },
+    data: {
+      mutation: `
+        mutation($good: AddGoodInput!) {
+          addGood(input: $good) {
+            good {
+              id,
+              title,
+              description,
+              image
+            }
+          }
+        }
+      `,
+    },
   };
 };
 
-// temporary defined:
-// good = {
-//   title: 'title',
-//   description: 'description',
-// }
-
-export const addGood = (good) => {
+export const allGoodsQuery = () => {
   return {
-    ...good,
-    type: ADD_GOOD,
+    type: GRAPH,
+    data: {
+      query: `
+        query {
+          allGoods{
+            totalCount,
+            edges {
+              node {
+                id,
+                title,
+                image,
+                allBiddings(first: 2147483647) {
+                  totalCount,
+                  edges {
+                    node {
+                      user {
+                        id,
+                        fakeName
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      `,
+    },
+  };
+};
+
+export const goodQuery = (id) => {
+  return {
+    type: GRAPH,
+    vars: {
+      id,
+    },
+    data: {
+      query: `
+        query($id: ID!) {
+          good(id: $id) {
+            biddingTime,
+            createdAt,
+            description,
+            id,
+            image,
+            title,
+            updatedAt
+          }
+        }
+      `,
+    },
+  };
+};
+
+export const myBiddingsQuery = () => {
+  return {
+    type: GRAPH,
+    data: {
+      query: `
+        query {
+          user {
+            myBiddings {
+              totalCount,
+              edges {
+                node {
+                  good {
+                    id,
+                    title,
+                    image,
+                    allBiddings(first: 2147483647) {
+                      totalCount,
+                      edges {
+                        node {
+                          user {
+                            id,
+                            fakeName
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      `,
+    },
+  };
+};
+
+export const myGoodsQuery = () => {
+  return {
+    type: GRAPH,
+    data: {
+      query: `
+        query {
+          user {
+            myGoods {
+              totalCount,
+              edges {
+                node {
+                  id,
+                  title,
+                  image
+                }
+              }
+            }
+          }
+        }
+      `,
+    },
   };
 };

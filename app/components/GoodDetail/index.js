@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react';
-import Relay from 'react-relay';
 import CSSModules from 'react-css-modules';
 import styles from './styles.css';
 import Info from './Info';
@@ -10,8 +9,15 @@ class GoodDetail extends React.Component {
     super(props);
     this.displayName = 'GoodDetail';
   }
+  componentWillMount() {
+    const { getGood, params } = this.props;
+    return getGood(params.id);
+  }
   render() {
-    const { good } = this.props;
+    const { isLoading, good } = this.props;
+    if (isLoading) {
+      return <div>Now Loading......</div>;
+    }
     return (
       <div styleName="container">
         <Info good={good} />
@@ -24,25 +30,11 @@ class GoodDetail extends React.Component {
 }
 
 GoodDetail.propTypes = {
-  good: PropTypes.object.isRequired,
+  getGood: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  error: PropTypes.object,
+  good: PropTypes.object,
   params: PropTypes.object.isRequired,
 };
 
-export default Relay.createContainer(
-  CSSModules(GoodDetail, styles), {
-  fragments: {
-    good: () => {
-      return Relay.QL`
-        fragment on Good {
-          biddingTime,
-          createdAt,
-          description,
-          id,
-          image,
-          title,
-          updatedAt
-        }
-      `;
-    },
-  },
-});
+export default CSSModules(GoodDetail, styles);

@@ -64,11 +64,9 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "babel-relay-plugin": "^0.9.3",
     "belle": "^2.0.7",
     "exports-loader": "^0.6.3",
     "graphql": "^0.7.0",
-    "graphql-relay": "^0.4.3",
     "immutable": "^3.8.1",
     "imports-loader": "^0.6.5",
     "json-loader": "^0.5.4",
@@ -78,13 +76,12 @@
     "react-css-modules": "^3.7.10",
     "react-dom": "^15.3.0",
     "react-redux": "^4.4.5",
-    "react-relay": "^0.9.3",
     "react-router": "^2.6.1",
     "react-router-redux": "^4.0.5",
-    "react-router-relay": "^0.13.5",
     "react-tap-event-plugin": "^1.0.0",
     "redux": "^3.5.2",
     "redux-auth": "0.0.5-beta5",
+    "redux-graphql-middleware": "^0.1.5",
     "redux-saga": "^0.11.0",
     "redux-thunk": "^2.1.0"
   },
