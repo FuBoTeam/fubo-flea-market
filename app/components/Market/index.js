@@ -3,6 +3,7 @@ import CSSModules from 'react-css-modules';
 import Block from './Block';
 import EditBlock from './EditBlock';
 import styles from './goods.css';
+import Loading from '../Loading';
 
 class Market extends React.Component {
   constructor(props) {
@@ -41,11 +42,11 @@ class Market extends React.Component {
   render() {
     const { isLoading, goods, biddings, params } = this.props;
     if (isLoading) {
-      return <div>Now Loading......</div>;
+      return <Loading />;
     }
     if (params.filter === 'my-selling') {
       if (goods === null || goods.totalCount === 0) {
-        return <div>Sell something now!</div>;
+        return <p className="bg-info" styleName="info-block">Sell something now!</p>;
       }
       return (
         <ul styleName="goods-edit-container">{
@@ -58,11 +59,16 @@ class Market extends React.Component {
       );
     } else if (params.filter === 'my-bids') {
       if (biddings === null || biddings.totalCount === 0) {
-        return <div>Bid something now!</div>;
+        return <p className="bg-info" styleName="info-block">Bid something now!</p>;
       }
       let biddingGoods = [];
+      let uniqueId = [];
       for (let i = 0; i < biddings.totalCount; i++) {
-        if (!biddingGoods.contains(biddings.edges[i].node.good)) {
+        if (uniqueId.indexOf(biddings.edges[i].node.good.id) < 0) {
+          uniqueId = [
+            ...uniqueId,
+            biddings.edges[i].node.good.id,
+          ];
           biddingGoods = [
             ...biddingGoods,
             biddings.edges[i].node.good,
@@ -78,7 +84,7 @@ class Market extends React.Component {
       );
     }
     if (goods === null || goods.totalCount === 0) {
-      return <div>Oops, nothing here, wanna sell something?</div>;
+      return <p className="bg-info" styleName="info-block">Oops, nothing here, wanna sell something?</p>;
     }
     return (
       <ul styleName="goods-container">{

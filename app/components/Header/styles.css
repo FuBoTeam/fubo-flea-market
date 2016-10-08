@@ -63,16 +63,26 @@
   } 
 }
 
-.planet-logo {
-  background-image: none,url(../../assets/background/planet.svg);
+.circle-logo {
+  background-image: none,url(../../assets/background/circle1.svg);
   background-size: cover;
-  width: 500px;
-  height: 500px;
+  width: 300px;
+  height: 300px;
   position: absolute;
-  right: 225px;
-  top: -215px;
-  animation: infinite-rotate 180s infinite linear;
+  right: 224px;
+  top: -15px;
+  animation: infinite-rotate 160s infinite linear;
   transform: rotate(360deg);
+}
+
+.circle-base {
+  background-image: none,url(../../assets/background/circle2.svg);
+  background-size: cover;
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  right: 272px;
+  top: 112px;
 }
 
 @keyframes infinite-rotate{

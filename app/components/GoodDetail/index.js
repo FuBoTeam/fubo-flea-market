@@ -3,6 +3,7 @@ import CSSModules from 'react-css-modules';
 import styles from './styles.css';
 import Info from './Info';
 import BidTableContainer from '../../containers/BidTableContainer';
+import Loading from '../Loading';
 
 class GoodDetail extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class GoodDetail extends React.Component {
   render() {
     const { isLoading, good } = this.props;
     if (isLoading) {
-      return <div>Now Loading......</div>;
+      return <Loading />;
     }
     return (
       <div styleName="container">

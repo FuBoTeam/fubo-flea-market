@@ -28,7 +28,8 @@ class Header extends React.Component {
     );
     return (
       <div styleName="castle-background">
-        <div styleName="planet-logo"></div>
+        <div styleName="circle-logo"></div>
+        <div styleName="circle-base"></div>
         <ul styleName="header scroll-header">
           <li><IndexLink to="/">Flea Market</IndexLink></li>
           <li>{LoginLogoutCmp}</li>
