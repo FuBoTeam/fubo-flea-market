@@ -62,10 +62,10 @@ class Market extends React.Component {
       }
       let biddingGoods = [];
       for (let i = 0; i < biddings.totalCount; i++) {
-        if (biddingGoods.contains(biddings.edges.node.good)) {
+        if (!biddingGoods.contains(biddings.edges[i].node.good)) {
           biddingGoods = [
             ...biddingGoods,
-            biddings.edges.node.good,
+            biddings.edges[i].node.good,
           ];
         }
       }
