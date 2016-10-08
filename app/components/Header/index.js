@@ -13,13 +13,20 @@ class Header extends React.Component {
     this.displayName = 'Header';
   }
   render() {
-    const { isSignedIn, changeLocationOnSignOut } = this.props;
+    const { isSignedIn, changeLocationOnSignOut, user } = this.props;
+    let userData = {
+      email: '',
+      fakeName: '',
+    };
+    if (user) {
+      userData = user;
+    }
     const LoginLogoutCmp = isSignedIn ? (
       <SignOutButton
         styleName="sign-out"
         next={() => { return changeLocationOnSignOut('/'); }}
       >
-        Logout<i className="fa fa-sign-out" />
+        <span>Logout</span><i className="fa fa-sign-out" />
       </SignOutButton>
     ) : (
       <Link to="/login" styleName="sign-in">
@@ -28,6 +35,11 @@ class Header extends React.Component {
     );
     return (
       <div styleName="castle-background">
+        <div styleName="user-setting">
+          <p>{userData.name}</p>
+          <p>{userData.email}</p>
+          <p styleName="fake-name">{userData.fakeName}</p>
+        </div>
         <div styleName="circle-logo"></div>
         <div styleName="circle-base"></div>
         <ul styleName="header scroll-header">
@@ -42,6 +54,7 @@ class Header extends React.Component {
 Header.propTypes = {
   isSignedIn: PropTypes.bool.isRequired,
   changeLocationOnSignOut: PropTypes.func.isRequired,
+  user: PropTypes.Object,
 };
 
 export default CSSModules(Header, styles, { allowMultiple: true });

@@ -153,3 +153,20 @@ export const myGoodsQuery = () => {
     },
   };
 };
+
+export const userQuery = () => {
+  return {
+    type: GRAPH,
+    data: {
+      query: `
+        query {
+          user {
+            email,
+            fakeName,
+            name
+          }
+        }
+      `,
+    },
+  };
+};
