@@ -23,7 +23,7 @@ class GoodDetail extends React.Component {
       <div styleName="container">
         <Info good={good} />
         <div styleName="bid-content">
-          <BidTableContainer />
+          <BidTableContainer biddings={good.allBiddings.biddings} />
         </div>
       </div>
     );

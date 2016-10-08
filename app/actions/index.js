@@ -69,15 +69,25 @@ export const goodQuery = (id) => {
       query: `
         query($id: ID!) {
           good(id: $id) {
-            biddingTime,
             createdAt,
             description,
             id,
             image,
             title,
-            updatedAt
+            updatedAt,
+            allBiddings {
+            biddings {
+              id,
+              amount,
+              createdAt,
+              trashWord,
+              user {
+                fakeName,
+              }
+            }
           }
         }
+      }
       `,
     },
   };
