@@ -44,6 +44,41 @@ export const addBidMutation = (biddingData) => {
   };
 };
 
+export const updateGoodMutation = (good) => {
+  return {
+    type: GRAPH,
+    vars: {
+      good,
+    },
+    data: {
+      mutation: `
+        mutation($good: UpdateGoodInput!) {
+          updateGood(input: $good) {
+            clientMutationId,
+          }
+        }
+      `,
+    },
+  };
+};
+
+export const deleteGoodMutation = (id) => {
+  return {
+    type: GRAPH,
+    vars: {
+      id,
+    },
+    data: {
+      mutation: `
+        mutation($id: DeleteGoodInput!) {
+          deleteGood(input: $id) {
+            clientMutationId,
+          }
+        }
+      `,
+    },
+  };
+};
 
 export const allGoodsQuery = () => {
   return {

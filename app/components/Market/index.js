@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
 import Block from './Block';
-import EditBlock from './EditBlock';
+import EditBlockContainer from '../../containers/EditBlockContainer';
 import styles from './goods.css';
 import Loading from '../Loading';
 
@@ -37,6 +37,11 @@ class Market extends React.Component {
       }
       return nextProps.getAllGoods();
     }
+    if (this.props.params.filter === 'my-selling' && nextProps.params.filter === 'my-selling') {
+      if (!nextProps.goods) {
+        return nextProps.getMyGoods();
+      }
+    }
     return {};
   }
   render() {
@@ -52,7 +57,7 @@ class Market extends React.Component {
         <ul styleName="goods-edit-container">{
           goods.edges.map((g) => {
             return (
-              <EditBlock key={g.node.id} good={g.node} />
+              <EditBlockContainer key={g.node.id} good={g.node} />
             );
           })
         }</ul>
