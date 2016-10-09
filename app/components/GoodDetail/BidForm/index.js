@@ -14,13 +14,18 @@ class BidForm extends React.Component {
     this.displayName = 'BidForm';
   }
   render() {
-    const { user } = this.props;
+    const { user, handleBid, goodId } = this.props;
+    const biddingData = {
+      id: goodId,
+      amount: 50,
+      trashWord: 'orga ha ha',
+    };
     return (
       <tr>
         <td style={nameStyle}>{user.fakeName}</td>
         <td><input className="form-control" type="number" /></td>
         <td><input className="form-control" type="text" /></td>
-        <td><Button primary style={btnStyles}>Submit</Button></td>
+        <td><Button primary style={btnStyles} onClick={() => { handleBid(biddingData); }}>Submit</Button></td>
       </tr>
     );
   }
@@ -28,6 +33,8 @@ class BidForm extends React.Component {
 
 BidForm.propTypes = {
   user: PropTypes.object,
+  handleBid: PropTypes.func.isRequired,
+  goodId: PropTypes.string,
 };
 
 export default BidForm;

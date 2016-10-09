@@ -26,6 +26,32 @@ export const addGoodMutation = (good) => {
   };
 };
 
+export const addBidMutation = (biddingData) => {
+  return {
+    type: GRAPH,
+    vars: {
+      biddingData,
+    },
+    data: {
+      mutation: `
+        mutation($biddingData: AddBiddingInput!) {
+          addBidding(input: $biddingData) {
+            bidding {
+              id,
+              amount,
+              createdAt,
+              trashWord,
+              user {
+                fakeName,
+              }
+            }
+          }
+        }
+      `,
+    },
+  };
+};
+
 export const allGoodsQuery = () => {
   return {
     type: GRAPH,
@@ -39,6 +65,7 @@ export const allGoodsQuery = () => {
                 id,
                 title,
                 image,
+                biddingTime,
                 allBiddings(first: 2147483647) {
                   totalCount,
                   edges {
@@ -75,6 +102,7 @@ export const goodQuery = (id) => {
             image,
             title,
             updatedAt,
+            biddingTime,
             allBiddings {
             biddings {
               id,
@@ -108,6 +136,7 @@ export const myBiddingsQuery = () => {
                     id,
                     title,
                     image,
+                    biddingTime
                     allBiddings(first: 2147483647) {
                       totalCount,
                       edges {
@@ -143,7 +172,8 @@ export const myGoodsQuery = () => {
                 node {
                   id,
                   title,
-                  image
+                  image,
+                  biddingTime
                 }
               }
             }
@@ -163,7 +193,8 @@ export const userQuery = () => {
           user {
             email,
             fakeName,
-            name
+            name,
+            id
           }
         }
       `,

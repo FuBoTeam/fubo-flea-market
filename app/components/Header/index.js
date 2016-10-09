@@ -53,7 +53,7 @@ class Header extends React.Component {
 Header.propTypes = {
   isSignedIn: PropTypes.bool.isRequired,
   changeLocationOnSignOut: PropTypes.func.isRequired,
-  user: PropTypes.Object,
+  user: PropTypes.object,
   clearUser: PropTypes.func.isRequired,
 };
 

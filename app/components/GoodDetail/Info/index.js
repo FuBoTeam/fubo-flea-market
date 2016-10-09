@@ -33,6 +33,8 @@ class Info extends React.Component {
           <p>{good.updatedAt}</p>
           <label>Good ID</label>
           <p>{good.id}</p>
+          <label>Time of Closing</label>
+          <p>{good.biddingTime}</p>
         </div>
       </div>
     );

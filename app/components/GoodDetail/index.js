@@ -14,6 +14,14 @@ class GoodDetail extends React.Component {
     const { getGood, params } = this.props;
     return getGood(params.id);
   }
+  shouldComponentUpdate(nextProps) {
+    if (!nextProps.good) {
+      const { getGood, params } = this.props;
+      getGood(params.id);
+      return false;
+    }
+    return true;
+  }
   render() {
     const { isLoading, good } = this.props;
     if (isLoading) {
@@ -23,7 +31,7 @@ class GoodDetail extends React.Component {
       <div styleName="container">
         <Info good={good} />
         <div styleName="bid-content">
-          <BidTableContainer biddings={good.allBiddings.biddings} />
+          <BidTableContainer biddings={good.allBiddings.biddings} goodId={good.id} />
         </div>
       </div>
     );
@@ -33,7 +41,7 @@ class GoodDetail extends React.Component {
 GoodDetail.propTypes = {
   getGood: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  error: PropTypes.object,
+  error: PropTypes.array,
   good: PropTypes.object,
   params: PropTypes.object.isRequired,
 };

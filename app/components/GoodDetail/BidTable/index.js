@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
 import styles from './styles.css';
-import BidForm from '../BidForm';
+import BidFormContainer from '../../../containers/BidFormContainer';
 import {
   Link,
 } from 'react-router';
@@ -12,8 +12,8 @@ class BidTable extends React.Component {
     this.displayName = 'BidTable';
   }
   render() {
-    const { isSignedIn, user, biddings } = this.props;
-    const bidForm = isSignedIn ? (<BidForm user={user} />) : (<tr>
+    const { isSignedIn, biddings, goodId } = this.props;
+    const bidForm = isSignedIn ? (<BidFormContainer goodId={goodId} />) : (<tr>
         <td colSpan="4" styleName="login"><Link to="/login">Sign up/Log in</Link> to place bid.</td>
       </tr>);
     const tableBiddings = biddings.map((bidding) => {
@@ -65,8 +65,8 @@ class BidTable extends React.Component {
 
 BidTable.propTypes = {
   isSignedIn: PropTypes.bool.isRequired,
-  user: PropTypes.object,
   biddings: PropTypes.array.isRequired,
+  goodId: PropTypes.string,
 };
 
 export default CSSModules(BidTable, styles);
