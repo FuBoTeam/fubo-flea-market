@@ -13,7 +13,11 @@ class BidTable extends React.Component {
   }
   render() {
     const { isSignedIn, biddings, goodId } = this.props;
-    const bidForm = isSignedIn ? (<BidFormContainer goodId={goodId} />) : (<tr>
+    let hightestBid = 0;
+    if (biddings.length > 0) {
+      hightestBid = biddings[biddings.length - 1].amount;
+    }
+    const bidForm = isSignedIn ? (<BidFormContainer goodId={goodId} highestBid={hightestBid} />) : (<tr>
         <td colSpan="4" styleName="login"><Link to="/login">Sign up/Log in</Link> to place bid.</td>
       </tr>);
     const tableBiddings = biddings.map((bidding) => {
