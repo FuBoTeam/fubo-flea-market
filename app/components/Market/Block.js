@@ -18,9 +18,11 @@ class Block extends React.Component {
     const { good } = this.props;
     const length = good.allBiddings && good.allBiddings.totalCount || 0;
     let highestBidder = 'None of Above';
+    let bestBid = 'None';
     if (length > 0) {
       const bidder = good.allBiddings.edges[length - 1];
       highestBidder = bidder.node.user.fakeName;
+      bestBid = bidder.node.amount;
     }
     const detailLink = `good/${good.id}`;
     let starNum = parseInt(length / 5 + 1, 10);
@@ -33,6 +35,7 @@ class Block extends React.Component {
         <label>{good.title}</label>
         <Rating defaultValue={starNum} disabled disabledStyle={starStyle}>star</Rating>
         <p>Highest Bidder: {highestBidder}</p>
+        <p>Best Bid: {bestBid}</p>
       </li>
     );
   }

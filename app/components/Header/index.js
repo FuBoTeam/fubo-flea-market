@@ -13,15 +13,13 @@ class Header extends React.Component {
     this.displayName = 'Header';
   }
   render() {
-    const { isSignedIn, changeLocationOnSignOut, user, clearUser } = this.props;
+    const { isSignedIn, changeLocationOnSignOut, user } = this.props;
     const LoginLogoutCmp = isSignedIn ? (
       <SignOutButton
         styleName="sign-out"
         next={
           () => {
-            changeLocationOnSignOut('/');
-            clearUser();
-            return;
+            return changeLocationOnSignOut('/');
           }
         }
       >
@@ -54,7 +52,6 @@ Header.propTypes = {
   isSignedIn: PropTypes.bool.isRequired,
   changeLocationOnSignOut: PropTypes.func.isRequired,
   user: PropTypes.object,
-  clearUser: PropTypes.func.isRequired,
 };
 
 export default CSSModules(Header, styles, { allowMultiple: true });

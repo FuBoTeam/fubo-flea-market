@@ -19,10 +19,14 @@ class BidForm extends React.Component {
     this.displayName = 'BidForm';
   }
   handleAmount(event) {
-    biddingData.amount = parseInt(event.target.value, 10);
+    if (!event.preventDefault()) {
+      biddingData.amount = parseInt(event.target.value, 10);
+    }
   }
   handleWord(event) {
-    biddingData.trashWord = event.target.value;
+    if (!event.preventDefault()) {
+      biddingData.trashWord = event.target.value;
+    }
   }
   render() {
     const { user, handleBid, goodId, highestBid } = this.props;

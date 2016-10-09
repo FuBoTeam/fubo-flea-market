@@ -7,7 +7,7 @@ const Upload = (props) => {
   const good = {
     title: 'Will smith',
     description: 'Will Will smith smith',
-    image: 'http://i.imgur.com/F0lbsuA.jpg',
+    image: 'https://xieranmaya.github.io/images/cats/stock-photo-123942383.jpg',
   };
   const { handleSubmit } = props;
   return (

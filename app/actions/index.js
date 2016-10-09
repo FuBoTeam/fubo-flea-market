@@ -36,21 +36,14 @@ export const addBidMutation = (biddingData) => {
       mutation: `
         mutation($biddingData: AddBiddingInput!) {
           addBidding(input: $biddingData) {
-            bidding {
-              id,
-              amount,
-              createdAt,
-              trashWord,
-              user {
-                fakeName,
-              }
-            }
+            clientMutationId,
           }
         }
       `,
     },
   };
 };
+
 
 export const allGoodsQuery = () => {
   return {
@@ -70,6 +63,7 @@ export const allGoodsQuery = () => {
                   totalCount,
                   edges {
                     node {
+                      amount,
                       user {
                         id,
                         fakeName
@@ -141,6 +135,7 @@ export const myBiddingsQuery = () => {
                       totalCount,
                       edges {
                         node {
+                          amount,
                           user {
                             id,
                             fakeName
@@ -173,7 +168,10 @@ export const myGoodsQuery = () => {
                   id,
                   title,
                   image,
-                  biddingTime
+                  biddingTime,
+                  allBiddings {
+                    totalCount
+                  }
                 }
               }
             }
@@ -187,6 +185,12 @@ export const myGoodsQuery = () => {
 export const userQuery = () => {
   return {
     type: GRAPH,
+    graphql: {
+      action: 'GRAPH/USER',
+      ready: 'GRAPH_READY/USER',
+      done: 'GRAPH_DONE/USER',
+      error: 'GRAPH_ERROR/USER',
+    },
     data: {
       query: `
         query {
@@ -194,16 +198,10 @@ export const userQuery = () => {
             email,
             fakeName,
             name,
-            id
+            id,
           }
         }
       `,
     },
-  };
-};
-
-export const clearUser = () => {
-  return {
-    type: 'CLEAR_USER',
   };
 };

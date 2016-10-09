@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
 import styles from './edit-block.css';
 import { Button } from 'belle';
+import { Link } from 'react-router';
 const btnStyles = {
   float: 'right',
   marginLeft: 10,
@@ -14,9 +15,13 @@ class EditBlock extends React.Component {
   }
   render() {
     const { good } = this.props;
+    const detailLink = `good/${good.id}`;
+    const deleteBtn = good.allBiddings.totalCount > 0 ? '' : <Button primary style={btnStyles} >Delete</Button>;
     return (
       <li styleName="edit-block">
-        <img src={good.image} alt="Not found" />
+        <Link to={detailLink}>
+          <img src={good.image} alt="Not found" />
+        </Link>
         <div styleName="edit-container">
           <dl styleName="edit-info">
             <dt>Title</dt>
@@ -25,7 +30,7 @@ class EditBlock extends React.Component {
             <dd>{good.description}</dd>
           </dl>
           <div styleName="btn-container">
-            <Button primary style={btnStyles}>Delete</Button>
+            {deleteBtn}
             <Button primary style={btnStyles}>Edit</Button>
           </div>
         </div>

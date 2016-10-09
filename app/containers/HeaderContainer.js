@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import Header from '../components/Header';
-import { clearUser } from '../actions';
 
 const mapStateToProps = (state) => {
   const user = state.user;
@@ -15,9 +14,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     changeLocationOnSignOut: (nextPathname) => {
       dispatch(push(nextPathname));
-    },
-    clearUser: () => {
-      dispatch(clearUser());
     },
   };
 };
