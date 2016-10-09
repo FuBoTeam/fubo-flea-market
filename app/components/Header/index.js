@@ -13,18 +13,17 @@ class Header extends React.Component {
     this.displayName = 'Header';
   }
   render() {
-    const { isSignedIn, changeLocationOnSignOut, user } = this.props;
-    let userData = {
-      email: '',
-      fakeName: '',
-    };
-    if (user) {
-      userData = user;
-    }
+    const { isSignedIn, changeLocationOnSignOut, user, clearUser } = this.props;
     const LoginLogoutCmp = isSignedIn ? (
       <SignOutButton
         styleName="sign-out"
-        next={() => { return changeLocationOnSignOut('/'); }}
+        next={
+          () => {
+            changeLocationOnSignOut('/');
+            clearUser();
+            return;
+          }
+        }
       >
         <span>Logout</span><i className="fa fa-sign-out" />
       </SignOutButton>
@@ -36,9 +35,9 @@ class Header extends React.Component {
     return (
       <div styleName="castle-background">
         <div styleName="user-setting">
-          <p>{userData.name}</p>
-          <p>{userData.email}</p>
-          <p styleName="fake-name">{userData.fakeName}</p>
+          <p>{user.name}</p>
+          <p>{user.email}</p>
+          <p styleName="fake-name">{user.fakeName}</p>
         </div>
         <div styleName="circle-logo"></div>
         <div styleName="circle-base"></div>
@@ -55,6 +54,7 @@ Header.propTypes = {
   isSignedIn: PropTypes.bool.isRequired,
   changeLocationOnSignOut: PropTypes.func.isRequired,
   user: PropTypes.Object,
+  clearUser: PropTypes.func.isRequired,
 };
 
 export default CSSModules(Header, styles, { allowMultiple: true });

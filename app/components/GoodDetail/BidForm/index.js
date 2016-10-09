@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Button } from 'belle';
 const btnStyles = {
   paddingTop: 3,
@@ -14,9 +14,10 @@ class BidForm extends React.Component {
     this.displayName = 'BidForm';
   }
   render() {
+    const { user } = this.props;
     return (
       <tr>
-        <td style={nameStyle}>Elaine</td>
+        <td style={nameStyle}>{user.fakeName}</td>
         <td><input className="form-control" type="number" /></td>
         <td><input className="form-control" type="text" /></td>
         <td><Button primary style={btnStyles}>Submit</Button></td>
@@ -24,5 +25,9 @@ class BidForm extends React.Component {
     );
   }
 }
+
+BidForm.propTypes = {
+  user: PropTypes.object,
+};
 
 export default BidForm;
