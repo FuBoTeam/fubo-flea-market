@@ -21,7 +21,7 @@ const mapStateToProps = (state) => {
   const error = state.allGoods.error || state.my.error || null;
   const isAllLoading = !state.allGoods.isFetched || (goods === null && error === null);
   const isMyLoading = !state.my.isFetched || (biddings === null && error === null);
-  const action = state.graph.data && state.graph.data.deleteGood || state.graph.updateGood || null;
+  const action = state.graph.data || null;
   return {
     isAllLoading,
     isMyLoading,

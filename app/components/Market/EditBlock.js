@@ -3,6 +3,7 @@ import CSSModules from 'react-css-modules';
 import styles from './edit-block.css';
 import { Button } from 'belle';
 import { Link } from 'react-router';
+
 const btnStyles = {
   float: 'right',
   marginLeft: 10,
@@ -39,24 +40,21 @@ class EditBlock extends React.Component {
         () => { deleteGood({ id: good.id }); }
       }
     >Delete</Button>;
-    data.id = good.id;
-    data.title = good.title;
-    data.description = good.description;
     return (
       <li styleName="edit-block">
         <Link to={detailLink}>
           <img src={good.image} alt="Not found" />
         </Link>
-        <form styleName="edit-container" onSubmit={() => { updateGood(data); }}>
+        <form styleName="edit-container">
           <dl styleName="edit-info">
             <dt>ID</dt>
-            <dd>{data.id}</dd>
+            <dd>{good.id}</dd>
             <dt>Title</dt>
             <dd>
               <input
                 className="form-control"
                 type="text"
-                defaultValue={data.title}
+                defaultValue={good.title}
                 onChange={this.handleTitle}
                 required
               />
@@ -66,7 +64,7 @@ class EditBlock extends React.Component {
               <input
                 className="form-control"
                 type="text"
-                defaultValue={data.description}
+                defaultValue={good.description}
                 onChange={this.handleDescription}
               />
             </dd>
@@ -76,7 +74,19 @@ class EditBlock extends React.Component {
             <Button
               primary
               style={btnStyles}
-              type="submit"
+              type="button"
+              onClick={
+                () => {
+                  data.id = good.id;
+                  if (data.title === '') {
+                    data.title = good.title;
+                  }
+                  if (data.description === '') {
+                    data.description = good.description;
+                  }
+                  updateGood(data);
+                }
+              }
             >Edit</Button>
           </div>
         </form>
