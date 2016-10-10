@@ -38,7 +38,7 @@ class Market extends React.Component {
       return nextProps.getAllGoods();
     }
     if (this.props.params.filter === 'my-selling' && nextProps.params.filter === 'my-selling') {
-      if (!nextProps.goods) {
+      if (nextProps.goods === undefined) {
         return nextProps.getMyGoods();
       }
     }
@@ -48,6 +48,9 @@ class Market extends React.Component {
     const { isLoading, goods, biddings, params } = this.props;
     if (isLoading) {
       return <Loading />;
+    }
+    if (goods === undefined) {
+      return '';
     }
     if (params.filter === 'my-selling') {
       if (goods === null || goods.totalCount === 0) {

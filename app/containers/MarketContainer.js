@@ -7,16 +7,19 @@ import {
 } from '../actions';
 
 const mapStateToProps = (state) => {
-  const goods = state.graph.data &&
-                state.graph.data.allGoods ||
-                state.graph.data &&
-                state.graph.data.user &&
-                state.graph.data.user.myGoods ||
-                null;
+  let goods = state.graph.data &&
+              state.graph.data.allGoods ||
+              state.graph.data &&
+              state.graph.data.user &&
+              state.graph.data.user.myGoods ||
+              null;
   const biddings = state.graph.data &&
                    state.graph.data.user &&
                    state.graph.data.user.myBiddings ||
                    null;
+  if (state.graph.data && state.graph.data.deleteGood || state.graph.data && state.graph.data.updateGood) {
+    goods = undefined;
+  }
   const error = state.graph.error || null;
   const isLoading = state.graph.isFetching || (goods === null && biddings === null && error === null);
   return {

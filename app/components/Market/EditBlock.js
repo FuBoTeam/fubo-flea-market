@@ -49,6 +49,8 @@ class EditBlock extends React.Component {
         </Link>
         <form styleName="edit-container" onSubmit={() => { updateGood(data); }}>
           <dl styleName="edit-info">
+            <dt>ID</dt>
+            <dd>{data.id}</dd>
             <dt>Title</dt>
             <dd>
               <input

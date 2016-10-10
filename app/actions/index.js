@@ -132,19 +132,19 @@ export const goodQuery = (id) => {
             title,
             updatedAt,
             biddingTime,
-            allBiddings {
-            biddings {
-              id,
-              amount,
-              createdAt,
-              trashWord,
-              user {
-                fakeName,
+            allBiddings(first: 2147483647) {
+              biddings {
+                id,
+                amount,
+                createdAt,
+                trashWord,
+                user {
+                  fakeName,
+                }
               }
             }
           }
         }
-      }
       `,
     },
   };
@@ -203,6 +203,7 @@ export const myGoodsQuery = () => {
                   id,
                   title,
                   image,
+                  description,
                   biddingTime,
                   allBiddings {
                     totalCount
