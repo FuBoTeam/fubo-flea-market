@@ -83,6 +83,12 @@ export const deleteGoodMutation = (id) => {
 export const allGoodsQuery = () => {
   return {
     type: GRAPH,
+    graphql: {
+      action: 'GRAPH/ALL',
+      ready: 'GRAPH_READY/ALL',
+      done: 'GRAPH_DONE/ALL',
+      error: 'GRAPH_ERROR/ALL',
+    },
     data: {
       query: `
         query {
@@ -150,13 +156,34 @@ export const goodQuery = (id) => {
   };
 };
 
-export const myBiddingsQuery = () => {
+export const myGoodsQuery = () => {
   return {
     type: GRAPH,
+    graphql: {
+      action: 'GRAPH/MY',
+      ready: 'GRAPH_READY/MY',
+      done: 'GRAPH_DONE/MY',
+      error: 'GRAPH_ERROR/MY',
+    },
     data: {
       query: `
         query {
           user {
+            myGoods {
+              totalCount,
+              edges {
+                node {
+                  id,
+                  title,
+                  image,
+                  description,
+                  biddingTime,
+                  allBiddings {
+                    totalCount
+                  }
+                }
+              }
+            },
             myBiddings {
               totalCount,
               edges {
@@ -189,35 +216,6 @@ export const myBiddingsQuery = () => {
   };
 };
 
-export const myGoodsQuery = () => {
-  return {
-    type: GRAPH,
-    data: {
-      query: `
-        query {
-          user {
-            myGoods {
-              totalCount,
-              edges {
-                node {
-                  id,
-                  title,
-                  image,
-                  description,
-                  biddingTime,
-                  allBiddings {
-                    totalCount
-                  }
-                }
-              }
-            }
-          }
-        }
-      `,
-    },
-  };
-};
-
 export const userQuery = () => {
   return {
     type: GRAPH,
@@ -239,5 +237,11 @@ export const userQuery = () => {
         }
       `,
     },
+  };
+};
+
+export const actionClear = () => {
+  return {
+    type: 'GRAPH_CLEAR',
   };
 };

@@ -14,13 +14,12 @@ class Market extends React.Component {
     const {
       params,
       getAllGoods,
-      getMyBiddings,
       getMyGoods,
     } = this.props;
     if (params.filter === 'my-selling') {
       return getMyGoods();
     } else if (params.filter === 'my-bids') {
-      return getMyBiddings();
+      return getMyGoods();
     }
     return getAllGoods();
   }
@@ -30,35 +29,31 @@ class Market extends React.Component {
         !(this.props.params.filter &&
           nextProps.params.filter &&
           this.props.params.filter === nextProps.params.filter)) {
-      if (nextProps.params.filter === 'my-selling') {
+      if (nextProps.params.filter === 'my-selling' || nextProps.params.filter === 'my-bids') {
         return nextProps.getMyGoods();
-      } else if (nextProps.params.filter === 'my-bids') {
-        return nextProps.getMyBiddings();
       }
       return nextProps.getAllGoods();
     }
     if (this.props.params.filter === 'my-selling' && nextProps.params.filter === 'my-selling') {
-      if (nextProps.goods === undefined) {
+      if (nextProps.action !== null) {
+        nextProps.actionClear();
         return nextProps.getMyGoods();
       }
     }
     return {};
   }
   render() {
-    const { isLoading, goods, biddings, params } = this.props;
-    if (isLoading) {
-      return <Loading />;
-    }
-    if (goods === undefined) {
-      return '';
-    }
+    const { isAllLoading, isMyLoading, goods, myGoods, biddings, params } = this.props;
     if (params.filter === 'my-selling') {
-      if (goods === null || goods.totalCount === 0) {
+      if (isMyLoading) {
+        return <Loading />;
+      }
+      if (myGoods === null || myGoods.totalCount === 0) {
         return <p className="bg-info" styleName="info-block">Sell something now!</p>;
       }
       return (
         <ul styleName="goods-edit-container">{
-          goods.edges.map((g) => {
+          myGoods.edges.map((g) => {
             return (
               <EditBlockContainer key={g.node.id} good={g.node} />
             );
@@ -66,6 +61,9 @@ class Market extends React.Component {
         }</ul>
       );
     } else if (params.filter === 'my-bids') {
+      if (isMyLoading) {
+        return <Loading />;
+      }
       if (biddings === null || biddings.totalCount === 0) {
         return <p className="bg-info" styleName="info-block">Bid something now!</p>;
       }
@@ -91,6 +89,9 @@ class Market extends React.Component {
         }</ul>
       );
     }
+    if (isAllLoading) {
+        return <Loading />;
+      }
     if (goods === null || goods.totalCount === 0) {
       return <p className="bg-info" styleName="info-block">Oops, nothing here, wanna sell something?</p>;
     }
@@ -106,13 +107,15 @@ class Market extends React.Component {
 
 Market.propTypes = {
   getAllGoods: PropTypes.func.isRequired,
-  getMyBiddings: PropTypes.func.isRequired,
   getMyGoods: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  isAllLoading: PropTypes.bool.isRequired,
+  isMyLoading: PropTypes.bool.isRequired,
   error: PropTypes.object,
   goods: PropTypes.object,
+  myGoods: PropTypes.object,
   biddings: PropTypes.object,
   params: PropTypes.object.isRequired,
+  action: PropTypes.object,
 };
 
 export default CSSModules(Market, styles);

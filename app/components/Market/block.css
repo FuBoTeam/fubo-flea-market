@@ -23,6 +23,10 @@
   }
 }
 
+.closed {
+  opacity: 0.5;
+}
+
 .image {
   flex-grow: 1;
   height: 300px;

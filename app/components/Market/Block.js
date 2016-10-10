@@ -17,6 +17,10 @@ class Block extends React.Component {
   render() {
     const { good } = this.props;
     const length = good.allBiddings && good.allBiddings.totalCount || 0;
+    const now = Date.parse(new Date().toUTCString());
+    const endTime = Date.parse(good.biddingTime);
+    const bidderWord = now > endTime ? 'Winning Bidder' : 'Highest Bidder';
+    const containerStyles = now > endTime ? 'good-container closed' : 'good-container';
     let highestBidder = 'None of Above';
     let bestBid = 'None';
     if (length > 0) {
@@ -28,13 +32,13 @@ class Block extends React.Component {
     let starNum = parseInt(length / 5 + 1, 10);
     starNum = starNum > 5 ? 5 : starNum;
     return (
-      <li styleName="good-container">
+      <li styleName={containerStyles}>
         <Link to={detailLink}>
           <img styleName="image" src={good.image} alt="Not found" />
         </Link>
         <label>{good.title}</label>
         <Rating defaultValue={starNum} disabled disabledStyle={starStyle}>star</Rating>
-        <p>Highest Bidder: {highestBidder}</p>
+        <p>{bidderWord}: {highestBidder}</p>
         <p>Best Bid: {bestBid}</p>
       </li>
     );
@@ -50,4 +54,4 @@ Block.propTypes = {
   }),
 };
 
-export default CSSModules(Block, styles);
+export default CSSModules(Block, styles, { allowMultiple: true });

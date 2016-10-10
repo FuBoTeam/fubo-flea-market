@@ -15,6 +15,7 @@ class Info extends React.Component {
   }
   render() {
     const { good } = this.props;
+    const higestBidding = good.allBiddings.biddings[good.allBiddings.biddings.length - 1];
     return (
       <div styleName="good-info">
         <img src={good.image} alt="not found" />
@@ -24,9 +25,9 @@ class Info extends React.Component {
           <label>Description</label>
           <p>{good.description}</p>
           <label>Highest Bidder</label>
-          <p>Elaine</p>
+          <p>{higestBidding.user.fakeName}</p>
           <label>Highest Amount</label>
-          <p>NTD 400</p>
+          <p>NTD {higestBidding.amount}</p>
           <label>Created At</label>
           <p>{good.createdAt}</p>
           <label>Updated At</label>
