@@ -160,10 +160,10 @@ export const myGoodsQuery = () => {
   return {
     type: GRAPH,
     graphql: {
-      action: 'GRAPH/MY',
-      ready: 'GRAPH_READY/MY',
-      done: 'GRAPH_DONE/MY',
-      error: 'GRAPH_ERROR/MY',
+      action: 'GRAPH/MYGOODS',
+      ready: 'GRAPH_READY/MYGOODS',
+      done: 'GRAPH_DONE/MYGOODS',
+      error: 'GRAPH_ERROR/MYGOODS',
     },
     data: {
       query: `
@@ -183,7 +183,27 @@ export const myGoodsQuery = () => {
                   }
                 }
               }
-            },
+            }
+          }
+        }
+      `,
+    },
+  };
+};
+
+export const myBiddingsQuery = () => {
+  return {
+    type: GRAPH,
+    graphql: {
+      action: 'GRAPH/MYBIDDINGS',
+      ready: 'GRAPH_READY/MYBIDDINGS',
+      done: 'GRAPH_DONE/MYBIDDINGS',
+      error: 'GRAPH_ERROR/MYBIDDINGS',
+    },
+    data: {
+      query: `
+        query {
+          user {
             myBiddings {
               totalCount,
               edges {

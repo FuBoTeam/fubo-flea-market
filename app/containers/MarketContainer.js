@@ -3,32 +3,31 @@ import Market from '../components/Market';
 import {
   allGoodsQuery,
   myGoodsQuery,
+  myBiddingsQuery,
   actionClear,
 } from '../actions';
 
 const mapStateToProps = (state) => {
-  const goods = state.allGoods.data &&
-                state.allGoods.data.allGoods ||
-                null;
-  const myGoods = state.my.data &&
-                  state.my.data.user &&
-                  state.my.data.user.myGoods ||
-                  null;
-  const biddings = state.my.data &&
-                   state.my.data.user &&
-                   state.my.data.user.myBiddings ||
-                   null;
-  const error = state.allGoods.error || state.my.error || null;
-  const isAllLoading = !state.allGoods.isFetched || (goods === null && error === null);
-  const isMyLoading = !state.my.isFetched || (biddings === null && error === null);
+  const goods = state.allGoods.goods;
+  const error = state.error;
+  const isAllLoading = !state.allGoods.isFetched && state.allGoods.isFetching;
+  const myGoods = state.my.goods.data;
+  const isMyGoodsLoading = state.my.goods.isFetching && !state.my.goods.isFetched;
+  const myGoodsError = state.my.goods.error;
+  const myBiddings = state.my.biddings.data;
+  const isMyBiddingsLoading = state.my.biddings.isFetching && !state.my.biddings.isFetched;
+  const myBiddingsError = state.my.biddings.error;
   const action = state.graph.data || null;
   return {
-    isAllLoading,
-    isMyLoading,
-    error,
     goods,
+    error,
+    isAllLoading,
     myGoods,
-    biddings,
+    isMyGoodsLoading,
+    myGoodsError,
+    myBiddings,
+    isMyBiddingsLoading,
+    myBiddingsError,
     action,
   };
 };
@@ -40,6 +39,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     getMyGoods: () => {
       dispatch(myGoodsQuery());
+    },
+    getMyBiddings: () => {
+      dispatch(myBiddingsQuery());
     },
     actionClear: () => {
       dispatch(actionClear());

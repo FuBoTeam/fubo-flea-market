@@ -15,22 +15,28 @@ class Market extends React.Component {
       params,
       getAllGoods,
       getMyGoods,
+      getMyBiddings,
     } = this.props;
     if (params.filter === 'my-selling') {
       return getMyGoods();
     } else if (params.filter === 'my-bids') {
-      return getMyGoods();
+      return getMyBiddings();
     }
     return getAllGoods();
   }
   componentWillReceiveProps(nextProps) {
+    // Switching between different tabs should fetch data
     if ((this.props.params.filter ||
          nextProps.params.filter) &&
         !(this.props.params.filter &&
           nextProps.params.filter &&
           this.props.params.filter === nextProps.params.filter)) {
-      if (nextProps.params.filter === 'my-selling' || nextProps.params.filter === 'my-bids') {
+      // Get my goods when gonna switch to my-selling tab
+      // Get my biddings when gonna switch to my-bids tab
+      if (nextProps.params && nextProps.params.filter === 'my-selling') {
         return nextProps.getMyGoods();
+      } else if (nextProps.params && nextProps.params.filter === 'my-bids') {
+        return nextProps.getMyBiddings();
       }
       return nextProps.getAllGoods();
     }
@@ -43,9 +49,17 @@ class Market extends React.Component {
     return {};
   }
   render() {
-    const { isAllLoading, isMyLoading, goods, myGoods, biddings, params } = this.props;
+    const {
+      isAllLoading,
+      goods,
+      isMyBiddingsLoading,
+      myBiddings,
+      isMyGoodsLoading,
+      myGoods,
+      params,
+    } = this.props;
     if (params.filter === 'my-selling') {
-      if (isMyLoading) {
+      if (isMyGoodsLoading) {
         return <Loading />;
       }
       if (myGoods === null || myGoods.totalCount === 0) {
@@ -61,23 +75,23 @@ class Market extends React.Component {
         }</ul>
       );
     } else if (params.filter === 'my-bids') {
-      if (isMyLoading) {
+      if (isMyBiddingsLoading) {
         return <Loading />;
       }
-      if (biddings === null || biddings.totalCount === 0) {
+      if (myBiddings === null || myBiddings.totalCount === 0) {
         return <p className="bg-info" styleName="info-block">Bid something now!</p>;
       }
       let biddingGoods = [];
       let uniqueId = [];
-      for (let i = 0; i < biddings.totalCount; i++) {
-        if (uniqueId.indexOf(biddings.edges[i].node.good.id) < 0) {
+      for (let i = 0; i < myBiddings.totalCount; i++) {
+        if (uniqueId.indexOf(myBiddings.edges[i].node.good.id) < 0) {
           uniqueId = [
             ...uniqueId,
-            biddings.edges[i].node.good.id,
+            myBiddings.edges[i].node.good.id,
           ];
           biddingGoods = [
             ...biddingGoods,
-            biddings.edges[i].node.good,
+            myBiddings.edges[i].node.good,
           ];
         }
       }
@@ -108,12 +122,16 @@ class Market extends React.Component {
 Market.propTypes = {
   getAllGoods: PropTypes.func.isRequired,
   getMyGoods: PropTypes.func.isRequired,
+  getMyBiddings: PropTypes.func.isRequired,
   isAllLoading: PropTypes.bool.isRequired,
-  isMyLoading: PropTypes.bool.isRequired,
-  error: PropTypes.object,
+  isMyGoodsLoading: PropTypes.bool.isRequired,
+  isMyBiddingsLoading: PropTypes.bool.isRequired,
   goods: PropTypes.object,
+  error: PropTypes.object,
   myGoods: PropTypes.object,
-  biddings: PropTypes.object,
+  myGoodsError: PropTypes.object,
+  myBiddings: PropTypes.object,
+  myBiddingsError: PropTypes.object,
   params: PropTypes.object.isRequired,
   action: PropTypes.object,
 };

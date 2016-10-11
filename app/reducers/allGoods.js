@@ -1,7 +1,7 @@
 const defaultState = {
   isFetched: false,
   isFetching: false,
-  data: null,
+  goods: null,
   error: null,
 };
 
@@ -15,7 +15,7 @@ const allGoods = (state = defaultState, action) => {
     case 'GRAPH_DONE/ALL':
       return {
         ...state,
-        data: action.data,
+        goods: action.data && action.data.allGoods || null,
         error: null,
         isFetched: true,
       };
