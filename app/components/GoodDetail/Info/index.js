@@ -25,9 +25,9 @@ class Info extends React.Component {
           <label>Description</label>
           <p>{good.description}</p>
           <label>Highest Bidder</label>
-          <p>{higestBidding.user.fakeName}</p>
+          <p>{higestBidding && higestBidding.user && higestBidding.user.fakeName || 'None of above'}</p>
           <label>Highest Amount</label>
-          <p>NTD {higestBidding.amount}</p>
+          <p>NTD {higestBidding && higestBidding.amount || 0}</p>
           <label>Created At</label>
           <p>{good.createdAt}</p>
           <label>Updated At</label>
