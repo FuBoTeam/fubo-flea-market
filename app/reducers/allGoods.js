@@ -22,7 +22,7 @@ const allGoods = (state = defaultState, action) => {
     case 'GRAPH_ERROR/ALL':
       return {
         ...state,
-        data: null,
+        goods: null,
         error: action.error,
         isFetched: true,
       };

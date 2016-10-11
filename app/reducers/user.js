@@ -15,6 +15,7 @@ const graph = (state = defaultState, action) => {
       };
     case 'GRAPH_DONE/USER':
       return {
+        ...state,
         ...action.data.user,
       };
     case 'GRAPH_ERROR/USER':

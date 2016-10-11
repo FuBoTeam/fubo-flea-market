@@ -8,25 +8,28 @@ const btnStyles = {
   float: 'right',
   marginLeft: 10,
 };
-const data = {
-  id: '',
-  title: '',
-  description: '',
-};
 
 class EditBlock extends React.Component {
   constructor(props) {
     super(props);
+    const { good } = props;
     this.displayName = 'EditBlock';
+    this.handleTitle = this.handleTitle.bind(this);
+    this.handleDescription = this.handleDescription.bind(this);
+    this.data = {
+      id: good.id,
+      title: good.title,
+      description: good.description,
+    };
   }
   handleTitle(event) {
     if (!event.preventDefault()) {
-      data.title = event.target.value;
+      this.data.title = event.target.value;
     }
   }
   handleDescription(event) {
     if (!event.preventDefault()) {
-      data.description = event.target.value;
+      this.data.description = event.target.value;
     }
   }
   render() {
@@ -77,14 +80,7 @@ class EditBlock extends React.Component {
               type="button"
               onClick={
                 () => {
-                  data.id = good.id;
-                  if (data.title === '') {
-                    data.title = good.title;
-                  }
-                  if (data.description === '') {
-                    data.description = good.description;
-                  }
-                  updateGood(data);
+                  updateGood(this.data);
                 }
               }
             >Edit</Button>
