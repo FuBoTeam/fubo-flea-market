@@ -2,10 +2,11 @@ import { connect } from 'react-redux';
 import GoodDetail from '../components/GoodDetail';
 import { goodQuery } from '../actions';
 
-const mapStateToProps = (state) => {
-  const good = state.graph.data && state.graph.data.good || null;
-  const error = state.graph.error || null;
-  const isLoading = state.graph.isFetching || (good === null && error === null);
+const mapStateToProps = (state, ownProps) => {
+  const id = ownProps.params.id;
+  const good = state.good.data && state.good.data[id] || null;
+  const error = state.good.error || null;
+  const isLoading = (state.good.data && !state.good.data[id]) || (good === null && error === null);
   return {
     isLoading,
     error,

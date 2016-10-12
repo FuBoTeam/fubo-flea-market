@@ -29,6 +29,12 @@ export const addGoodMutation = (good) => {
 export const addBidMutation = (biddingData) => {
   return {
     type: GRAPH,
+    graphql: {
+      action: 'GRAPH/GOOD',
+      ready: 'GRAPH_READY/GOOD',
+      done: 'GRAPH_MUTATION/GOOD',
+      error: 'GRAPH_ERROR/GOOD',
+    },
     vars: {
       biddingData,
     },
@@ -36,7 +42,28 @@ export const addBidMutation = (biddingData) => {
       mutation: `
         mutation($biddingData: AddBiddingInput!) {
           addBidding(input: $biddingData) {
-            clientMutationId,
+            bidding {
+              good {
+                createdAt,
+                description,
+                id,
+                image,
+                title,
+                updatedAt,
+                biddingTime,
+                allBiddings(first: 2147483647) {
+                  biddings {
+                    id,
+                    amount,
+                    createdAt,
+                    trashWord,
+                    user {
+                      fakeName,
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       `,
@@ -124,6 +151,12 @@ export const allGoodsQuery = () => {
 export const goodQuery = (id) => {
   return {
     type: GRAPH,
+    graphql: {
+      action: 'GRAPH/GOOD',
+      ready: 'GRAPH_READY/GOOD',
+      done: 'GRAPH_DONE/GOOD',
+      error: 'GRAPH_ERROR/GOOD',
+    },
     vars: {
       id,
     },

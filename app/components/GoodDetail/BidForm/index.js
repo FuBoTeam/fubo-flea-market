@@ -7,31 +7,32 @@ const btnStyles = {
 const nameStyle = {
   lineHeight: '34px',
 };
-const biddingData = {
-  id: '',
-  amount: 0,
-  trashWord: '',
-};
 
 class BidForm extends React.Component {
   constructor(props) {
     super(props);
     this.displayName = 'BidForm';
+    const { goodId, highestBid } = this.props;
+    this.biddingData = {
+      id: goodId,
+      amount: highestBid + 5,
+      trashWord: '',
+    };
+    this.handleAmount = this.handleAmount.bind(this);
+    this.handleWord = this.handleWord.bind(this);
   }
   handleAmount(event) {
     if (!event.preventDefault()) {
-      biddingData.amount = parseInt(event.target.value, 10);
+      this.biddingData.amount = parseInt(event.target.value, 10);
     }
   }
   handleWord(event) {
     if (!event.preventDefault()) {
-      biddingData.trashWord = event.target.value;
+      this.biddingData.trashWord = event.target.value;
     }
   }
   render() {
-    const { user, handleBid, goodId, highestBid } = this.props;
-    biddingData.id = goodId;
-    biddingData.amount = highestBid + 5;
+    const { user, handleBid, highestBid } = this.props;
     return (
       <tr>
         <td style={nameStyle}>{user.fakeName}</td>
@@ -40,7 +41,7 @@ class BidForm extends React.Component {
             className="form-control"
             type="number"
             min={highestBid + 1}
-            defaultValue={biddingData.amount}
+            defaultValue={this.biddingData.amount}
             onChange={this.handleAmount}
           />
         </td>
@@ -48,11 +49,20 @@ class BidForm extends React.Component {
           <input
             className="form-control"
             type="text"
-            defaultValue={biddingData.trashWord}
+            defaultValue={this.biddingData.trashWord}
             onChange={this.handleWord}
           />
         </td>
-        <td><Button primary style={btnStyles} onClick={() => { handleBid(biddingData); }}>Submit</Button></td>
+        <td>
+          <Button
+            primary
+            style={btnStyles}
+            onClick={
+              () => {
+                handleBid(this.biddingData);
+              }
+            }
+          >Submit</Button></td>
       </tr>
     );
   }

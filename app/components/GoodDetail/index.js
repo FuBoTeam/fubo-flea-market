@@ -14,12 +14,6 @@ class GoodDetail extends React.Component {
     const { getGood, params } = this.props;
     return getGood(params.id);
   }
-  componentWillReceiveProps(nextProps) {
-    if (!nextProps.good) {
-      const { getGood, params } = this.props;
-      getGood(params.id);
-    }
-  }
   render() {
     const { isLoading, good } = this.props;
     if (isLoading) {
