@@ -6,72 +6,64 @@ import { Button } from 'belle';
 import './filepicker.css';
 import './dropzone.min.css';
 
-const dropzoneConfigs = {
-  config: {
-    iconFiletypes: ['.jpg', '.png', '.gif'],
-    showFiletypeIcon: true,
-    postUrl: '/failUrl',
-  },
-  eventHandlers: {
-    drop: [() => { console.log('Hi!'); }, () => { console.log('Hello.'); }],
-    addedfile: (file) => { console.log(file); },
-  },
-  djsConfig: {
-    addRemoveLinks: true,
-    acceptedFiles: 'image/jpeg,image/png,image/gif',
-    autoProcessQueue: false,
-  },
-};
-
 class Upload extends React.Component {
   constructor(props) {
     super(props);
     this.displayName = 'Upload';
+    this.node = {
+      title: null,
+      description: null,
+    };
     this.state = {
       good: {
         title: '',
+        file: '',
       },
-      files: [],
     };
-  }
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextState === this.state;
-  }
-  onDrop(files) {
-    this.setState({
-      files,
-    });
-    files.forEach((file) => {
-      const formData = new FormData();
-      formData.append('type', 'file');
-      formData.append('image', file);
-      fetch('https://api.imgur.com/3/image/', {
-        mode: 'cors',
-        method: 'POST',
+    this.dropzone = null;
+    this.dropzoneConfigs = {
+      config: {
+        iconFiletypes: ['.jpg', '.png', '.gif'],
+        showFiletypeIcon: true,
+        postUrl: 'https://api.imgur.com/3/image/',
+      },
+      eventHandlers: {
+        init: (dropzone) => { this.dropzone = dropzone; },
+        maxfilesexceeded: (file) => {
+          // Discard file when max files exceeded
+          if (this.dropzone) {
+            this.dropzone.removeFile(file);
+          }
+        },
+        sending: (file, xhr, formData) => {
+          formData.append('type', 'file');
+          formData.append('image', file);
+        },
+        success: (file, res) => {
+          if (res && res.success) {
+            this.state.good.file = res.data.link;
+            props.handleSubmit(this.state.good);
+          }
+        },
+        error: (file, errorMessage) => {
+          this.state.error = errorMessage;
+        },
+      },
+      djsConfig: {
+        maxFilesize: 10,
+        maxFiles: 1,
+        addRemoveLinks: true,
+        acceptedFiles: 'image/jpeg,image/png,image/gif',
+        autoProcessQueue: false,
         headers: {
           Authorization: 'Client-ID 192fcc4079f82ee',
+          'Cache-Control': null,
+          'X-Requested-With': null,
         },
-        body: formData,
-      })
-      .then((res) => {
-        if (res.status >= 200 && res.status < 300) {
-          return res;
-        }
-        const error = new Error(res.statusText);
-        error.res = res;
-        throw error;
-      })
-      .then((res) => {
-        console.log(res.json());
-        return res.json();
-      })
-      .catch((error) => {
-        return error;
-      });
-    });
+      },
+    };
   }
   render() {
-    const { handleSubmit } = this.props;
     return (
       <form styleName="upload-form" name="uploadForm">
         <h2 styleName="form-title">Upload My Good</h2>
@@ -80,7 +72,7 @@ class Upload extends React.Component {
         <input
           type="text"
           name="title"
-          ref={(node) => { this.state.good.title = node; }}
+          ref={(node) => { this.node.title = node; }}
           className="form-control"
           styleName="input-control"
           required
@@ -88,39 +80,29 @@ class Upload extends React.Component {
         <label styleName="title">Description:</label>
         <textarea
           name="description"
-          ref={(node) => { this.state.good.description = node; }}
+          ref={(node) => { this.node.description = node; }}
           className="form-control"
           styleName="input-control"
         />
         <label styleName="title">Image:</label>
         <DropzoneComponent
-          {...dropzoneConfigs}
+          {...this.dropzoneConfigs}
         />
-        {/*
-        <Dropzone
-          ref="dropzone"
-          onDrop={this.onDrop}
-          multiple={false}
-          disablePreview={false}
-          accept="image/*"
-          maxSize={10485760}
-        >
-          <div>Try dropping some files here, or click to select files to upload.</div>
-        </Dropzone>*/
-        }
-        {/*
-          this.state.files.length > 0 ? (
-            <div>
-               <h2>Uploading {this.state.files.length} files...</h2>
-               <div>{this.state.files.map((file) => {
-                  return <img src={file.preview} alt="Uplaod failed" />;
-                })}
-               </div>
-            </div>
-          ) : null
-        */}
         <div styleName="btn-container">
-          <Button primary type="submit">Upload</Button>
+          <Button
+            primary
+            onClick={(e) => {
+              e.preventDefault();
+              this.dropzone.processQueue();
+              if (!this.node.title.value.trim()) {
+                return;
+              }
+              this.state.good.title = this.node.title.value.trim();
+              this.state.good.description = this.node.description.value;
+            }}
+          >
+            Upload
+          </Button>
         </div>
       </form>
     );
