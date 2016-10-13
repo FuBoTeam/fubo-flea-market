@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
 import Block from './Block';
-import EditBlock from './EditBlock';
+import EditBlockContainer from '../../containers/EditBlockContainer';
 import styles from './goods.css';
+import Loading from '../Loading';
 
 class Market extends React.Component {
   constructor(props) {
@@ -13,8 +14,8 @@ class Market extends React.Component {
     const {
       params,
       getAllGoods,
-      getMyBiddings,
       getMyGoods,
+      getMyBiddings,
     } = this.props;
     if (params.filter === 'my-selling') {
       return getMyGoods();
@@ -24,48 +25,73 @@ class Market extends React.Component {
     return getAllGoods();
   }
   componentWillReceiveProps(nextProps) {
+    // Switching between different tabs should fetch data
     if ((this.props.params.filter ||
          nextProps.params.filter) &&
         !(this.props.params.filter &&
           nextProps.params.filter &&
           this.props.params.filter === nextProps.params.filter)) {
-      if (nextProps.params.filter === 'my-selling') {
+      // Get my goods when gonna switch to my-selling tab
+      // Get my biddings when gonna switch to my-bids tab
+      if (nextProps.params && nextProps.params.filter === 'my-selling') {
         return nextProps.getMyGoods();
-      } else if (nextProps.params.filter === 'my-bids') {
+      } else if (nextProps.params && nextProps.params.filter === 'my-bids') {
         return nextProps.getMyBiddings();
       }
       return nextProps.getAllGoods();
     }
+    if (this.props.params.filter === 'my-selling' && nextProps.params.filter === 'my-selling') {
+      if (nextProps.action !== null) {
+        nextProps.actionClear();
+        return nextProps.getMyGoods();
+      }
+    }
     return {};
   }
   render() {
-    const { isLoading, goods, biddings, params } = this.props;
-    if (isLoading) {
-      return <div>Now Loading......</div>;
-    }
+    const {
+      isAllLoading,
+      goods,
+      isMyBiddingsLoading,
+      myBiddings,
+      isMyGoodsLoading,
+      myGoods,
+      params,
+    } = this.props;
     if (params.filter === 'my-selling') {
-      if (goods === null || goods.totalCount === 0) {
-        return <div>Sell something now!</div>;
+      if (isMyGoodsLoading) {
+        return <Loading />;
+      }
+      if (myGoods === null || myGoods.totalCount === 0) {
+        return <p className="bg-info" styleName="info-block">Sell something now!</p>;
       }
       return (
         <ul styleName="goods-edit-container">{
-          goods.edges.map((g) => {
+          myGoods.edges.map((g) => {
             return (
-              <EditBlock key={g.node.id} good={g.node} />
+              <EditBlockContainer key={g.node.id} good={g.node} />
             );
           })
         }</ul>
       );
     } else if (params.filter === 'my-bids') {
-      if (biddings === null || biddings.totalCount === 0) {
-        return <div>Bid something now!</div>;
+      if (isMyBiddingsLoading) {
+        return <Loading />;
+      }
+      if (myBiddings === null || myBiddings.totalCount === 0) {
+        return <p className="bg-info" styleName="info-block">Bid something now!</p>;
       }
       let biddingGoods = [];
-      for (let i = 0; i < biddings.totalCount; i++) {
-        if (!biddingGoods.contains(biddings.edges[i].node.good)) {
+      let uniqueId = [];
+      for (let i = 0; i < myBiddings.totalCount; i++) {
+        if (uniqueId.indexOf(myBiddings.edges[i].node.good.id) < 0) {
+          uniqueId = [
+            ...uniqueId,
+            myBiddings.edges[i].node.good.id,
+          ];
           biddingGoods = [
             ...biddingGoods,
-            biddings.edges[i].node.good,
+            myBiddings.edges[i].node.good,
           ];
         }
       }
@@ -77,8 +103,11 @@ class Market extends React.Component {
         }</ul>
       );
     }
+    if (isAllLoading) {
+        return <Loading />;
+      }
     if (goods === null || goods.totalCount === 0) {
-      return <div>Oops, nothing here, wanna sell something?</div>;
+      return <p className="bg-info" styleName="info-block">Oops, nothing here, wanna sell something?</p>;
     }
     return (
       <ul styleName="goods-container">{
@@ -92,13 +121,19 @@ class Market extends React.Component {
 
 Market.propTypes = {
   getAllGoods: PropTypes.func.isRequired,
-  getMyBiddings: PropTypes.func.isRequired,
   getMyGoods: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  error: PropTypes.object,
+  getMyBiddings: PropTypes.func.isRequired,
+  isAllLoading: PropTypes.bool.isRequired,
+  isMyGoodsLoading: PropTypes.bool.isRequired,
+  isMyBiddingsLoading: PropTypes.bool.isRequired,
   goods: PropTypes.object,
-  biddings: PropTypes.object,
+  error: PropTypes.object,
+  myGoods: PropTypes.object,
+  myGoodsError: PropTypes.object,
+  myBiddings: PropTypes.object,
+  myBiddingsError: PropTypes.object,
   params: PropTypes.object.isRequired,
+  action: PropTypes.object,
 };
 
 export default CSSModules(Market, styles);

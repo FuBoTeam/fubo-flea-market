@@ -2,29 +2,33 @@ import { connect } from 'react-redux';
 import Market from '../components/Market';
 import {
   allGoodsQuery,
-  myBiddingsQuery,
   myGoodsQuery,
+  myBiddingsQuery,
+  actionClear,
 } from '../actions';
 
 const mapStateToProps = (state) => {
-  const goods = state.graph.data &&
-                state.graph.data.allGoods ||
-                state.graph.data &&
-                state.graph.data.user &&
-                state.graph.data.user.myGoods ||
-                null;
-  const biddings = state.graph.data &&
-                   state.graph.data.user &&
-                   state.graph.data.user.myBiddings ||
-                   null;
-  const error = state.graph.error || null;
-  const isLoading = state.graph.isFetching || (goods === null && biddings === null && error === null);
+  const goods = state.allGoods.goods;
+  const error = state.error;
+  const isAllLoading = !state.allGoods.isFetched && state.allGoods.isFetching;
+  const myGoods = state.my.goods.data;
+  const isMyGoodsLoading = state.my.goods.isFetching && !state.my.goods.isFetched;
+  const myGoodsError = state.my.goods.error;
+  const myBiddings = state.my.biddings.data;
+  const isMyBiddingsLoading = state.my.biddings.isFetching && !state.my.biddings.isFetched;
+  const myBiddingsError = state.my.biddings.error;
+  const action = state.graph.data || null;
   return {
-    user: state.auth && state.auth.getIn(['user', 'attributes']) || null,
-    isLoading,
-    error,
     goods,
-    biddings,
+    error,
+    isAllLoading,
+    myGoods,
+    isMyGoodsLoading,
+    myGoodsError,
+    myBiddings,
+    isMyBiddingsLoading,
+    myBiddingsError,
+    action,
   };
 };
 
@@ -33,11 +37,14 @@ const mapDispatchToProps = (dispatch) => {
     getAllGoods: () => {
       dispatch(allGoodsQuery());
     },
+    getMyGoods: () => {
+      dispatch(myGoodsQuery());
+    },
     getMyBiddings: () => {
       dispatch(myBiddingsQuery());
     },
-    getMyGoods: () => {
-      dispatch(myGoodsQuery());
+    actionClear: () => {
+      dispatch(actionClear());
     },
   };
 };

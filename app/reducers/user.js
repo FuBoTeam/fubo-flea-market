@@ -1,35 +1,33 @@
-import {
-  GRAPH_READY,
-  GRAPH_DONE,
-  GRAPH_ERROR,
-} from '../actions';
-
 const defaultState = {
   isFetching: false,
-  data: null,
+  email: null,
+  name: null,
+  fakeName: null,
   error: null,
 };
 
 const graph = (state = defaultState, action) => {
   switch (action.type) {
-    case GRAPH_READY:
+    case 'GRAPH_READY/USER':
       return {
         ...state,
         isFetching: !action.data,
       };
-    case GRAPH_DONE:
+    case 'GRAPH_DONE/USER':
       return {
         ...state,
-        data: action.data,
-        error: null,
+        ...action.data.user,
       };
-    case GRAPH_ERROR:
+    case 'GRAPH_ERROR/USER':
       return {
         ...state,
-        data: null,
         error: action.error,
       };
-    case 'GRAPH_CLEAR':
+    case 'SIGN_OUT_COMPLETE':
+      return {
+        ...defaultState,
+      };
+    case 'SIGN_OUT_ERROR':
       return {
         ...defaultState,
       };

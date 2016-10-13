@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
 import styles from './styles.css';
-import BidForm from '../BidForm';
+import BidFormContainer from '../../../containers/BidFormContainer';
 import {
   Link,
 } from 'react-router';
@@ -12,22 +12,26 @@ class BidTable extends React.Component {
     this.displayName = 'BidTable';
   }
   render() {
-    const { isSignedIn, user } = this.props;
-    const bidForm = isSignedIn ? (<BidForm user={user} />) : (<tr>
+    const { isSignedIn, biddings, goodId } = this.props;
+    let hightestBid = 0;
+    if (biddings.length > 0) {
+      hightestBid = biddings[biddings.length - 1].amount;
+    }
+    const bidForm = isSignedIn ? (<BidFormContainer goodId={goodId} highestBid={hightestBid} />) : (<tr>
         <td colSpan="4" styleName="login"><Link to="/login">Sign up/Log in</Link> to place bid.</td>
       </tr>);
-    const tableElements = ['displayName', 'money', 'clamor', 'time'];
+    const tableBiddings = biddings.map((bidding) => {
+      return {
+        ...bidding,
+        fakeName: bidding.user.fakeName,
+      };
+    });
+    const tableElements = ['fakeName', 'amount', 'trashWord', 'createdAt'];
     const tableTitles = {
-      displayName: 'Bidder',
-      money: 'Bid',
-      clamor: 'Taunt(ex.未看先猜，樓下魯蛇)',
-      time: 'Bid Time',
-    };
-    const mockData = {
-      displayName: 'Elaine',
-      money: 500,
-      clamor: 'My goods!!!',
-      time: '01:11',
+      fakeName: 'Bidder',
+      amount: 'Bid',
+      trashWord: 'Taunt(ex.未看先猜，樓下魯蛇)',
+      createdAt: 'Bid Time',
     };
     return (
       <table className="table table-hover" styleName="bid-table">
@@ -43,14 +47,20 @@ class BidTable extends React.Component {
           </tr>
         </thead>
         <tbody>
-          <tr>
-          {
-            tableElements.map((element, index) => {
-              return (<td key={index}>{mockData[element]}</td>);
-            })
-          }
-          </tr>
-          {bidForm}
+        {
+          tableBiddings.map((bidding, bidIndex) => {
+            return (
+              <tr key={`bid-${bidIndex}`}>
+              {
+                tableElements.map((element, index) => {
+                  return (<td key={index}>{bidding[element]}</td>);
+                })
+              }
+              </tr>
+            );
+          })
+        }
+        {bidForm}
         </tbody>
       </table>
     );
@@ -59,7 +69,8 @@ class BidTable extends React.Component {
 
 BidTable.propTypes = {
   isSignedIn: PropTypes.bool.isRequired,
-  user: PropTypes.object,
+  biddings: PropTypes.array.isRequired,
+  goodId: PropTypes.string,
 };
 
 export default CSSModules(BidTable, styles);

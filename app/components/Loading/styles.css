@@ -1,0 +1,30 @@
+.loading {
+  height: auto;
+  background-color: rgba(255, 128, 128, 0.8);
+  text-align: center;
+  color: white;
+  padding: 10px;
+  margin: 10px auto;
+  span {
+    font-size: 20px;
+  }
+}
+
+.circle-logo {
+  background-image: none,url(../../assets/background/circle1.svg);
+  background-size: cover;
+  width: 200px;
+  height: 200px;
+  animation: infinite-rotate 10s infinite linear;
+  transform: rotate(360deg);
+  margin: 0 auto;
+}
+
+@keyframes infinite-rotate{
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -10,3 +10,8 @@
   flex-direction: column;
   align-items: center;
 }
+
+.info-block {
+  padding: 15px;
+  text-align: center;
+}

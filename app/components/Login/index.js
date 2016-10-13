@@ -8,7 +8,7 @@ const btnStyle = {
 
 class Login extends React.Component {
   render() {
-    const { changeLocationOnSignIn } = this.props;
+    const { changeLocationOnSignIn, getUser } = this.props;
     const { next } = this.props.location.query;
     return (
       <div styleName="container">
@@ -17,7 +17,13 @@ class Login extends React.Component {
         <p>Support Google Login.
           <OAuthSignInButton
             provider="google"
-            next={() => { return changeLocationOnSignIn(next || '/'); }}
+            next={
+              () => {
+                getUser();
+                changeLocationOnSignIn(next || '/');
+                return;
+              }
+            }
             style={btnStyle}
           />
         </p>
@@ -29,6 +35,7 @@ class Login extends React.Component {
 Login.propTypes = {
   location: React.PropTypes.object.isRequired,
   changeLocationOnSignIn: React.PropTypes.func.isRequired,
+  getUser: React.PropTypes.func.isRequired,
 };
 
 export default CSSModules(Login, styles);

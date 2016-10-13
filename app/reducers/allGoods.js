@@ -1,37 +1,30 @@
-import {
-  GRAPH_READY,
-  GRAPH_DONE,
-  GRAPH_ERROR,
-} from '../actions';
-
 const defaultState = {
+  isFetched: false,
   isFetching: false,
-  data: null,
+  goods: null,
   error: null,
 };
 
-const graph = (state = defaultState, action) => {
+const allGoods = (state = defaultState, action) => {
   switch (action.type) {
-    case GRAPH_READY:
+    case 'GRAPH_READY/ALL':
       return {
         ...state,
         isFetching: !action.data,
       };
-    case GRAPH_DONE:
+    case 'GRAPH_DONE/ALL':
       return {
         ...state,
-        data: action.data,
+        goods: action.data && action.data.allGoods || null,
         error: null,
+        isFetched: true,
       };
-    case GRAPH_ERROR:
+    case 'GRAPH_ERROR/ALL':
       return {
         ...state,
-        data: null,
+        goods: null,
         error: action.error,
-      };
-    case 'GRAPH_CLEAR':
-      return {
-        ...defaultState,
+        isFetched: true,
       };
     default:
       break;
@@ -39,4 +32,4 @@ const graph = (state = defaultState, action) => {
   return state;
 };
 
-export default graph;
+export default allGoods;

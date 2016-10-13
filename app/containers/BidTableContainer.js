@@ -4,7 +4,6 @@ import BidTable from '../components/GoodDetail/BidTable';
 const mapStateToProps = (state) => {
   return {
     isSignedIn: state.auth.getIn(['user', 'isSignedIn']),
-    user: state.auth.getIn(['user', 'attributes']),
   };
 };
 
