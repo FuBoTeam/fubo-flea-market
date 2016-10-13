@@ -4,10 +4,16 @@ import { goodQuery } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
   const id = ownProps.params.id;
-  const good = state.good.data && state.good.data[id] || null;
-  const error = state.good.error || null;
-  const isLoading = (state.good.data && !state.good.data[id]) || (good === null && error === null);
+  // Prevent state.good[id] is initializing
+  const good = state.good[id] && state.good[id].data || null;
+  const error = state.good[id] && state.good[id].error || null;
+  const isLoading = state.good[id] ?
+                    !state.good[id].isFetched : true;
+  const isUpdating = state.good[id] ?
+                     state.good[id].isFetching &&
+                     state.good[id].isFetched : false;
   return {
+    isUpdating,
     isLoading,
     error,
     good,
