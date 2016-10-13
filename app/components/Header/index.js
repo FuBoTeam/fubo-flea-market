@@ -12,6 +12,12 @@ class Header extends React.Component {
     super(props);
     this.displayName = 'Header';
   }
+  componentWillMount() {
+    const { getUser, user } = this.props;
+    if (user.auth) {
+      getUser();
+    }
+  }
   render() {
     const { isSignedIn, changeLocationOnSignOut, user } = this.props;
     const LoginLogoutCmp = isSignedIn ? (
@@ -52,6 +58,7 @@ Header.propTypes = {
   isSignedIn: PropTypes.bool.isRequired,
   changeLocationOnSignOut: PropTypes.func.isRequired,
   user: PropTypes.object,
+  getUser: PropTypes.func.isRequired,
 };
 
 export default CSSModules(Header, styles, { allowMultiple: true });
