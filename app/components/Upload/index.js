@@ -17,7 +17,7 @@ class Upload extends React.Component {
     this.state = {
       good: {
         title: '',
-        file: '',
+        image: '',
       },
     };
     this.dropzone = null;
@@ -41,7 +41,7 @@ class Upload extends React.Component {
         },
         success: (file, res) => {
           if (res && res.success) {
-            this.state.good.file = res.data.link;
+            this.state.good.image = res.data.link;
             props.handleSubmit(this.state.good);
           }
         },
