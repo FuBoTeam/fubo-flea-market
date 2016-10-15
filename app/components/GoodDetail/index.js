@@ -30,7 +30,7 @@ class GoodDetail extends React.Component {
         <div styleName="container">
           <Info good={good} />
           <div styleName="bid-content">
-            <BidTableContainer biddings={good.allBiddings.biddings} goodId={good.id} />
+            <BidTableContainer biddings={good.allBiddings.biddings} goodId={good.id} utcTime={good.utcTime} />
             <Button type="button" style={refreshBtn} onClick={() => { getGood(params.id); }}>Refresh</Button>
           </div>
         </div>

@@ -48,7 +48,7 @@ class Tab extends React.Component {
 
 Tab.propTypes = {
   location: PropTypes.object.isRequired,
-  isUpdating: PropTypes.boolean,
+  isUpdating: PropTypes.bool,
 };
 
 export default CSSModules(Tab, styles);

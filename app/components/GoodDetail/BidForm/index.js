@@ -15,7 +15,7 @@ class BidForm extends React.Component {
     const { goodId, highestBid } = this.props;
     this.biddingData = {
       id: goodId,
-      amount: highestBid + 5,
+      amount: highestBid + 10,
       trashWord: '',
     };
     this.handleAmount = this.handleAmount.bind(this);
@@ -32,7 +32,8 @@ class BidForm extends React.Component {
     }
   }
   render() {
-    const { user, handleBid, highestBid } = this.props;
+    const { user, handleBid, highestBid, utcTime } = this.props;
+    const gap = (Date.parse(utcTime) - Date.parse(new Date()) > 600000) ? 1 : 10;
     return (
       <tr>
         <td style={nameStyle}>{user.fakeName}</td>
@@ -40,9 +41,11 @@ class BidForm extends React.Component {
           <input
             className="form-control"
             type="number"
-            min={highestBid + 1}
+            min={highestBid + gap}
             defaultValue={this.biddingData.amount}
             onChange={this.handleAmount}
+            form="bidForm"
+            required
           />
         </td>
         <td>
@@ -51,18 +54,26 @@ class BidForm extends React.Component {
             type="text"
             defaultValue={this.biddingData.trashWord}
             onChange={this.handleWord}
+            form="bidForm"
           />
         </td>
         <td>
           <Button
             primary
             style={btnStyles}
-            onClick={
-              () => {
+            type="submit"
+            form="bidForm"
+          >Submit</Button>
+          <form
+            id="bidForm"
+            onSubmit={
+              (e) => {
+                e.preventDefault();
                 handleBid(this.biddingData);
               }
             }
-          >Submit</Button></td>
+          />
+        </td>
       </tr>
     );
   }
@@ -73,6 +84,7 @@ BidForm.propTypes = {
   handleBid: PropTypes.func.isRequired,
   goodId: PropTypes.string,
   highestBid: PropTypes.number,
+  utcTime: PropTypes.string,
 };
 
 export default BidForm;

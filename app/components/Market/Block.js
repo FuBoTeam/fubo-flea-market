@@ -18,7 +18,7 @@ class Block extends React.Component {
     const { good } = this.props;
     const length = good.allBiddings && good.allBiddings.totalCount || 0;
     const now = Date.parse(new Date());
-    const endTime = Date.parse(good.biddingTime);
+    const endTime = Date.parse(good.utcTime);
     const bidderWord = now > endTime ? 'Winning Bidder' : 'Highest Bidder';
     const containerStyles = now > endTime ? 'good-container closed' : 'good-container';
     let highestBidder = 'None of Above';

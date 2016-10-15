@@ -12,12 +12,12 @@ class BidTable extends React.Component {
     this.displayName = 'BidTable';
   }
   render() {
-    const { isSignedIn, biddings, goodId } = this.props;
+    const { isSignedIn, biddings, goodId, utcTime } = this.props;
     let hightestBid = 0;
     if (biddings.length > 0) {
       hightestBid = biddings[biddings.length - 1].amount;
     }
-    const bidForm = isSignedIn ? (<BidFormContainer goodId={goodId} highestBid={hightestBid} />) : (<tr>
+    const bidForm = isSignedIn ? (<BidFormContainer goodId={goodId} highestBid={hightestBid} utcTime={utcTime} />) : (<tr>
         <td colSpan="4" styleName="login"><Link to={{ pathname: '/login', query: { next: `/good/${goodId}` } }}>Sign up/Log in</Link> to place bid.</td>
       </tr>);
     const tableBiddings = biddings.map((bidding) => {
@@ -71,6 +71,7 @@ BidTable.propTypes = {
   isSignedIn: PropTypes.bool.isRequired,
   biddings: PropTypes.array.isRequired,
   goodId: PropTypes.string,
+  utcTime: PropTypes.string,
 };
 
 export default CSSModules(BidTable, styles);

@@ -25,7 +25,7 @@ class Info extends React.Component {
           <label>Good ID</label>
           <p>{good.id}</p>
           <label>Description</label>
-          <p>{good.description}</p>
+          <p>{good.description || 'None'}</p>
           <label>Highest Bidder</label>
           <p>{higestBidding && higestBidding.user && higestBidding.user.fakeName || 'None of above'}</p>
           <label>Bidders</label>
