@@ -4,11 +4,12 @@ import {
 } from 'react-router';
 import CSSModules from 'react-css-modules';
 import styles from './styles.css';
+import Updating from '../Updating';
 
-class Tabs extends React.Component {
+class Tab extends React.Component {
   constructor(props) {
     super(props);
-    this.displayName = 'Tabs';
+    this.displayName = 'Tab';
     this.tabNames = [
       {
         link: '/',
@@ -25,7 +26,7 @@ class Tabs extends React.Component {
       }];
   }
   render() {
-    const { location } = this.props;
+    const { location, isUpdating } = this.props;
     const tabs = this.tabNames.map((tab, index) => {
       const selected = (tab.link === location.pathname) ? 'active' : '';
       return (
@@ -35,15 +36,19 @@ class Tabs extends React.Component {
       );
     });
     return (
-      <ul styleName="tab-group">
-        {tabs}
-      </ul>
+      <div>
+        {(isUpdating) ? (<Updating />) : null}
+        <ul styleName="tab-group">
+          {tabs}
+        </ul>
+      </div>
     );
   }
 }
 
-Tabs.propTypes = {
+Tab.propTypes = {
   location: PropTypes.object.isRequired,
+  isUpdating: PropTypes.boolean,
 };
 
-export default CSSModules(Tabs, styles);
+export default CSSModules(Tab, styles);

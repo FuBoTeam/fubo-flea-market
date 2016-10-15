@@ -22,18 +22,20 @@ class Info extends React.Component {
         <div styleName="word-intro">
           <h2>{good.title}</h2>
           <Rating defaultValue={2} disabled disabledStyle={starStyle}>star</Rating>
+          <label>Good ID</label>
+          <p>{good.id}</p>
           <label>Description</label>
           <p>{good.description}</p>
           <label>Highest Bidder</label>
           <p>{higestBidding && higestBidding.user && higestBidding.user.fakeName || 'None of above'}</p>
+          <label>Bidders</label>
+          <p>{good.allBiddings.biddings.length}</p>
           <label>Highest Amount</label>
           <p>NTD {higestBidding && higestBidding.amount || 0}</p>
           <label>Created At</label>
           <p>{good.createdAt}</p>
           <label>Updated At</label>
           <p>{good.updatedAt}</p>
-          <label>Good ID</label>
-          <p>{good.id}</p>
           <label>Time of Closing</label>
           <p>{good.biddingTime}</p>
         </div>

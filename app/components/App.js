@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { AuthGlobals } from 'redux-auth/bootstrap-theme';
 import HeaderContainer from '../containers/HeaderContainer';
-import Tabs from './Tabs';
+import TabContainer from '../containers/TabContainer';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,9 +10,9 @@ class App extends React.Component {
   }
   render() {
     const { children, location } = this.props;
-    let tab = '';
+    let tab = null;
     if (!location.pathname.includes('good') && location.pathname !== '/login') {
-      tab = (<Tabs location={location} />);
+      tab = (<TabContainer location={location} />);
     }
     return (
       <div>
