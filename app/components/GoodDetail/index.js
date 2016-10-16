@@ -20,7 +20,7 @@ class GoodDetail extends React.Component {
     return getGood(params.id);
   }
   render() {
-    const { isLoading, isUpdating, good, getGood, params } = this.props;
+    const { isLoading, isUpdating, good, getGood, params, error } = this.props;
     if (isLoading) {
       return <Loading />;
     }
@@ -30,7 +30,8 @@ class GoodDetail extends React.Component {
         <div styleName="container">
           <Info good={good} />
           <div styleName="bid-content">
-            <BidTableContainer biddings={good.allBiddings.biddings} goodId={good.id} utcTime={good.utcTime} />
+            <BidTableContainer biddings={good.allBiddings.biddings} goodId={good.id} utcTime={good.utcTime} extendedCount={good.extendedCount} />
+            {(error) ? (<p className="bg-info" styleName="info-block">Make sure your bid is NTD 10 higher than the current price, or just refresh the page.</p>) : null}
             <Button type="button" style={refreshBtn} onClick={() => { getGood(params.id); }}>Refresh</Button>
           </div>
         </div>

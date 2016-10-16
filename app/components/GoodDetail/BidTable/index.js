@@ -12,14 +12,24 @@ class BidTable extends React.Component {
     this.displayName = 'BidTable';
   }
   render() {
-    const { isSignedIn, biddings, goodId, utcTime } = this.props;
+    const { isSignedIn, biddings, goodId, extendedCount, utcTime } = this.props;
     let hightestBid = 0;
     if (biddings.length > 0) {
       hightestBid = biddings[biddings.length - 1].amount;
     }
-    const bidForm = isSignedIn ? (<BidFormContainer goodId={goodId} highestBid={hightestBid} utcTime={utcTime} />) : (<tr>
-        <td colSpan="4" styleName="login"><Link to={{ pathname: '/login', query: { next: `/good/${goodId}` } }}>Sign up/Log in</Link> to place bid.</td>
+    let bidForm = isSignedIn ? (<BidFormContainer goodId={goodId} highestBid={hightestBid} extendedCount={extendedCount} />) : (<tr>
+        <td colSpan="4" styleName="login"><Link to={{ pathname: '/login', query: { next: `/good_${goodId}` } }}>Sign up/Log in</Link> to place bid.</td>
       </tr>);
+    const now = Date.parse(new Date());
+    const endTime = Date.parse(utcTime);
+    if (now > endTime) {
+      bidForm = (
+        <tr>
+          <td colSpan="4" styleName="login">Time's up</td>
+        </tr>
+      );
+    }
+
     const tableBiddings = biddings.map((bidding) => {
       return {
         ...bidding,
@@ -72,6 +82,7 @@ BidTable.propTypes = {
   biddings: PropTypes.array.isRequired,
   goodId: PropTypes.string,
   utcTime: PropTypes.string,
+  extendedCount: PropTypes.number,
 };
 
 export default CSSModules(BidTable, styles);

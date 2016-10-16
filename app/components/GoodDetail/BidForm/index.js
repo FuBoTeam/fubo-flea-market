@@ -32,8 +32,8 @@ class BidForm extends React.Component {
     }
   }
   render() {
-    const { user, handleBid, highestBid, utcTime } = this.props;
-    const gap = (Date.parse(utcTime) - Date.parse(new Date()) > 600000) ? 1 : 10;
+    const { user, handleBid, highestBid, extendedCount } = this.props;
+    const gap = (extendedCount > 0) ? 10 : 1;
     return (
       <tr>
         <td style={nameStyle}>{user.fakeName}</td>
@@ -84,7 +84,7 @@ BidForm.propTypes = {
   handleBid: PropTypes.func.isRequired,
   goodId: PropTypes.string,
   highestBid: PropTypes.number,
-  utcTime: PropTypes.string,
+  extendedCount: PropTypes.number,
 };
 
 export default BidForm;

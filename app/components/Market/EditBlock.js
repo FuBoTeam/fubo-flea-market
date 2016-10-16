@@ -34,7 +34,7 @@ class EditBlock extends React.Component {
   }
   render() {
     const { good, updateGood, deleteGood } = this.props;
-    const detailLink = `good/${good.id}`;
+    const detailLink = `good_${good.id}`;
     const deleteBtn = good.allBiddings.totalCount > 0 ? '' :
     <Button
       primary

@@ -16,6 +16,12 @@ class Info extends React.Component {
   render() {
     const { good } = this.props;
     const higestBidding = good.allBiddings.biddings[good.allBiddings.biddings.length - 1];
+    const now = Date.parse(new Date());
+    const endTime = Date.parse(good.utcTime);
+    let higestWord = 'Highest';
+    if (now > endTime) {
+      higestWord = 'Winning';
+    }
     return (
       <div styleName="good-info">
         <img src={good.image} alt="not found" />
@@ -26,11 +32,11 @@ class Info extends React.Component {
           <p>{good.id}</p>
           <label>Description</label>
           <p>{good.description || 'None'}</p>
-          <label>Highest Bidder</label>
+          <label>{higestWord} Bidder</label>
           <p>{higestBidding && higestBidding.user && higestBidding.user.fakeName || 'None of above'}</p>
           <label>Bidders</label>
           <p>{good.allBiddings.biddings.length}</p>
-          <label>Highest Amount</label>
+          <label>Best Bid</label>
           <p>NTD {higestBidding && higestBidding.amount || 0}</p>
           <label>Created At</label>
           <p>{good.createdAt}</p>

@@ -51,6 +51,7 @@ export const addBidMutation = (biddingData) => {
                 title,
                 updatedAt,
                 biddingTime,
+                extendedCount,
                 allBiddings(first: 2147483647) {
                   biddings {
                     id,
@@ -171,6 +172,7 @@ export const goodQuery = (id) => {
             title,
             updatedAt,
             biddingTime,
+            extendedCount,
             allBiddings(first: 2147483647) {
               biddings {
                 id,

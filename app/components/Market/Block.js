@@ -18,7 +18,7 @@ class Block extends React.Component {
     const { good } = this.props;
     const length = good.allBiddings && good.allBiddings.totalCount || 0;
     const now = Date.parse(new Date());
-    const endTime = Date.parse(good.utcTime);
+    const endTime = Date.parse(good.biddingTime);
     const bidderWord = now > endTime ? 'Winning Bidder' : 'Highest Bidder';
     const containerStyles = now > endTime ? 'good-container closed' : 'good-container';
     let highestBidder = 'None of Above';
@@ -28,7 +28,7 @@ class Block extends React.Component {
       highestBidder = bidder.node.user.fakeName;
       bestBid = bidder.node.amount;
     }
-    const detailLink = `good/${good.id}`;
+    const detailLink = `good_${good.id}`;
     let starNum = parseInt(length / 5 + 1, 10);
     starNum = starNum > 5 ? 5 : starNum;
     return (
