@@ -111,6 +111,7 @@
   padding: 140px 20px 20px;
   color: white;
   font-size: 24px;
+  position: absolute;
 }
 
 .fake-name {
