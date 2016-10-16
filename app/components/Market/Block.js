@@ -24,9 +24,14 @@ class Block extends React.Component {
     let highestBidder = 'None of Above';
     let bestBid = 'None';
     if (length > 0) {
-      const bidder = good.allBiddings.edges[length - 1];
-      highestBidder = bidder.node.user.fakeName;
-      bestBid = bidder.node.amount;
+      if (good.highestBidding) {
+        highestBidder = good.highestBidding.user.fakeName;
+        bestBid = good.highestBidding.amount;
+      } else {
+        const bidder = good.allBiddings.edges[length - 1];
+        highestBidder = bidder.node.user.fakeName;
+        bestBid = bidder.node.amount;
+      }
     }
     const detailLink = `good_${good.id}`;
     let starNum = parseInt(length / 5 + 1, 10);

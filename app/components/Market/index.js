@@ -84,24 +84,10 @@ class Market extends React.Component {
       if (myBiddings === null || myBiddings.totalCount === 0) {
         return <p className="bg-info" styleName="info-block">Start bidding now!</p>;
       }
-      let biddingGoods = [];
-      let uniqueId = [];
-      for (let i = 0; i < myBiddings.totalCount; i++) {
-        if (myBiddings.edges[i] && myBiddings.edges[i].node && uniqueId.indexOf(myBiddings.edges[i].node.good.id) < 0) {
-          uniqueId = [
-            ...uniqueId,
-            myBiddings.edges[i].node.good.id,
-          ];
-          biddingGoods = [
-            ...biddingGoods,
-            myBiddings.edges[i].node.good,
-          ];
-        }
-      }
       return (
         <ul styleName="goods-container">{
-          biddingGoods.map((g) => {
-            return <Block key={g.id} good={g} />;
+          myBiddings.edges.map((g) => {
+            return <Block key={g.node.id} good={g.node} />;
           })
         }</ul>
       );

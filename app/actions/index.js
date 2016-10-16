@@ -239,27 +239,23 @@ export const myBiddingsQuery = () => {
       query: `
         query {
           user {
-            myBiddings {
-              totalCount,
+            joinedGoods {
+              totalCount
               edges {
                 node {
-                  good {
-                    id,
-                    title,
-                    image,
-                    biddingTime
-                    allBiddings(first: 2147483647) {
-                      totalCount,
-                      edges {
-                        node {
-                          amount,
-                          user {
-                            id,
-                            fakeName
-                          }
-                        }
-                      }
+                  id
+                  title
+                  image
+                  highestBidding {
+                    amount
+                    user {
+                      id
+                      fakeName
                     }
+                  }
+                  biddingTime
+                  allBiddings{
+                    totalCount
                   }
                 }
               }
