@@ -84,7 +84,7 @@ const good = (state = {}, action) => {
           data: {
             ...newGood,
             biddingTime: dateFormat(newGood.biddingTime),
-            utcTime: action.data.good.biddingTime,
+            utcTime: newGood.biddingTime,
             updatedAt: dateFormat(newGood.updatedAt),
             createdAt: dateFormat(newGood.createdAt),
             allBiddings: {
