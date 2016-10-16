@@ -15,7 +15,7 @@ class Info extends React.Component {
   }
   render() {
     const { good } = this.props;
-    const higestBidding = good.allBiddings.biddings[good.allBiddings.biddings.length - 1];
+    const higestBidding = good.allBiddings.biddings[0];
     const now = Date.parse(new Date());
     const endTime = Date.parse(good.utcTime);
     let starNum = parseInt(good.allBiddings.biddings.length / 5 + 1, 10);

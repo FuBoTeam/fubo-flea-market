@@ -35,7 +35,7 @@ class BidTable extends React.Component {
         ...bidding,
         fakeName: bidding.user.fakeName,
       };
-    });
+    }).reverse();
     const tableElements = ['fakeName', 'amount', 'trashWord', 'createdAt'];
     const tableTitles = {
       fakeName: 'Bidder',

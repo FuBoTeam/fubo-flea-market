@@ -28,7 +28,7 @@ class Block extends React.Component {
         highestBidder = good.highestBidding.user.fakeName;
         bestBid = good.highestBidding.amount;
       } else {
-        const bidder = good.allBiddings.edges[length - 1];
+        const bidder = good.allBiddings.edges[0];
         highestBidder = bidder.node.user.fakeName;
         bestBid = bidder.node.amount;
       }
