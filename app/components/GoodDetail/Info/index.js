@@ -18,6 +18,8 @@ class Info extends React.Component {
     const higestBidding = good.allBiddings.biddings[good.allBiddings.biddings.length - 1];
     const now = Date.parse(new Date());
     const endTime = Date.parse(good.utcTime);
+    let starNum = parseInt(good.allBiddings.biddings.length / 5 + 1, 10);
+    starNum = starNum > 5 ? 5 : starNum;
     let higestWord = 'Highest';
     if (now > endTime) {
       higestWord = 'Winning';
@@ -27,7 +29,7 @@ class Info extends React.Component {
         <img src={good.image} alt="not found" />
         <div styleName="word-intro">
           <h2>{good.title}</h2>
-          <Rating defaultValue={2} disabled disabledStyle={starStyle}>star</Rating>
+          <Rating defaultValue={starNum} disabled disabledStyle={starStyle}>star</Rating>
           <label>Good ID</label>
           <p>{good.id}</p>
           <label>Description</label>

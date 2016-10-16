@@ -12,27 +12,37 @@ class BidForm extends React.Component {
   constructor(props) {
     super(props);
     this.displayName = 'BidForm';
-    const { goodId, highestBid } = this.props;
-    this.biddingData = {
-      id: goodId,
-      amount: highestBid + 10,
-      trashWord: '',
-    };
     this.handleAmount = this.handleAmount.bind(this);
     this.handleWord = this.handleWord.bind(this);
+    const { goodId, highestBid } = this.props;
+    this.state = {
+      bidding: {
+        id: goodId,
+        amount: highestBid + 10,
+        trashWord: '',
+      },
+    };
   }
   handleAmount(event) {
-    if (!event.preventDefault()) {
-      this.biddingData.amount = parseInt(event.target.value, 10);
-    }
+    event.preventDefault();
+    this.setState({
+      bidding: {
+        ...this.state.bidding,
+        amount: parseInt(event.target.value, 10),
+      },
+    });
   }
   handleWord(event) {
-    if (!event.preventDefault()) {
-      this.biddingData.trashWord = event.target.value;
-    }
+    event.preventDefault();
+    this.setState({
+      bidding: {
+        ...this.state.bidding,
+        trashWord: event.target.value,
+      },
+    });
   }
   render() {
-    const { user, handleBid, highestBid, extendedCount } = this.props;
+    const { user, handleBid, highestBid, extendedCount, goodId } = this.props;
     const gap = (extendedCount > 0) ? 10 : 1;
     return (
       <tr>
@@ -41,8 +51,9 @@ class BidForm extends React.Component {
           <input
             className="form-control"
             type="number"
+            ref="amount"
             min={highestBid + gap}
-            defaultValue={this.biddingData.amount}
+            value={this.state.bidding.amount}
             onChange={this.handleAmount}
             form="bidForm"
             required
@@ -52,7 +63,8 @@ class BidForm extends React.Component {
           <input
             className="form-control"
             type="text"
-            defaultValue={this.biddingData.trashWord}
+            ref="trashWord"
+            value={this.state.bidding.trashWord}
             onChange={this.handleWord}
             form="bidForm"
           />
@@ -69,7 +81,14 @@ class BidForm extends React.Component {
             onSubmit={
               (e) => {
                 e.preventDefault();
-                handleBid(this.biddingData);
+                this.setState({
+                  bidding: {
+                    id: goodId,
+                    amount: this.state.bidding.amount + 10,
+                    trashWord: '',
+                  },
+                });
+                handleBid(this.state.bidding);
               }
             }
           />

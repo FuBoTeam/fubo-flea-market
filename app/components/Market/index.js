@@ -87,7 +87,7 @@ class Market extends React.Component {
       let biddingGoods = [];
       let uniqueId = [];
       for (let i = 0; i < myBiddings.totalCount; i++) {
-        if (uniqueId.indexOf(myBiddings.edges[i].node.good.id) < 0) {
+        if (myBiddings.edges[i] && myBiddings.edges[i].node && uniqueId.indexOf(myBiddings.edges[i].node.good.id) < 0) {
           uniqueId = [
             ...uniqueId,
             myBiddings.edges[i].node.good.id,
