@@ -7,6 +7,10 @@ const btnStyle = {
 };
 
 class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.displayName = 'Login';
+  }
   render() {
     const { changeLocationOnSignIn, getUser } = this.props;
     const { next } = this.props.location.query;

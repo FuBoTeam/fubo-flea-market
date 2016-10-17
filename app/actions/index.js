@@ -128,16 +128,14 @@ export const allGoodsQuery = () => {
                 title,
                 image,
                 biddingTime,
-                allBiddings(first: 2147483647) {
+                allBiddings {
                   totalCount,
-                  edges {
-                    node {
-                      amount,
-                      user {
-                        id,
-                        fakeName
-                      }
-                    }
+                }
+                highestBidding {
+                  amount
+                  user {
+                    id
+                    fakeName
                   }
                 }
               }
@@ -173,7 +171,7 @@ export const goodQuery = (id) => {
             updatedAt,
             biddingTime,
             extendedCount,
-            allBiddings(first: 2147483647) {
+            allBiddings {
               biddings {
                 id,
                 amount,
