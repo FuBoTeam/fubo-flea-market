@@ -31,7 +31,7 @@ class GoodDetail extends React.Component {
           <Info good={good} />
           <div styleName="bid-content">
             <BidTableContainer biddings={good.allBiddings.biddings} goodId={good.id} utcTime={good.utcTime} extendedCount={good.extendedCount} />
-            {(error) ? (<p className="bg-info" styleName="info-block">Make sure your bid is NTD 10 higher than the current price, or just refresh the page.</p>) : null}
+            {(error) ? (<p className="bg-info" styleName="info-block">Refresh the page.</p>) : null}
             <Button type="button" style={refreshBtn} onClick={() => { getGood(params.id); }}>Refresh</Button>
           </div>
         </div>
