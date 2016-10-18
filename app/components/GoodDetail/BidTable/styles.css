@@ -1,5 +1,7 @@
 .bid-table {
-  background-color: white;
+  tr {
+    background-color: white;
+  }
 }
 
 .login {

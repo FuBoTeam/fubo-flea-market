@@ -83,7 +83,7 @@ class EditBlock extends React.Component {
                   updateGood(this.data);
                 }
               }
-            >Edit</Button>
+            >Update</Button>
           </div>
         </form>
       </li>
