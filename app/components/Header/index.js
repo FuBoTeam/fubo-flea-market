@@ -13,9 +13,14 @@ class Header extends React.Component {
     this.displayName = 'Header';
   }
   componentWillMount() {
-    const { getUser, user } = this.props;
-    if (user.auth) {
+    const { getUser, isSignedIn } = this.props;
+    if (isSignedIn) {
       getUser();
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (this.props.isSignedIn === false && nextProps.isSignedIn === true) {
+      nextProps.getUser();
     }
   }
   render() {
