@@ -2,7 +2,7 @@ import React from 'react';
 import DropzoneComponent from 'react-dropzone-component';
 import CSSModules from 'react-css-modules';
 import styles from './styles.css';
-import { Button } from 'belle';
+import { Button, Spinner } from 'belle';
 import './filepicker.css';
 import './dropzone.min.css';
 
@@ -19,6 +19,7 @@ class Upload extends React.Component {
         title: '',
         image: '',
       },
+      disabled: false,
     };
     this.dropzone = null;
     this.dropzoneConfigs = {
@@ -45,6 +46,7 @@ class Upload extends React.Component {
             props.handleSubmit(this.state.good);
             this.dropzone.removeFile(file);
             this.refs.form.reset();
+            this.setState({ disabled: false });
           }
         },
         error: (file, errorMessage) => {
@@ -66,6 +68,7 @@ class Upload extends React.Component {
     };
   }
   render() {
+    const spinner = this.state.disabled ? (<Spinner characterStyle={{ fontSize: 18, color: '#fff' }} />) : null;
     return (
       <form
         styleName="upload-form"
@@ -78,8 +81,13 @@ class Upload extends React.Component {
             if (!this.node.title.value.trim()) {
               return;
             }
-            this.state.good.title = this.node.title.value.trim();
-            this.state.good.description = this.node.description.value;
+            this.setState({
+              good: {
+                title: this.node.title.value.trim(),
+                description: this.node.description.value,
+              },
+              disabled: true,
+            });
           }
         }
       >
@@ -109,7 +117,7 @@ class Upload extends React.Component {
           {...this.dropzoneConfigs}
         />
         <div styleName="btn-container">
-          <Button primary type="submit">Upload</Button>
+          <Button primary type="submit" disabled={this.state.disabled}>Upload{spinner}</Button>
         </div>
       </form>
     );
