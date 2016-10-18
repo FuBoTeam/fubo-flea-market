@@ -5,6 +5,9 @@ import BidFormContainer from '../../../containers/BidFormContainer';
 import {
   Link,
 } from 'react-router';
+const amountColumn = {
+  width: 5,
+};
 
 class BidTable extends React.Component {
   constructor(props) {
@@ -35,7 +38,7 @@ class BidTable extends React.Component {
         ...bidding,
         fakeName: bidding.user.fakeName,
       };
-    }).reverse();
+    });
     const tableElements = ['fakeName', 'amount', 'trashWord', 'createdAt'];
     const tableTitles = {
       fakeName: 'Bidder',
@@ -45,6 +48,12 @@ class BidTable extends React.Component {
     };
     return (
       <table className="table table-hover" styleName="bid-table">
+        <colgroup>
+          <col />
+          <col style={amountColumn} />
+          <col />
+          <col />
+        </colgroup>
         <thead>
           <tr className="warning">
           {
@@ -57,6 +66,7 @@ class BidTable extends React.Component {
           </tr>
         </thead>
         <tbody>
+        {bidForm}
         {
           tableBiddings.map((bidding, bidIndex) => {
             return (
@@ -70,7 +80,6 @@ class BidTable extends React.Component {
             );
           })
         }
-        {bidForm}
         </tbody>
       </table>
     );

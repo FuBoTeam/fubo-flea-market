@@ -7,6 +7,9 @@ const btnStyles = {
 const nameStyle = {
   lineHeight: '34px',
 };
+const amountStyle = {
+  width: 80,
+};
 
 class BidForm extends React.Component {
   constructor(props) {
@@ -49,6 +52,7 @@ class BidForm extends React.Component {
         <td style={nameStyle}>{user.fakeName}</td>
         <td>
           <input
+            style={amountStyle}
             className="form-control"
             type="number"
             ref="amount"
@@ -66,6 +70,7 @@ class BidForm extends React.Component {
             ref="trashWord"
             value={this.state.bidding.trashWord}
             onChange={this.handleWord}
+            maxLength="64"
             form="bidForm"
           />
         </td>
