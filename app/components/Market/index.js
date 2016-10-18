@@ -4,6 +4,9 @@ import Block from './Block';
 import EditBlockContainer from '../../containers/EditBlockContainer';
 import styles from './goods.css';
 import Loading from '../Loading';
+import {
+  Link,
+} from 'react-router';
 
 class Market extends React.Component {
   constructor(props) {
@@ -63,7 +66,7 @@ class Market extends React.Component {
         return <Loading />;
       }
       if (myGoods === null || myGoods.totalCount === 0) {
-        return <p className="bg-info" styleName="info-block">Sell something now!</p>;
+        return <p className="bg-info" styleName="info-block">Start selling today!</p>;
       }
       return (
         <ul styleName="goods-edit-container">{
@@ -79,26 +82,12 @@ class Market extends React.Component {
         return <Loading />;
       }
       if (myBiddings === null || myBiddings.totalCount === 0) {
-        return <p className="bg-info" styleName="info-block">Bid something now!</p>;
-      }
-      let biddingGoods = [];
-      let uniqueId = [];
-      for (let i = 0; i < myBiddings.totalCount; i++) {
-        if (uniqueId.indexOf(myBiddings.edges[i].node.good.id) < 0) {
-          uniqueId = [
-            ...uniqueId,
-            myBiddings.edges[i].node.good.id,
-          ];
-          biddingGoods = [
-            ...biddingGoods,
-            myBiddings.edges[i].node.good,
-          ];
-        }
+        return <p className="bg-info" styleName="info-block">Start bidding now!</p>;
       }
       return (
         <ul styleName="goods-container">{
-          biddingGoods.map((g) => {
-            return <Block key={g.id} good={g} />;
+          myBiddings.edges.map((g) => {
+            return <Block key={g.node.id} good={g.node} />;
           })
         }</ul>
       );
@@ -107,10 +96,11 @@ class Market extends React.Component {
         return <Loading />;
       }
     if (goods === null || goods.totalCount === 0) {
-      return <p className="bg-info" styleName="info-block">Oops, nothing here, wanna sell something?</p>;
+      return <p className="bg-info" styleName="info-block">Oops! No items for sale. <Link to="/upload">Start selling.</Link></p>;
     }
     return (
-      <ul styleName="goods-container">{
+      <ul styleName="goods-container">
+      {
         goods.edges.map((g) => {
           return <Block key={g.node.id} good={g.node} />;
         })

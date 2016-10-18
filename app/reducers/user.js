@@ -1,7 +1,6 @@
 const defaultState = {
   isFetching: false,
-  email: null,
-  name: null,
+  id: null,
   fakeName: null,
   error: null,
 };

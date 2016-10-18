@@ -15,3 +15,8 @@
     width: 100%;
   }
 }
+
+.info-block {
+  padding: 10px;
+  text-align: center;
+}

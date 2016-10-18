@@ -15,25 +15,35 @@ class Info extends React.Component {
   }
   render() {
     const { good } = this.props;
-    const higestBidding = good.allBiddings.biddings[good.allBiddings.biddings.length - 1];
+    const higestBidding = good.allBiddings.biddings[0];
+    const now = Date.parse(new Date());
+    const endTime = Date.parse(good.utcTime);
+    let starNum = parseInt(good.allBiddings.biddings.length / 5 + 1, 10);
+    starNum = starNum > 5 ? 5 : starNum;
+    let higestWord = 'Highest';
+    if (now > endTime) {
+      higestWord = 'Winning';
+    }
     return (
       <div styleName="good-info">
         <img src={good.image} alt="not found" />
         <div styleName="word-intro">
           <h2>{good.title}</h2>
-          <Rating defaultValue={2} disabled disabledStyle={starStyle}>star</Rating>
+          <Rating defaultValue={starNum} disabled disabledStyle={starStyle}>star</Rating>
+          <label>Good ID</label>
+          <p>{good.id}</p>
           <label>Description</label>
-          <p>{good.description}</p>
-          <label>Highest Bidder</label>
+          <p>{good.description || 'None'}</p>
+          <label>{higestWord} Bidder</label>
           <p>{higestBidding && higestBidding.user && higestBidding.user.fakeName || 'None of above'}</p>
-          <label>Highest Amount</label>
+          <label>Bidders</label>
+          <p>{good.allBiddings.biddings.length}</p>
+          <label>Best Bid</label>
           <p>NTD {higestBidding && higestBidding.amount || 0}</p>
           <label>Created At</label>
           <p>{good.createdAt}</p>
           <label>Updated At</label>
           <p>{good.updatedAt}</p>
-          <label>Good ID</label>
-          <p>{good.id}</p>
           <label>Time of Closing</label>
           <p>{good.biddingTime}</p>
         </div>

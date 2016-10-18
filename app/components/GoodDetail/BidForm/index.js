@@ -12,27 +12,38 @@ class BidForm extends React.Component {
   constructor(props) {
     super(props);
     this.displayName = 'BidForm';
-    const { goodId, highestBid } = this.props;
-    this.biddingData = {
-      id: goodId,
-      amount: highestBid + 5,
-      trashWord: '',
-    };
     this.handleAmount = this.handleAmount.bind(this);
     this.handleWord = this.handleWord.bind(this);
+    const { goodId, highestBid } = this.props;
+    this.state = {
+      bidding: {
+        id: goodId,
+        amount: highestBid + 10,
+        trashWord: '',
+      },
+    };
   }
   handleAmount(event) {
-    if (!event.preventDefault()) {
-      this.biddingData.amount = parseInt(event.target.value, 10);
-    }
+    event.preventDefault();
+    this.setState({
+      bidding: {
+        ...this.state.bidding,
+        amount: parseInt(event.target.value, 10),
+      },
+    });
   }
   handleWord(event) {
-    if (!event.preventDefault()) {
-      this.biddingData.trashWord = event.target.value;
-    }
+    event.preventDefault();
+    this.setState({
+      bidding: {
+        ...this.state.bidding,
+        trashWord: event.target.value,
+      },
+    });
   }
   render() {
-    const { user, handleBid, highestBid } = this.props;
+    const { user, handleBid, highestBid, extendedCount, goodId } = this.props;
+    const gap = (extendedCount > 0) ? 10 : 1;
     return (
       <tr>
         <td style={nameStyle}>{user.fakeName}</td>
@@ -40,29 +51,48 @@ class BidForm extends React.Component {
           <input
             className="form-control"
             type="number"
-            min={highestBid + 1}
-            defaultValue={this.biddingData.amount}
+            ref="amount"
+            min={highestBid + gap}
+            value={this.state.bidding.amount}
             onChange={this.handleAmount}
+            form="bidForm"
+            required
           />
         </td>
         <td>
           <input
             className="form-control"
             type="text"
-            defaultValue={this.biddingData.trashWord}
+            ref="trashWord"
+            value={this.state.bidding.trashWord}
             onChange={this.handleWord}
+            form="bidForm"
           />
         </td>
         <td>
           <Button
             primary
             style={btnStyles}
-            onClick={
-              () => {
-                handleBid(this.biddingData);
+            type="submit"
+            form="bidForm"
+          >Submit</Button>
+          <form
+            id="bidForm"
+            onSubmit={
+              (e) => {
+                e.preventDefault();
+                this.setState({
+                  bidding: {
+                    id: goodId,
+                    amount: this.state.bidding.amount + 10,
+                    trashWord: '',
+                  },
+                });
+                handleBid(this.state.bidding);
               }
             }
-          >Submit</Button></td>
+          />
+        </td>
       </tr>
     );
   }
@@ -73,6 +103,7 @@ BidForm.propTypes = {
   handleBid: PropTypes.func.isRequired,
   goodId: PropTypes.string,
   highestBid: PropTypes.number,
+  extendedCount: PropTypes.number,
 };
 
 export default BidForm;

@@ -7,8 +7,12 @@ const btnStyle = {
 };
 
 class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.displayName = 'Login';
+  }
   render() {
-    const { changeLocationOnSignIn, getUser } = this.props;
+    const { changeLocationOnSignIn } = this.props;
     const { next } = this.props.location.query;
     return (
       <div styleName="container">
@@ -19,7 +23,6 @@ class Login extends React.Component {
             provider="google"
             next={
               () => {
-                getUser();
                 changeLocationOnSignIn(next || '/');
                 return;
               }
@@ -35,7 +38,6 @@ class Login extends React.Component {
 Login.propTypes = {
   location: React.PropTypes.object.isRequired,
   changeLocationOnSignIn: React.PropTypes.func.isRequired,
-  getUser: React.PropTypes.func.isRequired,
 };
 
 export default CSSModules(Login, styles);

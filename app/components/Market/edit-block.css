@@ -8,8 +8,16 @@
   width: 100%;
   img {
     height: 300px;
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     object-fit: cover;
+    @media screen and (max-width: 800px) {
+      max-width: 100%;
+    }
+  }
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+    overflow-x: hidden;
   }
 }
 

@@ -12,20 +12,30 @@ class BidTable extends React.Component {
     this.displayName = 'BidTable';
   }
   render() {
-    const { isSignedIn, biddings, goodId } = this.props;
+    const { isSignedIn, biddings, goodId, extendedCount, utcTime } = this.props;
     let hightestBid = 0;
     if (biddings.length > 0) {
-      hightestBid = biddings[biddings.length - 1].amount;
+      hightestBid = biddings[0].amount;
     }
-    const bidForm = isSignedIn ? (<BidFormContainer goodId={goodId} highestBid={hightestBid} />) : (<tr>
-        <td colSpan="4" styleName="login"><Link to="/login">Sign up/Log in</Link> to place bid.</td>
+    let bidForm = isSignedIn ? (<BidFormContainer goodId={goodId} highestBid={hightestBid} extendedCount={extendedCount} />) : (<tr>
+        <td colSpan="4" styleName="login"><Link to={{ pathname: '/login', query: { next: `/good_${goodId}` } }}>Sign up/Log in</Link> to place bid.</td>
       </tr>);
+    const now = Date.parse(new Date());
+    const endTime = Date.parse(utcTime);
+    if (now > endTime) {
+      bidForm = (
+        <tr>
+          <td colSpan="4" styleName="login">Time's up</td>
+        </tr>
+      );
+    }
+
     const tableBiddings = biddings.map((bidding) => {
       return {
         ...bidding,
         fakeName: bidding.user.fakeName,
       };
-    });
+    }).reverse();
     const tableElements = ['fakeName', 'amount', 'trashWord', 'createdAt'];
     const tableTitles = {
       fakeName: 'Bidder',
@@ -71,6 +81,8 @@ BidTable.propTypes = {
   isSignedIn: PropTypes.bool.isRequired,
   biddings: PropTypes.array.isRequired,
   goodId: PropTypes.string,
+  utcTime: PropTypes.string,
+  extendedCount: PropTypes.number,
 };
 
 export default CSSModules(BidTable, styles);

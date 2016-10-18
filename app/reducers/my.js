@@ -31,16 +31,17 @@ const my = (state = defaultState, action) => {
           isFetching: !action.data,
         },
       };
-    case 'GRAPH_DONE/MYBIDDINGS':
+    case 'GRAPH_DONE/MYBIDDINGS': {
       return {
         ...state,
         biddings: {
           ...state.biddings,
-          data: action.data && action.data.user && action.data.user.myBiddings,
+          data: action.data && action.data.user.joinedGoods,
           error: null,
           isFetched: true,
         },
       };
+    }
     case 'GRAPH_DONE/MYGOODS':
       return {
         ...state,

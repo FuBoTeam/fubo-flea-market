@@ -43,6 +43,8 @@ class Upload extends React.Component {
           if (res && res.success) {
             this.state.good.image = res.data.link;
             props.handleSubmit(this.state.good);
+            this.dropzone.removeFile(file);
+            this.refs.form.reset();
           }
         },
         error: (file, errorMessage) => {
@@ -65,7 +67,22 @@ class Upload extends React.Component {
   }
   render() {
     return (
-      <form styleName="upload-form" name="uploadForm">
+      <form
+        styleName="upload-form"
+        name="uploadForm"
+        ref="form"
+        onSubmit={
+          (e) => {
+            e.preventDefault();
+            this.dropzone.processQueue();
+            if (!this.node.title.value.trim()) {
+              return;
+            }
+            this.state.good.title = this.node.title.value.trim();
+            this.state.good.description = this.node.description.value;
+          }
+        }
+      >
         <h2 styleName="form-title">Upload My Good</h2>
         <hr />
         <label styleName="title">Title:</label>
@@ -75,6 +92,7 @@ class Upload extends React.Component {
           ref={(node) => { this.node.title = node; }}
           className="form-control"
           styleName="input-control"
+          maxLength="40"
           required
         />
         <label styleName="title">Description:</label>
@@ -83,26 +101,15 @@ class Upload extends React.Component {
           ref={(node) => { this.node.description = node; }}
           className="form-control"
           styleName="input-control"
+          maxLength="100"
         />
         <label styleName="title">Image:</label>
         <DropzoneComponent
+          styleName="image-upload"
           {...this.dropzoneConfigs}
         />
         <div styleName="btn-container">
-          <Button
-            primary
-            onClick={(e) => {
-              e.preventDefault();
-              this.dropzone.processQueue();
-              if (!this.node.title.value.trim()) {
-                return;
-              }
-              this.state.good.title = this.node.title.value.trim();
-              this.state.good.description = this.node.description.value;
-            }}
-          >
-            Upload
-          </Button>
+          <Button primary type="submit">Upload</Button>
         </div>
       </form>
     );

@@ -1,3 +1,8 @@
+const dateFormat = (utcDate) => {
+  const date = new Date(utcDate);
+  return date.toLocaleString();
+};
+
 const good = (state = {}, action) => {
   const id = action.vars &&
              action.vars.biddingData &&
@@ -29,16 +34,32 @@ const good = (state = {}, action) => {
         },
       };
     }
-    case 'GRAPH_DONE/GOOD':
+    case 'GRAPH_DONE/GOOD': {
+      const biddings = action.data.good.allBiddings.biddings.map((bidding) => {
+        return {
+          ...bidding,
+          createdAt: dateFormat(bidding.createdAt),
+        };
+      });
       return {
         ...state,
         [id]: {
           ...state[id],
-          data: action.data.good,
+          data: {
+            ...action.data.good,
+            biddingTime: dateFormat(action.data.good.biddingTime),
+            utcTime: action.data.good.biddingTime,
+            updatedAt: dateFormat(action.data.good.updatedAt),
+            createdAt: dateFormat(action.data.good.createdAt),
+            allBiddings: {
+              biddings,
+            },
+          },
           error: null,
           isFetched: true,
         },
       };
+    }
     case 'GRAPH_ERROR/GOOD':
       return {
         ...state,
@@ -50,12 +71,25 @@ const good = (state = {}, action) => {
       };
     case 'GRAPH_MUTATION/GOOD': {
       const newGood = action.data.addBidding.bidding.good;
+      const biddings = newGood.allBiddings.biddings.map((bidding) => {
+        return {
+          ...bidding,
+          createdAt: dateFormat(bidding.createdAt),
+        };
+      });
       return {
         ...state,
         [id]: {
           ...state[id],
           data: {
             ...newGood,
+            biddingTime: dateFormat(newGood.biddingTime),
+            utcTime: newGood.biddingTime,
+            updatedAt: dateFormat(newGood.updatedAt),
+            createdAt: dateFormat(newGood.createdAt),
+            allBiddings: {
+              biddings,
+            },
           },
           error: null,
           isFetched: true,

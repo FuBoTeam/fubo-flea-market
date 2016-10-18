@@ -9,7 +9,7 @@ import LoginContainer from '../containers/LoginContainer';
 import MarketContainer from '../containers/MarketContainer';
 import GoodDetailContainer from '../containers/GoodDetailContainer';
 import UploadContainer from '../containers/UploadContainer';
-import DevTools from '../containers/DevTools';
+// import DevTools from '../containers/DevTools';
 
 class RTRouter extends React.Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class RTRouter extends React.Component {
         />
         <Route path="login" component={LoginContainer} />
         <Route
-          path="good/:id"
+          path="good_:id"
           component={GoodDetailContainer}
         />
         <Route
@@ -47,13 +47,26 @@ class RTRouter extends React.Component {
   }
   requireAuth(nextState, replace, next) {
     const { getState } = this.props;
+    let pathname = getState().routing.locationBeforeTransitions.pathname;
+    const url = ['upload', 'my-selling', 'my-bids'];
+    for (let i = 0; i < url.length; i++) {
+      if (pathname.includes(url[i])) {
+        pathname = `/${url[i]}`;
+      }
+    }
     if (!getState().auth.getIn(['user', 'isSignedIn'])) {
-      replace({
-        pathname: '/login',
-        query: {
-          next: getState().routing.locationBeforeTransitions.pathname,
-        },
-      });
+      if (pathname.includes('blank')) {
+        replace({
+          pathname: '/login',
+        });
+      } else {
+        replace({
+          pathname: '/login',
+          query: {
+            next: pathname,
+          },
+        });
+      }
     }
     next();
   }
@@ -64,7 +77,6 @@ class RTRouter extends React.Component {
         <Router history={history}>
           {this.routes}
         </Router>
-        {!window.devToolsExtension ? <DevTools /> : null}
       </div>
     );
   }

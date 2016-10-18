@@ -51,6 +51,7 @@ export const addBidMutation = (biddingData) => {
                 title,
                 updatedAt,
                 biddingTime,
+                extendedCount,
                 allBiddings(first: 2147483647) {
                   biddings {
                     id,
@@ -127,16 +128,14 @@ export const allGoodsQuery = () => {
                 title,
                 image,
                 biddingTime,
-                allBiddings(first: 2147483647) {
+                allBiddings {
                   totalCount,
-                  edges {
-                    node {
-                      amount,
-                      user {
-                        id,
-                        fakeName
-                      }
-                    }
+                }
+                highestBidding {
+                  amount
+                  user {
+                    id
+                    fakeName
                   }
                 }
               }
@@ -171,7 +170,8 @@ export const goodQuery = (id) => {
             title,
             updatedAt,
             biddingTime,
-            allBiddings(first: 2147483647) {
+            extendedCount,
+            allBiddings {
               biddings {
                 id,
                 amount,
@@ -237,27 +237,23 @@ export const myBiddingsQuery = () => {
       query: `
         query {
           user {
-            myBiddings {
-              totalCount,
+            joinedGoods {
+              totalCount
               edges {
                 node {
-                  good {
-                    id,
-                    title,
-                    image,
-                    biddingTime
-                    allBiddings(first: 2147483647) {
-                      totalCount,
-                      edges {
-                        node {
-                          amount,
-                          user {
-                            id,
-                            fakeName
-                          }
-                        }
-                      }
+                  id
+                  title
+                  image
+                  highestBidding {
+                    amount
+                    user {
+                      id
+                      fakeName
                     }
+                  }
+                  biddingTime
+                  allBiddings{
+                    totalCount
                   }
                 }
               }
@@ -282,9 +278,7 @@ export const userQuery = () => {
       query: `
         query {
           user {
-            email,
             fakeName,
-            name,
             id,
           }
         }

@@ -20,11 +20,12 @@
   }
   a {
     display: inline-flex;
+    overflow-x: hidden;
   }
 }
 
 .closed {
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 .image {

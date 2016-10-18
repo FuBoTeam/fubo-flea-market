@@ -4,6 +4,11 @@ import styles from './styles.css';
 import Info from './Info';
 import BidTableContainer from '../../containers/BidTableContainer';
 import Loading from '../Loading';
+import Updating from '../Updating';
+import { Button } from 'belle';
+const refreshBtn = {
+  float: 'right',
+};
 
 class GoodDetail extends React.Component {
   constructor(props) {
@@ -15,16 +20,20 @@ class GoodDetail extends React.Component {
     return getGood(params.id);
   }
   render() {
-    const { isLoading, isUpdating, good } = this.props;
+    const { isLoading, isUpdating, good, getGood, params, error } = this.props;
     if (isLoading) {
       return <Loading />;
     }
     return (
-      <div styleName="container">
-        {(isUpdating) ? (<div>Updating......</div>) : null}
-        <Info good={good} />
-        <div styleName="bid-content">
-          <BidTableContainer biddings={good.allBiddings.biddings} goodId={good.id} />
+      <div>
+        {(isUpdating) ? (<Updating />) : null}
+        <div styleName="container">
+          <Info good={good} />
+          <div styleName="bid-content">
+            <BidTableContainer biddings={good.allBiddings.biddings} goodId={good.id} utcTime={good.utcTime} extendedCount={good.extendedCount} />
+            {(error) ? (<p className="bg-info" styleName="info-block">Make sure your bid is NTD 10 higher than the current price, or just refresh the page.</p>) : null}
+            <Button type="button" style={refreshBtn} onClick={() => { getGood(params.id); }}>Refresh</Button>
+          </div>
         </div>
       </div>
     );
