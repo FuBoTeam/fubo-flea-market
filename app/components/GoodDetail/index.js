@@ -7,7 +7,7 @@ import Loading from '../Loading';
 import Updating from '../Updating';
 import { Button } from 'belle';
 const refreshBtn = {
-  float: 'right',
+  marginBottom: 10,
 };
 
 class GoodDetail extends React.Component {
@@ -30,9 +30,11 @@ class GoodDetail extends React.Component {
         <div styleName="container">
           <Info good={good} />
           <div styleName="bid-content">
+            <div styleName="refresh-block">
+              <Button type="button" style={refreshBtn} onClick={() => { getGood(params.id); }}>Refresh</Button>
+              {(error) ? (<p className="bg-info" styleName="info-block">Refresh the page.</p>) : null}
+            </div>
             <BidTableContainer biddings={good.allBiddings.biddings} goodId={good.id} utcTime={good.utcTime} extendedCount={good.extendedCount} />
-            {(error) ? (<p className="bg-info" styleName="info-block">Refresh the page.</p>) : null}
-            <Button type="button" style={refreshBtn} onClick={() => { getGood(params.id); }}>Refresh</Button>
           </div>
         </div>
       </div>
