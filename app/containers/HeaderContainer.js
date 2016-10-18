@@ -4,10 +4,13 @@ import Header from '../components/Header';
 import { userQuery } from '../actions';
 
 const mapStateToProps = (state) => {
-  const user = state.user;
+  const user = state.auth.getIn(['user', 'attributes'])
+            && state.auth.getIn(['user', 'attributes']).toObject()
+            || {};
   return {
     isSignedIn: state.auth.getIn(['user', 'isSignedIn']),
     user,
+    userFakeName: state.user.fakeName,
   };
 };
 

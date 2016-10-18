@@ -24,7 +24,7 @@ class Header extends React.Component {
     }
   }
   render() {
-    const { isSignedIn, changeLocationOnSignOut, user } = this.props;
+    const { isSignedIn, changeLocationOnSignOut, user, userFakeName } = this.props;
     const LoginLogoutCmp = isSignedIn ? (
       <SignOutButton
         styleName="sign-out"
@@ -46,7 +46,7 @@ class Header extends React.Component {
         <div styleName="user-setting">
           <p>{user.name}</p>
           <p>{user.email}</p>
-          <p styleName="fake-name">{user.fakeName}</p>
+          <p styleName="fake-name">{userFakeName}</p>
         </div>
         <div styleName="circle-logo"></div>
         <div styleName="circle-base"></div>
@@ -62,6 +62,7 @@ class Header extends React.Component {
 Header.propTypes = {
   isSignedIn: PropTypes.bool.isRequired,
   changeLocationOnSignOut: PropTypes.func.isRequired,
+  userFakeName: PropTypes.string,
   user: PropTypes.object,
   getUser: PropTypes.func.isRequired,
 };

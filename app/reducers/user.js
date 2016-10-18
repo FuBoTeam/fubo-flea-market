@@ -1,10 +1,8 @@
 const defaultState = {
   isFetching: false,
-  email: null,
-  name: null,
+  id: null,
   fakeName: null,
   error: null,
-  auth: false,
 };
 
 const graph = (state = defaultState, action) => {
@@ -31,11 +29,6 @@ const graph = (state = defaultState, action) => {
     case 'SIGN_OUT_ERROR':
       return {
         ...defaultState,
-      };
-    case 'AUTHENTICATE_COMPLETE':
-      return {
-        ...defaultState,
-        auth: true,
       };
     default:
       break;

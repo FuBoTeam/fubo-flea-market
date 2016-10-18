@@ -278,9 +278,7 @@ export const userQuery = () => {
       query: `
         query {
           user {
-            email,
             fakeName,
-            name,
             id,
           }
         }
