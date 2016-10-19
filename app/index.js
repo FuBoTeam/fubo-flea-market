@@ -17,6 +17,7 @@ const history = syncHistoryWithStore(browserHistory, store);
 store.dispatch(configure({
   apiUrl: 'http://flea.fubotech.com.tw/',
 }, {
+  currentLocation: window.location.href,
   clientOnly: true,
   cleanSession: false,
 })).then(() => {
