@@ -108,7 +108,7 @@ export const deleteGoodMutation = (id) => {
   };
 };
 
-export const allGoodsQuery = () => {
+export const allGoodsQuery = (n = 50, cursor = '') => {
   return {
     type: GRAPH,
     graphql: {
@@ -117,12 +117,17 @@ export const allGoodsQuery = () => {
       done: 'GRAPH_DONE/ALL',
       error: 'GRAPH_ERROR/ALL',
     },
+    vars: {
+      n,
+      cursor,
+    },
     data: {
       query: `
-        query {
-          allGoods{
+        query($n: Int, $cursor: String) {
+          allGoods(first: $n, after: $cursor){
             totalCount,
             edges {
+              cursor
               node {
                 id,
                 title,
