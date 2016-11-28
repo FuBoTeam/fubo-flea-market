@@ -9,7 +9,7 @@ import LoginContainer from '../containers/LoginContainer';
 import MarketContainer from '../containers/MarketContainer';
 import GoodDetailContainer from '../containers/GoodDetailContainer';
 import UploadContainer from '../containers/UploadContainer';
-// import DevTools from '../containers/DevTools';
+import DevTools from '../containers/DevTools';
 
 class RTRouter extends React.Component {
   constructor(props) {
@@ -77,6 +77,7 @@ class RTRouter extends React.Component {
         <Router history={history}>
           {this.routes}
         </Router>
+        <DevTools />
       </div>
     );
   }
