@@ -1,5 +1,11 @@
 # flea-market
 
+Build your own flea-market platform in few minutes.
+
+This project began from charity flea market, and we think a geek team should hold the flea market in geek way. We would focus on different bidding system in next version.
+
+## Installation
+
 Install npm, node, nvm
 Reference: node version: v6.2.2
 
