@@ -2,20 +2,26 @@ const path = require('path');
 const webpack = require('webpack');
 const postcssNested = require('postcss-nested');
 const postcssNext = require('postcss-cssnext');
+const StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
+const routingPaths = [
+  '/good/',
+];
+const scope = { window: {} };
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: {
-    javascript: [
+    app: [
       'webpack-dev-server/client?http://0.0.0.0:8080',
       'webpack/hot/only-dev-server',
       path.resolve(__dirname, 'app/index.js'),
     ],
-    html: path.resolve(__dirname, 'app/index.html'),
   },
   output: {
+    publicPath: 'http://localhost:8080/',
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
+    libraryTarget: 'umd',
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
@@ -73,6 +79,7 @@ module.exports = {
     configFile: './.eslintrc',
   },
   plugins: [
+    new StaticSiteGeneratorPlugin('app', routingPaths, {}, scope),
     new webpack.NoErrorsPlugin(),
   ],
 };
