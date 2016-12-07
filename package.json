@@ -82,6 +82,7 @@
     "react-router": "^2.6.1",
     "react-router-redux": "^4.0.5",
     "react-tap-event-plugin": "^1.0.0",
+    "reactfire": "^1.0.0",
     "redux": "^3.5.2",
     "redux-auth": "0.0.5-beta5",
     "redux-graphql-middleware": "^0.1.5",
