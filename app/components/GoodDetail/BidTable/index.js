@@ -21,7 +21,7 @@ class BidTable extends React.Component {
       hightestBid = biddings[0].amount;
     }
     let bidForm = isSignedIn ? (<BidFormContainer goodId={goodId} highestBid={hightestBid} extendedCount={extendedCount} />) : (<tr>
-        <td colSpan="4" styleName="login"><Link to={{ pathname: '/login', query: { next: `/good_${goodId}` } }}>Sign up/Log in</Link> to place bid.</td>
+        <td colSpan="4" styleName="login"><Link to={{ pathname: '/login', query: { next: `/good/${goodId}` } }}>Sign up/Log in</Link> to place bid.</td>
       </tr>);
     const now = Date.parse(new Date());
     const endTime = Date.parse(utcTime);

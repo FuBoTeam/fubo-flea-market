@@ -27,7 +27,7 @@ class Block extends React.Component {
       highestBidder = good.highestBidding.user.fakeName;
       bestBid = good.highestBidding.amount;
     }
-    const detailLink = `good_${good.id}`;
+    const detailLink = `good/${good.id}`;
     let starNum = parseInt(length / 5 + 1, 10);
     starNum = starNum > 5 ? 5 : starNum;
     return (

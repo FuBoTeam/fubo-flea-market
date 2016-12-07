@@ -34,7 +34,7 @@ class RTRouter extends React.Component {
         />
         <Route path="login" component={LoginContainer} />
         <Route
-          path="good_:id"
+          path="good/:id"
           component={GoodDetailContainer}
         />
         <Route
