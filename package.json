@@ -5,7 +5,7 @@
   "main": "app/app.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
-    "deploy": "gh-pages -d build",
+    "deploy": "npm run build && gh-pages -d build",
     "lint-staged": "lint-staged",
     "eslint:fix": "eslint --fix",
     "eslint": "eslint --fix --ext .js app test",
@@ -16,14 +16,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Fu-Bo-Tech/fubo-flea-market.git"
+    "url": "https://github.com/FuBoTeam/fubo-flea-market.git"
   },
   "author": "ben196888, ElaineHuang",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Fu-Bo-Tech/fubo-flea-market/issues"
+    "url": "https://github.com/FuBoTeam/fubo-flea-market/issues"
   },
-  "homepage": "https://github.com/Fu-Bo-Tech/fubo-flea-market#readme",
+  "homepage": "https://fuboteam.github.io/fubo-flea-market/",
   "devDependencies": {
     "babel-core": "^6.10.4",
     "babel-eslint": "^6.1.2",
