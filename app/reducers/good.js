@@ -1,9 +1,7 @@
-const dateFormat = (utcDate) => {
-  const date = new Date(utcDate);
-  return date.toLocaleString();
-};
+import { dateFormat } from '../utils';
 
 const good = (state = {}, action) => {
+  // id is biddingData.id or id
   const id = action.vars &&
              action.vars.biddingData &&
              action.vars.biddingData.id ||
