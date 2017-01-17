@@ -1,4 +1,5 @@
+const moment = require('moment');
+
 export const dateFormat = (utcDate) => {
-  const date = new Date(utcDate);
-  return date.toLocaleString();
+  return moment(utcDate, 'YYYY-MM-DD hh:mm:ss z').format('LLL');
 };
