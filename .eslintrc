@@ -9,7 +9,7 @@
     "browser": true,
     "node": true,
     "amd": true,
-    "mocha": true
+    "jest": true
   },
   "rules": {
     "max-len": [1, 200, 2, {ignoreComments: true}],
