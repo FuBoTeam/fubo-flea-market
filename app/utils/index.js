@@ -1,5 +1,5 @@
 const moment = require('moment');
 
 export const dateFormat = (utcDate) => {
-  return moment(utcDate, 'YYYY-MM-DD hh:mm:ss z').format('LLL');
+  return moment.utc(new Date(utcDate)).format('LLL');
 };
