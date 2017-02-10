@@ -5,14 +5,14 @@
   "main": "app/app.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
-    "deploy": "npm run build && gh-pages -d build",
+    "deploy": "yarn run build && gh-pages -d build",
     "lint-staged": "lint-staged",
     "eslint:fix": "eslint --fix",
     "eslint": "eslint --fix --ext .js app test",
     "git:add": "git add",
     "start": "webpack-dev-server --host 0.0.0.0 --devtool eval --progress --colors --hot --content-base build --history-api-fallback",
     "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register --require ./test/setup.js --reporter mochawesome",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "yarn test -- --watch"
   },
   "repository": {
     "type": "git",
