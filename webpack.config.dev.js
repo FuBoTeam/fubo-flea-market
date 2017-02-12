@@ -1,7 +1,5 @@
 const path = require('path');
 const webpack = require('webpack');
-const postcssNested = require('postcss-nested');
-const postcssNext = require('postcss-cssnext');
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
