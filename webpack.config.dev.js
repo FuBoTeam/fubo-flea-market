@@ -1,16 +1,14 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   devtool: 'cheap-module-eval-source-map',
-  entry: {
-    javascript: [
-      'webpack-dev-server/client?http://0.0.0.0:8080',
-      'webpack/hot/only-dev-server',
-      path.resolve(__dirname, 'app/index.js'),
-    ],
-    html: path.resolve(__dirname, 'app/index.html'),
-  },
+  entry: [
+    'webpack-dev-server/client?http://0.0.0.0:8080',
+    'webpack/hot/only-dev-server',
+    path.resolve(__dirname, 'app/index.js'),
+  ],
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
@@ -74,14 +72,15 @@ module.exports = {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'file-loader',
       },
-      {
-        test: /\.html$/,
-        loader: 'file-loader',
-        options: { name: '[name].[ext]' },
-      },
     ],
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
+    new HtmlWebpackPlugin({
+      title: 'Flea Market',
+      template: path.resolve(__dirname, 'app/index.html'),
+      filename: 'index.html',
+      inject: 'body',
+    }),
   ],
 };
