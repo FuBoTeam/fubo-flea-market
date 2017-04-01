@@ -1,75 +1,83 @@
 const path = require('path');
 const webpack = require('webpack');
-const postcssNested = require('postcss-nested');
-const postcssNext = require('postcss-cssnext');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: {
-    javascript: [
-      path.resolve(__dirname, 'app/index.js'),
-    ],
-    html: path.resolve(__dirname, 'app/index.html'),
-  },
+  entry: [
+    path.resolve(__dirname, 'app/index.js'),
+  ],
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
   },
-  postcss: [
-    postcssNested,
-    postcssNext,
-  ],
   module: {
-    preLoaders: [
+    rules: [
       {
         test: /\.js[x]?$/,
+        enforce: 'pre',
         exclude: /node_modules/,
-        loader: 'eslint',
+        loader: 'eslint-loader',
+        options: { configFile: './.eslintrc' },
       },
-    ],
-    loaders: [
       {
         test: /\.jsx?$/,
-        loaders: ['react-hot', 'babel'],
+        use: ['react-hot-loader', 'babel-loader'],
         include: path.join(__dirname, 'app'),
         exclude: /node_modules/,
       },
       {
-      test: /\.[s]?css$/,
-        loaders: [
-          'style?sourceMap',
-          'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
-          'postcss',
+        test: /\.[s]?css$/,
+        use: [
+          {
+            loader: 'style-loader',
+            options: { sourceMap: true },
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[path]___[name]__[local]___[hash:base64:5]',
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssNested: true,
+              postcssNext: true,
+            },
+          },
         ],
       },
       {
         test: /\.(png|jpg|jpeg|gif|woff)$/,
-        loader: 'url-loader?limit=8192?name=[name].[ext]',
+        loader: 'url-loader',
+        options: {
+          limit: 8192,
+          name: '[name].[ext]',
+        },
       },
       {
         test: /\.woff?$/,
-        loader: 'url?limit=100000',
+        loader: 'url-loader',
+        options: { limit: 100000 },
       },
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file',
-      },
-      {
-        test: /\.html$/,
-        loader: 'file?name=[name].[ext]',
-      },
-      {
-        test: /\.json$/,
-        loader: 'json',
+        loader: 'file-loader',
       },
     ],
   },
-  eslint: {
-    configFile: './.eslintrc',
-  },
   plugins: [
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new HtmlWebpackPlugin({
+      title: 'Flea Market',
+      template: path.resolve(__dirname, 'app/index.html'),
+      filename: 'index.html',
+      inject: 'body',
+    }),
   ],
 };
