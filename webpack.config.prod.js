@@ -8,7 +8,7 @@ module.exports = {
   ],
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js',
+    filename: 'bundle.min.js',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -73,6 +73,11 @@ module.exports = {
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      include: /\.min\.js$/,
+      minimize: true,
+      compress: { warnings: false },
+    }),
     new HtmlWebpackPlugin({
       title: 'Flea Market',
       template: path.resolve(__dirname, 'app/index.html'),
