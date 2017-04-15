@@ -12,6 +12,7 @@
     "git:add": "git add",
     "start": "webpack-dev-server --host 0.0.0.0 --devtool eval --progress --colors --hot --content-base build --history-api-fallback",
     "test": "cross-env jest",
+    "test:coverage": "yarn test -- --coverage",
     "test:watch": "yarn test -- --watch"
   },
   "repository": {
