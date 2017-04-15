@@ -8,12 +8,8 @@ import { browserHistory } from 'react-router';
 import graphqlMiddleware from 'redux-graphql-middleware';
 import thunk from 'redux-thunk';
 import { fetch } from 'redux-auth';
-// import createSagaMiddleware from 'redux-saga'
 
 import rootReducer from '../reducers';
-// import rootSaga from '../sagas'
-
-// const saga = createSagaMiddleware()
 
 const graphOptions = {
   fetch,
@@ -27,7 +23,6 @@ const graphOptions = {
 };
 
 const enhancer = compose(
-  // applyMiddleware(thunk, saga),
   applyMiddleware(
     routerMiddleware(browserHistory),
     graphqlMiddleware(graphOptions),
@@ -40,7 +35,6 @@ const reducers = require('../reducers');
 
 export default function configureStore(initialState) {
   const store = createStore(rootReducer, initialState, enhancer);
-  // saga.run(rootSaga)
 
   if (module.hot) {
     module.hot.accept('../reducers', () => {
