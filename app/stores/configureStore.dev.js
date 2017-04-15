@@ -5,7 +5,6 @@ import {
 } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import { browserHistory } from 'react-router';
-import { persistState } from 'redux-devtools';
 import graphqlMiddleware from 'redux-graphql-middleware';
 import thunk from 'redux-thunk';
 import { fetch } from 'redux-auth';
@@ -13,14 +12,8 @@ import { fetch } from 'redux-auth';
 
 import rootReducer from '../reducers';
 // import rootSaga from '../sagas'
-import DevTools from '../containers/DevTools';
 
 // const saga = createSagaMiddleware()
-
-function getDebugSessionKey() {
-  const matches = window.location.href.match(/[?&]debug_session=([^&]+)\b/);
-  return (matches && matches.length > 0) ? matches[1] : null;
-}
 
 const graphOptions = {
   fetch,
@@ -40,8 +33,7 @@ const enhancer = compose(
     graphqlMiddleware(graphOptions),
     thunk
   ),
-  window.devToolsExtension ? window.devToolsExtension() : DevTools.instrument(),
-  persistState(getDebugSessionKey())
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 const reducers = require('../reducers');
